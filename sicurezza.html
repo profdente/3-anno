@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sicurezza Laboratorio Odontotecnico - LIM Gate (IT/EN)</title>
+  <style>
+    :root {
+      --bg-dark: #0b1120;
+      --bg-panel: #162032;
+      --bg-card: #1e293b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-gold: #f59e0b;
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --border-color: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    header {
+      background-color: #020617;
+      border-bottom: 3px solid var(--accent-cyan);
+      padding: 0.9rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+    }
+
+    .brand-icon {
+      font-size: 2.2rem;
+      background: rgba(6, 182, 212, 0.15);
+      padding: 0.4rem 0.7rem;
+      border-radius: 12px;
+      border: 1px solid var(--accent-cyan);
+    }
+
+    .brand h1 {
+      font-size: 1.35rem;
+      color: var(--text-main);
+      letter-spacing: 0.4px;
+    }
+
+    .brand p {
+      font-size: 0.9rem;
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+
+    .header-controls {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .ctrl-btn {
+      background-color: var(--bg-card);
+      color: var(--text-main);
+      border: 2px solid var(--border-color);
+      padding: 0.6rem 1rem;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .ctrl-btn:hover {
+      border-color: var(--accent-cyan);
+    }
+
+    .ctrl-btn.active {
+      background-color: var(--accent-cyan);
+      color: #020617;
+      border-color: var(--accent-cyan);
+    }
+
+    .progress-container {
+      background-color: #0f172a;
+      padding: 0.8rem 2rem;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .progress-steps {
+      display: flex;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .step-dot {
+      height: 12px;
+      flex: 1;
+      border-radius: 6px;
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      transition: all 0.3s;
+    }
+
+    .step-dot.completed {
+      background-color: var(--accent-green);
+      border-color: var(--accent-green);
+    }
+
+    .step-dot.current {
+      background-color: var(--accent-gold);
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+    }
+
+    .step-label {
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--accent-gold);
+      white-space: nowrap;
+    }
+
+    body.mode-en .it { display: none !important; }
+    body.mode-it .en { display: none !important; }
+
+    .en-tag {
+      display: inline-block;
+      background: rgba(6, 182, 212, 0.15);
+      color: var(--accent-cyan);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.15rem 0.45rem;
+      border-radius: 5px;
+      margin-right: 0.4rem;
+      vertical-align: middle;
+    }
+
+    .it-tag {
+      display: inline-block;
+      background: rgba(245, 158, 11, 0.15);
+      color: var(--accent-gold);
+      font-size: 0.75rem;
+      font-weight: 800;
+      padding: 0.15rem 0.45rem;
+      border-radius: 5px;
+      margin-right: 0.4rem;
+      vertical-align: middle;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1320px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.8rem 2rem 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    .slide-card {
+      background-color: var(--bg-panel);
+      border: 2px solid var(--border-color);
+      border-radius: 20px;
+      padding: 2.2rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      animation: slideIn 0.35s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .slide-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1.5rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 1.3rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .slide-badge {
+      background-color: var(--accent-cyan);
+      color: #020617;
+      font-weight: 900;
+      font-size: 0.9rem;
+      padding: 0.35rem 0.9rem;
+      border-radius: 20px;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
+
+    .slide-title-it {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.2;
+    }
+
+    .slide-title-en {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      margin-top: 0.35rem;
+    }
+
+    .slide-hero-icon {
+      font-size: 4rem;
+      background: var(--bg-card);
+      border: 2px solid var(--border-color);
+      border-radius: 18px;
+      padding: 0.8rem 1.2rem;
+      line-height: 1;
+    }
+
+    .slide-body {
+      display: grid;
+      grid-template-columns: 1.25fr 0.95fr;
+      gap: 1.8rem;
+    }
+
+    @media (max-width: 950px) {
+      .slide-body { grid-template-columns: 1fr; }
+    }
+
+    .points-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .point-item {
+      background-color: var(--bg-card);
+      border-left: 5px solid var(--accent-cyan);
+      padding: 1.1rem 1.3rem;
+      border-radius: 12px;
+      font-size: 1.15rem;
+      line-height: 1.5;
+    }
+
+    .point-item .en {
+      color: #bae6fd;
+      margin-top: 0.45rem;
+      font-size: 1.08rem;
+    }
+
+    .dpi-box {
+      background: linear-gradient(145deg, #1e293b, #0f172a);
+      border: 2px solid var(--accent-gold);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .dpi-box h3 {
+      color: var(--accent-gold);
+      font-size: 1.25rem;
+      border-bottom: 1px dashed var(--border-color);
+      padding-bottom: 0.6rem;
+    }
+
+    .dpi-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .dpi-list li {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      font-size: 1.08rem;
+      font-weight: 600;
+    }
+
+    .glossary-strip {
+      background: rgba(6, 182, 212, 0.1);
+      border: 1px solid rgba(6, 182, 212, 0.35);
+      border-radius: 10px;
+      padding: 0.9rem 1rem;
+      font-size: 0.98rem;
+    }
+
+    .glossary-strip strong {
+      color: var(--accent-cyan);
+    }
+
+    .gate-container {
+      background-color: #111827;
+      border: 3px solid var(--accent-gold);
+      border-radius: 20px;
+      padding: 2rem;
+      position: relative;
+      transition: border-color 0.3s;
+    }
+
+    .gate-container.unlocked {
+      border-color: var(--accent-green);
+    }
+
+    .gate-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .gate-status-badge {
+      background-color: rgba(245, 158, 11, 0.2);
+      color: var(--accent-gold);
+      border: 1px solid var(--accent-gold);
+      padding: 0.45rem 1rem;
+      border-radius: 25px;
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .gate-container.unlocked .gate-status-badge {
+      background-color: rgba(16, 185, 129, 0.2);
+      color: var(--accent-green);
+      border-color: var(--accent-green);
+    }
+
+    .gate-question-it {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 0.3rem;
+    }
+
+    .gate-question-en {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--accent-cyan);
+      margin-bottom: 1.3rem;
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+    }
+
+    .opt-btn {
+      background-color: var(--bg-card);
+      border: 2px solid var(--border-color);
+      color: var(--text-main);
+      padding: 1.15rem 1.4rem;
+      border-radius: 14px;
+      text-align: left;
+      font-size: 1.15rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .opt-btn:hover:not(:disabled) {
+      border-color: var(--accent-cyan);
+      background-color: #263349;
+      transform: translateX(4px);
+    }
+
+    .opt-letter {
+      background: var(--bg-dark);
+      color: var(--accent-cyan);
+      font-weight: 900;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid var(--border-color);
+    }
+
+    .opt-btn.wrong {
+      background-color: rgba(239, 68, 68, 0.2);
+      border-color: var(--accent-red);
+      color: #fecaca;
+    }
+
+    .opt-btn.wrong .opt-letter {
+      background-color: var(--accent-red);
+      color: white;
+    }
+
+    .opt-btn.correct {
+      background-color: rgba(16, 185, 129, 0.22);
+      border-color: var(--accent-green);
+      color: #a7f3d0;
+    }
+
+    .opt-btn.correct .opt-letter {
+      background-color: var(--accent-green);
+      color: #020617;
+    }
+
+    .feedback-banner {
+      margin-top: 1.3rem;
+      padding: 1.1rem 1.4rem;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      display: none;
+    }
+
+    .feedback-banner.error {
+      display: block;
+      background-color: rgba(239, 68, 68, 0.15);
+      border-left: 5px solid var(--accent-red);
+      color: #fecaca;
+    }
+
+    .feedback-banner.success {
+      display: block;
+      background-color: rgba(16, 185, 129, 0.15);
+      border-left: 5px solid var(--accent-green);
+      color: #a7f3d0;
+    }
+
+    .nav-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.5rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .nav-btn {
+      padding: 1rem 2rem;
+      border-radius: 14px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .btn-prev {
+      background-color: var(--bg-card);
+      color: var(--text-main);
+      border: 2px solid var(--border-color);
+    }
+
+    .btn-prev:hover:not(:disabled) {
+      border-color: var(--accent-cyan);
+    }
+
+    .btn-prev:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .btn-next {
+      background-color: var(--accent-green);
+      color: #020617;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-next:disabled {
+      background-color: #334155;
+      color: #94a3b8;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    .final-screen {
+      display: none;
+      background-color: var(--bg-panel);
+      border: 3px solid var(--accent-green);
+      border-radius: 22px;
+      padding: 3rem;
+      text-align: center;
+      animation: slideIn 0.4s ease;
+    }
+
+    .final-screen h2 {
+      font-size: 2.4rem;
+      color: var(--accent-green);
+      margin-bottom: 0.8rem;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+      margin: 2rem 0;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      padding: 1.5rem;
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+    }
+
+    .stat-card .num {
+      font-size: 2.3rem;
+      font-weight: 900;
+      color: var(--accent-gold);
+    }
+  </style>
+</head>
+<body class="mode-both">
+
+  <header>
+    <div class="brand">
+      <div class="brand-icon">🦷</div>
+      <div>
+        <h1>SICUREZZA E DPI IN LABORATORIO ODONTOTECNICO</h1>
+        <p>Corso Serale Bilingue (CLIL IT / EN) • Modulo Interattivo LIM con Verifica Gate</p>
+      </div>
+    </div>
+    <div class="header-controls">
+      <button class="ctrl-btn active" onclick="setLangMode('both', this)">🇮🇹 + 🇬🇧 Bilingue</button>
+      <button class="ctrl-btn" onclick="setLangMode('it', this)">🇮🇹 Solo IT</button>
+      <button class="ctrl-btn" onclick="setLangMode('en', this)">🇬🇧 Only EN</button>
+      <button class="ctrl-btn" onclick="toggleFullScreen()">⛶ Schermo Intero</button>
+    </div>
+  </header>
+
+  <div class="progress-container">
+    <div class="progress-steps" id="progressSteps"></div>
+    <div class="step-label" id="stepLabel">SLIDE 1 / 10</div>
+  </div>
+
+  <main id="lessonStage">
+    <section class="slide-card" id="slideCard">
+      <div class="slide-top">
+        <div>
+          <span class="slide-badge" id="slideCategory">MODULO 1</span>
+          <h2 class="slide-title-it it" id="slideTitleIt"></h2>
+          <h3 class="slide-title-en en" id="slideTitleEn"></h3>
+        </div>
+        <div class="slide-hero-icon" id="slideIcon">🦷</div>
+      </div>
+
+      <div class="slide-body">
+        <div class="points-list" id="slidePoints"></div>
+
+        <div class="dpi-box">
+          <div>
+            <h3>🛡️ DPI Obbligatori / Mandatory PPE</h3>
+            <ul class="dpi-list" id="slideDpiList"></ul>
+          </div>
+          <div class="glossary-strip" id="slideGlossary"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gate-container" id="gateContainer">
+      <div class="gate-header">
+        <div class="gate-status-badge" id="gateBadge">🔒 GATE BLOCCATO • Rispondi correttamente per proseguire</div>
+        <div style="color: var(--text-muted); font-weight: 700; font-size: 0.95rem;" id="gateAttempts">Tentativi: 0</div>
+      </div>
+
+      <p class="gate-question-it it" id="gateQIt"></p>
+      <p class="gate-question-en en" id="gateQEn"></p>
+
+      <div class="options-grid" id="gateOptions"></div>
+
+      <div class="feedback-banner" id="gateFeedback"></div>
+
+      <div class="nav-footer">
+        <button class="nav-btn btn-prev" id="prevBtn" onclick="prevSlide()">⬅️ Slide Precedente</button>
+        <button class="nav-btn btn-next" id="nextBtn" onclick="nextSlide()" disabled>🔒 Completa il Gate per Avanzare</button>
+      </div>
+    </section>
+  </main>
+
+  <main id="finalStage" style="display:none;">
+    <div class="final-screen" style="display:block;">
+      <div style="font-size: 4.5rem; margin-bottom: 1rem;">🏆🦷</div>
+      <h2>MODULO COMPLETATO! / MODULE COMPLETED!</h2>
+      <p style="font-size: 1.25rem; color: #cbd5e1; max-width: 750px; margin: 0 auto;">
+        La classe ha superato tutti i 10 Gate di verifica sulla sicurezza e sui DPI nel laboratorio odontotecnico.
+      </p>
+      <div class="summary-grid">
+        <div class="stat-card">
+          <div class="num">10 / 10</div>
+          <div>Slide e Gate Superati</div>
+        </div>
+        <div class="stat-card">
+          <div class="num" id="firstTryScore">0 / 10</div>
+          <div>Risposte Esatte al 1° Tentativo</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">D.Lgs. 81/08</div>
+          <div>Standard HSE Odontotecnico</div>
+        </div>
+      </div>
+      <button class="nav-btn btn-next" style="margin: 0 auto;" onclick="restartLesson()">🔄 Ricomincia la Lezione</button>
+    </div>
+  </main>
+
+  <script>
+    const slidesData = [
+      {
+        category: "01 • QUADRO NORMATIVO & CULTURA HSE",
+        icon: "⚖️",
+        titleIt: "Il Laboratorio Odontotecnico: Un Ambiente Tecnico Complesso",
+        titleEn: "The Dental Laboratory: A Complex Technical Environment",
+        points: [
+          {
+            it: "Secondo il D.Lgs. 81/08, il laboratorio odontotecnico presenta rischi chimici, biologici, fisici e meccanici concentrati in spazi ridotti.",
+            en: "Under occupational safety regulations, a dental lab combines chemical, biological, physical, and mechanical hazards in compact workspaces."
+          },
+          {
+            it: "I DPI (Dispositivi di Protezione Individuale) si usano solo dopo aver attivato i DPC (Dispositivi di Protezione Collettiva, es. cappe e aspiratori).",
+            en: "PPE (Personal Protective Equipment) is worn in addition to Collective Protective Equipment (CPE), such as local exhaust hoods."
+          },
+          {
+            it: "Abbigliamento base: camice in cotone 100% abbottonato (mai sintetico, perché fonde con il calore) e scarpe chiuse antiscivolo.",
+            en: "Basic dress code: buttoned 100% cotton lab coat (never synthetic, which melts with heat) and closed non-slip shoes."
+          }
+        ],
+        dpi: [
+          "🥼 Camice in cotone 100% (100% Cotton Lab Coat)",
+          "👟 Calzature chiuse antiscivolo (Closed Non-Slip Shoes)",
+          "💇‍♂️ Capelli raccolti e divieto di monili (Tied Hair / No Jewelry)"
+        ],
+        glossary: "<strong>Key Terms:</strong> PPE = DPI • CPE = DPC • Lab Coat = Camice • Occupational Hazard = Rischio lavorativo",
+        gate: {
+          qIt: "Perché il camice da laboratorio odontotecnico deve essere in cotone 100% e non in tessuto sintetico?",
+          qEn: "Why must a dental lab coat be made of 100% cotton rather than synthetic fabric?",
+          options: [
+            { it: "Perché il cotone costa meno ed è più leggero.", en: "Because cotton is cheaper and lighter." },
+            { it: "Perché i tessuti sintetici fondono a contatto con fiamme o scintille, incollandosi alla pelle.", en: "Because synthetic fabrics melt near open flames or sparks, sticking to the skin." },
+            { it: "Perché il cotone resiste agli acidi concentrati senza bucarsi.", en: "Because cotton resists concentrated acids without burning." }
+          ],
+          correct: 1,
+          expIt: "Esatto! In presenza di becco Bunsen, scintille da fresatura o forni, il sintetico fonde provocando ustioni gravissime.",
+          expEn: "Correct! Near Bunsen burners, grinding sparks, or furnaces, synthetic fibers melt causing severe burns."
+        }
+      },
+      {
+        category: "02 • RISCHIO BIOLOGICO & ACCETTAZIONE",
+        icon: "🦠",
+        titleIt: "Rischio Biologico: Impronte, Modelli e Protesi Usate",
+        titleEn: "Biological Hazard: Dental Impressions, Casts & Used Prostheses",
+        points: [
+          {
+            it: "Ogni impronta (alginato, silicone, polietere) o protesi da riparare proveniente dallo studio è potenzialmente infetta (saliva, sangue, HBV, HCV, HIV).",
+            en: "Every dental impression or prosthesis arriving from the dental clinic for repair is potentially contaminated with saliva and bloodborne pathogens."
+          },
+          {
+            it: "Zona Sporca vs Zona Pulita: nessuna impronta può accedere all'area sviluppo modelli senza previa disinfezione certificata.",
+            en: "Dirty Zone vs. Clean Zone: no impression may enter the plaster/model room without prior certified disinfection."
+          },
+          {
+            it: "Risciacquo delicato, immersione/spray con disinfettante specifico compatibile con il materiale d'impronta e imbustamento tracciato.",
+            en: "Gentle rinsing, immersion or spraying with material-compatible disinfectant, followed by labeled bagging."
+          }
+        ],
+        dpi: [
+          "🧤 Guanti monouso in nitrile (Disposable Nitrile Gloves)",
+          "🥽 Occhiali paraschegge / Visiera (Splash Goggles / Face Shield)",
+          "😷 Mascherina chirurgica o FFP2 (Surgical / FFP2 Mask)"
+        ],
+        glossary: "<strong>Key Terms:</strong> Dental Impression = Impronta dentale • Cross-contamination = Contaminazione crociata • Disinfection = Disinfezione",
+        gate: {
+          qIt: "Qual è la procedura corretta quando arriva un'impronta dallo studio dentistico?",
+          qEn: "What is the mandatory procedure when a dental impression arrives from the clinic?",
+          options: [
+            { it: "Colare subito il gesso per evitare che l'alginato si deformi.", en: "Pour the plaster immediately so the alginate does not distort." },
+            { it: "Indossare guanti in nitrile, risciacquare e disinfettare l'impronta nella zona dedicata prima di passarla al gesso.", en: "Wear nitrile gloves, rinse and disinfect the impression in the dirty zone before moving it to the plaster area." },
+            { it: "Soffiare con aria compressa per asciugare la saliva.", en: "Blow with compressed air to dry off the saliva." }
+          ],
+          correct: 1,
+          expIt: "Corretto! Mai usare aria compressa su impronte non disinfettate perché nebulizza agenti patogeni nell'aria.",
+          expEn: "Correct! Never use compressed air on non-disinfected impressions as it creates infectious aerosols."
+        }
+      },
+      {
+        category: "03 • SALA GESSI & SQUADRAMODELLI",
+        icon: "🪨",
+        titleIt: "Polveri di Gesso e Taglio Meccanico alla Squadramodelli",
+        titleEn: "Gypsum Dust & Mechanical Cutting at the Model Trimmer",
+        points: [
+          {
+            it: "La pesatura e miscelazione a secco dei gessi (Tipo III, IV) e dei rivestimenti rilasciano polveri respirabili contenenti silice libera cristallina.",
+            en: "Weighing and dry-mixing dental stones (Type III, IV) and investments release respirable dust containing crystalline silica."
+          },
+          {
+            it: "La squadramodelli (Model Trimmer) combina un disco abrasivo rotante ad alta velocità con getto d'acqua: rischio di abrasione dita e schizzi oculari.",
+            en: "The model trimmer combines a high-speed rotating abrasive wheel with water spray: risk of finger abrasion and eye splashes."
+          },
+          {
+            it: "Verificare sempre la stabilità del piano d'appoggio, l'apertura dell'acqua prima dell'avvio e non avvicinare mai le dita al disco.",
+            en: "Always check the work table stability, turn on water before starting, and keep fingers away from the grinding wheel."
+          }
+        ],
+        dpi: [
+          "😷 Facciale filtrante FFP2 / FFP3 (FFP2 / FFP3 Respirator)",
+          "🥽 Occhiali protettivi avvolgenti (Wrap-around Safety Goggles)",
+          "🧤 Guanti in nitrile ad alta resistenza (Heavy-duty Nitrile Gloves)"
+        ],
+        glossary: "<strong>Key Terms:</strong> Dental Stone / Plaster = Gesso duro • Model Trimmer = Squadramodelli • Crystalline Silica = Silice cristallina",
+        gate: {
+          qIt: "Quale pericolo grave è associato all'inalazione cronica di polveri di rivestimento e gesso?",
+          qEn: "Which serious hazard is linked to chronic inhalation of investment and gypsum powders?",
+          options: [
+            { it: "Esposizione a silice libera cristallina (rischio silicosi e patologie polmonari).", en: "Exposure to free crystalline silica (risk of silicosis and lung disease)." },
+            { it: "Ustione termica delle vie aeree.", en: "Thermal burns of the airways." },
+            { it: "Esposizione a radiazioni ionizzanti.", en: "Exposure to ionizing radiation." }
+          ],
+          correct: 0,
+          expIt: "Perfetto! I rivestimenti per fusione contengono quarzo e cristobalite (silice cristallina): serve sempre FFP3 e aspirazione.",
+          expEn: "Spot on! Casting investments contain quartz and cristobalite (crystalline silica): FFP3 and extraction are mandatory."
+        }
+      },
+      {
+        category: "04 • POSTAZIONE AL BANCO & MICROMOTORE",
+        icon: "⚙️",
+        titleIt: "Fresatura al Micromotore: Schegge, Polveri Sottili e Rumore",
+        titleEn: "Handpiece Grinding: Flying Debris, Fine Dust & Noise",
+        points: [
+          {
+            it: "La rifinitura di resine, leghe metalliche (Cr-Co), zirconio e ceramiche con manipolo micromotore proietta schegge ad altissima velocità.",
+            en: "Trimming acrylics, metal alloys (Co-Cr), zirconia, and ceramics with a micromotor handpiece ejects high-velocity debris."
+          },
+          {
+            it: "Obbligo di lavorare dietro lo schermo protettivo trasparente del banco e con bocchetta di aspirazione localizzata (LEV) accesa.",
+            en: "Mandatory work behind the bench transparent safety shield with Local Exhaust Ventilation (LEV) turned on."
+          },
+          {
+            it: "Controllare sempre il numero massimo di giri (RPM) consentito per ogni fresa o disco diamantato prima di azionare il pedale.",
+            en: "Always check the maximum permitted RPM for each bur or diamond disc before pressing the foot pedal."
+          }
+        ],
+        dpi: [
+          "🥽 Occhiali paraschegge EN 166 (Impact-Resistant Glasses EN 166)",
+          "😷 Mascherina FFP2/FFP3 (FFP2/FFP3 Dust Mask)",
+          "🎧 Otoprotettori se > 80 dB (Earplugs / Earmuffs if > 80 dB)"
+        ],
+        glossary: "<strong>Key Terms:</strong> Micromotor Handpiece = Manipolo micromotore • Diamond Disc = Disco diamantato • Protective Shield = Schermo paraschegge",
+        gate: {
+          qIt: "Cosa accade se si utilizza un disco diamantato o una fresa oltre il limite massimo di giri (RPM) indicato dal produttore?",
+          qEn: "What happens if a diamond disc or bur is operated above the manufacturer's maximum RPM limit?",
+          options: [
+            { it: "Il manipolo si spegne automaticamente per sicurezza.", en: "The handpiece shuts off automatically for safety." },
+            { it: "L'alberino può piegarsi e il disco può frantumarsi proiettando schegge ad alta velocità.", en: "The mandrel can bend and the disc may shatter, ejecting high-speed shrapnel." },
+            { it: "La resina si lucida più velocemente senza surriscaldarsi.", en: "The resin polishes faster without overheating." }
+          ],
+          correct: 1,
+          expIt: "Esatto! La forza centrifuga spezza il gambo o frantuma il disco: occhiali EN 166 e schermo del banco sono salvavita.",
+          expEn: "Correct! Centrifugal force bends the shank or shatters the disc: EN 166 goggles and bench shields are vital."
+        }
+      },
+      {
+        category: "05 • RESINE ACRILICHE & MONOMERO (MMA)",
+        icon: "🧪",
+        titleIt: "Rischio Chimico: Monomero Metilmetacrilato (MMA) e Solventi",
+        titleEn: "Chemical Hazard: Methyl Methacrylate (MMA) Monomer & Solvents",
+        points: [
+          {
+            it: "Il liquido monomero (MMA) delle resine a freddo/caldo è altamente infiammabile (H225), irritante per occhi/vie respiratorie e sensibilizzante cutaneo (dermatiti allergiche).",
+            en: "Liquid MMA monomer for self/heat-cure acrylics is highly flammable (H225), a respiratory/eye irritant, and a skin sensitizer."
+          },
+          {
+            it: "I guanti in lattice comune NON proteggono dal monomero: il MMA attraversa il lattice in meno di 1 minuto!",
+            en: "Standard latex gloves DO NOT protect against monomer: MMA permeates through latex in under 1 minute!"
+          },
+          {
+            it: "Manipolare i monomeri esclusivamente sotto cappa aspirante chimica, lontano da fiamme libere (becco Bunsen) e richiudendo subito i flaconi.",
+            en: "Handle monomers strictly under a chemical fume hood, away from open flames (Bunsen burner), and recap bottles immediately."
+          }
+        ],
+        dpi: [
+          "🧤 Guanti in Nitrile spessorato o Butile (Thick Nitrile / Butyl Gloves)",
+          "🥽 Occhiali a mascherina contro vapori/schizzi (Chemical Splash Goggles)",
+          "🌬️ Cappa aspirante chimica (Chemical Fume Hood)"
+        ],
+        glossary: "<strong>Key Terms:</strong> Acrylic Resin = Resina acrilica • Monomer = Monomero • Skin Sensitizer = Sensibilizzante cutaneo • Fume Hood = Cappa aspirante",
+        gate: {
+          qIt: "Perché i comuni guanti in lattice sono inadatti quando si impasta la resina acrilica con il monomero?",
+          qEn: "Why are standard latex gloves unsuitable when mixing acrylic resin with liquid monomer?",
+          options: [
+            { it: "Perché il lattice fa ingiallire la resina protesica.", en: "Because latex turns the denture acrylic yellow." },
+            { it: "Perché il monomero permea rapidamente il lattice raggiungendo la pelle e causando dermatiti allergiche.", en: "Because monomer rapidly permeates latex, reaching the skin and causing allergic contact dermatitis." },
+            { it: "Perché il lattice è troppo spesso e toglie sensibilità.", en: "Because latex is too thick and reduces tactile sensitivity." }
+          ],
+          correct: 1,
+          expIt: "Ottimo! Il metilmetacrilato scioglie/attraversa il lattice: servono guanti in nitrile ad alto spessore o guanti laminati specifici.",
+          expEn: "Great! Methyl methacrylate permeates latex rapidly: thick nitrile or specific laminate gloves are required."
+        }
+      },
+      {
+        category: "06 • SABBIATURA & LUCIDATURA",
+        icon: "🌪️",
+        titleIt: "Sabbiatrice e Pulitrice: Polveri di Ossido di Alluminio e Impigliamento",
+        titleEn: "Sandblaster & Polishing Lathe: Alumina Dust & Entanglement",
+        points: [
+          {
+            it: "La sabbiatrice (Sandblaster) utilizza ossido di alluminio (Al2O3) o microsfere di vetro ad alta pressione: lavorare solo con sportello chiuso e manicotti integri.",
+            en: "The sandblaster uses aluminum oxide (Al2O3) or glass beads under pressure: operate only with the chamber closed and gauntlets intact."
+          },
+          {
+            it: "La pulitrice (Polishing Lathe) con spazzole in setola e feltrini rotanti ha un elevato rischio di trascinamento e proiezione del manufatto.",
+            en: "The polishing lathe with rotating bristle brushes and rag wheels poses a severe entanglement and workpiece ejection hazard."
+          },
+          {
+            it: "Regola d'oro alla pulitrice: MAI indossare guanti larghi, anelli o maniche slacciate che possono impigliarsi nell'albero rotante.",
+            en: "Golden rule at the polishing lathe: NEVER wear loose gloves, rings, or unbuttoned cuffs that can catch on the spinning spindle."
+          }
+        ],
+        dpi: [
+          "🥽 Schermo facciale o occhiali (Face Shield / Safety Goggles)",
+          "😷 Mascherina FFP3 durante pulizia sabbiatrice (FFP3 Mask when cleaning blaster)",
+          "🚫 Divieto guanti larghi alla pulitrice (No Loose Gloves at Lathe)"
+        ],
+        glossary: "<strong>Key Terms:</strong> Sandblaster = Sabbiatrice • Aluminum Oxide = Ossido di alluminio • Polishing Lathe = Pulitrice • Entanglement = Impigliamento",
+        gate: {
+          qIt: "Qual è il rischio meccanico più grave nell'uso della pulitrice (Polishing Lathe)?",
+          qEn: "What is the most severe mechanical hazard when operating a polishing lathe?",
+          options: [
+            { it: "Impigliamento di capelli, maniche o guanti nell'albero rotante e proiezione violenta della protesi.", en: "Entanglement of hair, sleeves, or gloves on the spinning spindle and violent ejection of the prosthesis." },
+            { it: "Esposizione a raggi ultravioletti (UV).", en: "Exposure to ultraviolet (UV) rays." },
+            { it: "Sviluppo di gas tossici dalla pietra pomice.", en: "Release of toxic gases from pumice powder." }
+          ],
+          correct: 0,
+          expIt: "Esatto! La pulitrice ha una coppia elevatissima: tenere saldamente il manufatto nella metà inferiore della ruota e zero indumenti svolazzanti.",
+          expEn: "Correct! The polishing lathe has high torque: hold the work firmly on the lower half of the wheel with zero loose clothing."
+        }
+      },
+      {
+        category: "07 • SALA FUSIONE & FORNI ALTA TEMPERATURA",
+        icon: "🔥",
+        titleIt: "Fonditrice, Forni di Preriscaldo e Forni per Ceramica",
+        titleEn: "Casting Machine, Burnout Furnaces & Porcelain Furnaces",
+        points: [
+          {
+            it: "I forni di preriscaldo cilindri (Burnout furnaces) raggiungono 900–1050°C e rilasciano fumi di combustione della cera/resina (necessaria cappa dedicata).",
+            en: "Burnout furnaces reach 900–1050°C and emit wax/resin burnout fumes (dedicated exhaust hood required)."
+          },
+          {
+            it: "Durante la fusione delle leghe (a fiamma ossipropanica o ad induzione), l'operatore è esposto a calore radiante, metallo fuso e luce intensa (IR/UV).",
+            en: "During alloy casting (torch or induction), the technician is exposed to radiant heat, molten metal, and intense IR/UV light."
+          },
+          {
+            it: "Estrazione del cilindro incandescente: utilizzare pinze lunghe da fonderia e guanti alluminizzati o in Kevlar certificati EN 407.",
+            en: "Removing the glowing casting ring: use long foundry tongs and aluminized or Kevlar gloves certified to EN 407."
+          }
+        ],
+        dpi: [
+          "🧤 Guanti anticalore EN 407 in Kevlar/Alluminizzati (EN 407 Heat Gloves)",
+          "🕶️ Occhiali filtro IR/UV per fusione a fiamma (IR/UV Casting Goggles)",
+          "🛡️ Grembiule ignifugo / in crosta di cuoio (Flame-Resistant Apron)"
+        ],
+        glossary: "<strong>Key Terms:</strong> Burnout Furnace = Forno di preriscaldo • Casting Ring = Cilindro di fusione • Molten Alloy = Lega fusa • Tongs = Pinze",
+        gate: {
+          qIt: "Quale combinazione di DPI è indispensabile per estrarre un cilindro a 950°C dal forno e avviare la fusione a fiamma?",
+          qEn: "Which PPE combination is essential to remove a 950°C casting ring from the furnace and perform torch casting?",
+          options: [
+            { it: "Guanti in nitrile e occhiali trasparenti.", en: "Nitrile gloves and clear safety glasses." },
+            { it: "Guanti anticalore certificati EN 407, pinze lunghe e occhiali con filtro IR/UV.", en: "EN 407 certified heat-resistant gloves, long tongs, and IR/UV filter goggles." },
+            { it: "Solo mascherina FFP2 e camice sbottonato.", en: "Only an FFP2 mask and unbuttoned lab coat." }
+          ],
+          correct: 1,
+          expIt: "Perfetto! I guanti in nitrile fonderebbero istantaneamente; gli occhiali IR/UV proteggono la retina dal bagliore del metallo fuso.",
+          expEn: "Spot on! Nitrile gloves would melt instantly; IR/UV goggles protect the retina from the glare of molten metal."
+        }
+      },
+      {
+        category: "08 • CERAMICA, ACIDI & VAPORIERA",
+        icon: "⚠️",
+        titleIt: "Acido Fluoridrico (Mordenzatura) e Pulizia a Vapore",
+        titleEn: "Hydrofluoric Acid (Etching) & Steam Cleaning",
+        points: [
+          {
+            it: "L'acido fluoridrico (HF) usato per mordenzare disilicato di litio e ceramiche feldspatiche è estremamente tossico e corrosivo (anche per assorbimento cutaneo).",
+            en: "Hydrofluoric acid (HF) used to etch lithium disilicate and feldspathic ceramics is acutely toxic and corrosive (even via skin absorption)."
+          },
+          {
+            it: "Usare gel mordenzante sotto cappa, neutralizzare subito i residui con polvere neutralizzante (carbonato di calcio/sodio) e tenere a portata il gel al gluconato di calcio.",
+            en: "Apply etching gel under a hood, neutralize residues immediately, and keep calcium gluconate antidote gel on hand."
+          },
+          {
+            it: "La vaporiera (Steam Cleaner) eroga vapore saturo a 130–150°C a 4–6 bar: usare pinze per reggere i manufatti e dirigere il getto dentro la vasca aspirata.",
+            en: "The steam cleaner jets saturated steam at 130–150°C (4–6 bar): hold workpieces with tweezers and aim inside the ventilated basin."
+          }
+        ],
+        dpi: [
+          "🧤 Guanti antiacido in Neoprene/Nitrile spesso (Acid-Resistant Gloves)",
+          "🥽 Visiera integrale contro schizzi acidi e vapore (Full Face Shield)",
+          "🌬️ Cappa aspirante dedicata agli acidi (Acid Fume Hood)"
+        ],
+        glossary: "<strong>Key Terms:</strong> Hydrofluoric Acid (HF) = Acido fluoridrico • Etching = Mordenzatura • Steam Cleaner = Vaporiera • Calcium Gluconate = Gluconato di calcio",
+        gate: {
+          qIt: "Quale sostanza corrosiva viene usata per mordenzare le ceramiche integrali (es. disilicato di litio) e richiede massima cautela?",
+          qEn: "Which corrosive chemical is used to etch all-ceramic restorations (e.g. lithium disilicate) and requires extreme caution?",
+          options: [
+            { it: "Acido fluoridrico (Hydrofluoric acid - HF).", en: "Hydrofluoric acid (HF)." },
+            { it: "Alcool etilico denaturato.", en: "Denatured ethyl alcohol." },
+            { it: "Soluzione fisiologica sterile.", en: "Sterile saline solution." }
+          ],
+          correct: 0,
+          expIt: "Esatto! L'acido fluoridrico penetra nei tessuti profondi legando il calcio: usare sempre guanti antiacido, visiera e cappa.",
+          expEn: "Correct! Hydrofluoric acid penetrates deep tissues binding calcium: always use acid-resistant gloves, face shield, and hood."
+        }
+      },
+      {
+        category: "09 • CAD/CAM, FRESATORI & STAMPANTI 3D",
+        icon: "🖨️",
+        titleIt: "Laboratorio Digitale: Fresatrici 5 Assi e Resine Fotopolimerizzabili",
+        titleEn: "Digital Lab: 5-Axis Milling Units & 3D Printing Photopolymers",
+        points: [
+          {
+            it: "Nelle stampanti 3D (SLA/DLP), le resine liquide fotopolimerizzabili non polimerizzate sono irritanti e sensibilizzanti: evitare ogni contatto con la pelle.",
+            en: "In 3D printers (SLA/DLP), uncured liquid photopolymer resins are irritants and skin sensitizers: avoid any skin contact."
+          },
+          {
+            it: "Durante il lavaggio dei pezzi stampati in Alcool Isopropilico (IPA 99%), lavorare in ambiente ventilato lontano da fonti di ignizione (IPA è altamente infiammabile).",
+            en: "When washing printed parts in Isopropyl Alcohol (99% IPA), work in a ventilated area away from ignition sources (IPA is highly flammable)."
+          },
+          {
+            it: "Nei fresatori CAD/CAM (Zirconio, PMMA, Titanio), non bypassare mai il blocco elettronico dello sportello e verificare i filtri HEPA dell'aspiratore.",
+            en: "In CAD/CAM milling units (Zirconia, PMMA, Titanium), never bypass the door safety interlock and check the extractor's HEPA filters."
+          }
+        ],
+        dpi: [
+          "🧤 Guanti in nitrile senza polvere per resine 3D (Powder-Free Nitrile Gloves)",
+          "🕶️ Occhiali filtro UV per lampade/forni curing (UV-Filtering Goggles)",
+          "😷 FFP3 durante cambio sacco polvere zirconio (FFP3 when changing zirconia bag)"
+        ],
+        glossary: "<strong>Key Terms:</strong> Photopolymer Resin = Resina fotopolimerizzabile • Isopropyl Alcohol (IPA) = Alcool isopropilico • Door Interlock = Blocco sportello",
+        gate: {
+          qIt: "Quali precauzioni servono nella fase di post-processing della stampa 3D (lavaggio in IPA e polimerizzazione UV)?",
+          qEn: "Which precautions are needed during 3D printing post-processing (IPA washing and UV curing)?",
+          options: [
+            { it: "Manipolare i pezzi a mani nude per sentire se sono ancora appiccicosi.", en: "Handle printed parts bare-handed to feel if they are still tacky." },
+            { it: "Guanti in nitrile, ventilazione adeguata (IPA infiammabile) e protezione occhi dai raggi UV.", en: "Nitrile gloves, proper ventilation (flammable IPA), and UV eye protection." },
+            { it: "Asciugare l'alcool isopropilico con la fiamma del becco Bunsen.", en: "Dry off isopropyl alcohol using a Bunsen burner flame." }
+          ],
+          correct: 1,
+          expIt: "Corretto! La resina è tossica finché non completa il ciclo UV, mentre l'IPA sviluppa vapori infiammabili.",
+          expEn: "Correct! Resin remains a skin sensitizer until fully UV-cured, while IPA emits flammable vapors."
+        }
+      },
+      {
+        category: "10 • EMERGENZE & GESTIONE RIFIUTI SPECIALI",
+        icon: "♻️",
+        titleIt: "Primo Soccorso, Segnaletica e Smaltimento Rifiuti (CER)",
+        titleEn: "First Aid, Safety Signage & Special Waste Disposal",
+        points: [
+          {
+            it: "In caso di schizzo chimico negli occhi (monomero, acidi, disinfettanti): sciacquare immediatamente al lavaocchi di emergenza per almeno 15 minuti.",
+            en: "In case of chemical eye splash (monomer, acids, disinfectants): flush immediately at the Eye Wash Station for at least 15 minutes."
+          },
+          {
+            it: "Separazione dei rifiuti speciali (D.Lgs. 152/06): gessi/rivestimenti, residui di leghe metalliche, contenitori contaminati da monomeri/acidi e rifiuti a rischio infettivo.",
+            en: "Segregation of hazardous waste: gypsum/investments, metal alloy scraps, monomer/acid-contaminated containers, and biohazardous waste."
+          },
+          {
+            it: "Mai versare monomeri, acidi o fanghi di gesso direttamente nello scarico del lavandino (obbligo di decantatore gessi e taniche di raccolta dedicata).",
+            en: "Never pour monomers, acids, or plaster sludge down the sink drain (plaster trap and dedicated waste drums are mandatory)."
+          }
+        ],
+        dpi: [
+          "🚿 Lavaocchi di emergenza accessibile (Accessible Eye Wash Station)",
+          "🧯 Estintori CO2 / Polvere verificati (Inspected CO2 / Powder Extinguishers)",
+          "🛢️ Taniche omologate per rifiuti chimici (Approved Chemical Waste Drums)"
+        ],
+        glossary: "<strong>Key Terms:</strong> Eye Wash Station = Lavaocchi di emergenza • Plaster Trap = Decantatore gessi • Hazardous Waste = Rifiuti pericolosi",
+        gate: {
+          qIt: "Dove vanno smaltiti i residui liquidi di monomero acrilico, alcool isopropilico esausto e soluzioni acide?",
+          qEn: "Where must liquid acrylic monomer residues, spent isopropyl alcohol, and acid solutions be disposed of?",
+          options: [
+            { it: "Nel lavandino della sala gessi diluendo con molta acqua.", en: "Down the plaster room sink diluted with plenty of water." },
+            { it: "In taniche etichettate per rifiuti chimici pericolosi ritirate da ditta autorizzata.", en: "In labeled hazardous chemical waste drums collected by a licensed contractor." },
+            { it: "Nel cestino della raccolta indifferenziata.", en: "In the general municipal waste bin." }
+          ],
+          correct: 1,
+          expIt: "Eccellente! Lo sversamento in fognatura di monomeri e acidi è un reato ambientale e comporta rischi di esplosione nelle tubature.",
+          expEn: "Excellent! Pouring monomers and acids down drains violates environmental law and creates explosion hazards in pipes."
+        }
+      }
+    ];
+
+    let currentSlide = 0;
+    let gateUnlocked = new Array(slidesData.length).fill(false);
+    let attemptsCount = new Array(slidesData.length).fill(0);
+    let firstTryCorrect = new Array(slidesData.length).fill(false);
+
+    function init() {
+      renderProgress();
+      renderSlide(0);
+    }
+
+    function renderProgress() {
+      const container = document.getElementById('progressSteps');
+      container.innerHTML = '';
+      slidesData.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.className = 'step-dot';
+        if (idx < currentSlide || gateUnlocked[idx]) dot.classList.add('completed');
+        if (idx === currentSlide) dot.classList.add('current');
+        container.appendChild(dot);
+      });
+      document.getElementById('stepLabel').innerText = `SLIDE ${currentSlide + 1} / ${slidesData.length}`;
+    }
+
+    function renderSlide(index) {
+      const s = slidesData[index];
+      document.getElementById('slideCategory').innerText = s.category;
+      document.getElementById('slideTitleIt').innerText = s.titleIt;
+      document.getElementById('slideTitleEn').innerText = s.titleEn;
+      document.getElementById('slideIcon').innerText = s.icon;
+
+      const pointsContainer = document.getElementById('slidePoints');
+      pointsContainer.innerHTML = '';
+      s.points.forEach(p => {
+        pointsContainer.innerHTML += `
+          <div class="point-item">
+            <div class="it"><span class="it-tag">IT</span>${p.it}</div>
+            <div class="en"><span class="en-tag">EN</span>${p.en}</div>
+          </div>
+        `;
+      });
+
+      const dpiContainer = document.getElementById('slideDpiList');
+      dpiContainer.innerHTML = '';
+      s.dpi.forEach(item => {
+        dpiContainer.innerHTML += `<li>${item}</li>`;
+      });
+
+      document.getElementById('slideGlossary').innerHTML = s.glossary;
+
+      const gateBox = document.getElementById('gateContainer');
+      const gateBadge = document.getElementById('gateBadge');
+      const fb = document.getElementById('gateFeedback');
+      const nextBtn = document.getElementById('nextBtn');
+      const prevBtn = document.getElementById('prevBtn');
+
+      document.getElementById('gateQIt').innerHTML = `<span class="it-tag">GATE IT</span> ${s.gate.qIt}`;
+      document.getElementById('gateQEn').innerHTML = `<span class="en-tag">GATE EN</span> ${s.gate.qEn}`;
+      document.getElementById('gateAttempts').innerText = `Tentativi: ${attemptsCount[index]}`;
+
+      const optsContainer = document.getElementById('gateOptions');
+      optsContainer.innerHTML = '';
+      const letters = ['A', 'B', 'C'];
+
+      s.gate.options.forEach((opt, optIdx) => {
+        const btn = document.createElement('button');
+        btn.className = 'opt-btn';
+        btn.innerHTML = `
+          <span class="opt-letter">${letters[optIdx]}</span>
+          <div>
+            <div class="it" style="font-weight:700;">${opt.it}</div>
+            <div class="en" style="color:#7dd3fc; font-size:1rem; margin-top:0.2rem;">${opt.en}</div>
+          </div>
+        `;
+        btn.onclick = () => checkGateAnswer(optIdx, btn);
+        if (gateUnlocked[index]) {
+          btn.disabled = true;
+          if (optIdx === s.gate.correct) btn.classList.add('correct');
+        }
+        optsContainer.appendChild(btn);
+      });
+
+      if (gateUnlocked[index]) {
+        gateBox.classList.add('unlocked');
+        gateBadge.innerText = "🔓 GATE SBLOCCATO • Puoi procedere alla slide successiva";
+        fb.className = "feedback-banner success";
+        fb.innerHTML = `<div class="it">✅ ${s.gate.expIt}</div><div class="en" style="margin-top:0.3rem;">${s.gate.expEn}</div>`;
+        nextBtn.disabled = false;
+        nextBtn.innerText = (index === slidesData.length - 1) ? "🏁 Completa Lezione" : "Slide Successiva ➡️";
+      } else {
+        gateBox.classList.remove('unlocked');
+        gateBadge.innerText = "🔒 GATE BLOCCATO • Rispondi correttamente per proseguire";
+        fb.className = "feedback-banner";
+        fb.style.display = "none";
+        nextBtn.disabled = true;
+        nextBtn.innerText = "🔒 Completa il Gate per Avanzare";
+      }
+
+      prevBtn.disabled = (index === 0);
+      renderProgress();
+    }
+
+    function checkGateAnswer(selectedIdx, btnElement) {
+      if (gateUnlocked[currentSlide]) return;
+
+      const s = slidesData[currentSlide];
+      attemptsCount[currentSlide]++;
+      document.getElementById('gateAttempts').innerText = `Tentativi: ${attemptsCount[currentSlide]}`;
+
+      const fb = document.getElementById('gateFeedback');
+
+      if (selectedIdx === s.gate.correct) {
+        if (attemptsCount[currentSlide] === 1) {
+          firstTryCorrect[currentSlide] = true;
+        }
+        gateUnlocked[currentSlide] = true;
+        btnElement.classList.add('correct');
+
+        document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
+
+        document.getElementById('gateContainer').classList.add('unlocked');
+        document.getElementById('gateBadge').innerText = "🔓 GATE SBLOCCATO • Puoi procedere alla slide successiva";
+
+        fb.className = "feedback-banner success";
+        fb.style.display = "block";
+        fb.innerHTML = `<div class="it">✅ ${s.gate.expIt}</div><div class="en" style="margin-top:0.3rem;">${s.gate.expEn}</div>`;
+
+        const nextBtn = document.getElementById('nextBtn');
+        nextBtn.disabled = false;
+        nextBtn.innerText = (currentSlide === slidesData.length - 1) ? "🏁 Completa Lezione" : "Slide Successiva ➡️";
+        renderProgress();
+      } else {
+        btnElement.classList.add('wrong');
+        btnElement.disabled = true;
+        fb.className = "feedback-banner error";
+        fb.style.display = "block";
+        fb.innerHTML = `
+          <div class="it">❌ Risposta errata! Rileggi la slide sopra e riprova per sbloccare il Gate.</div>
+          <div class="en" style="margin-top:0.2rem;">Incorrect! Review the slide above and try again to unlock the Gate.</div>
+        `;
+      }
+    }
+
+    function nextSlide() {
+      if (!gateUnlocked[currentSlide]) return;
+
+      if (currentSlide < slidesData.length - 1) {
+        currentSlide++;
+        renderSlide(currentSlide);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        document.getElementById('lessonStage').style.display = 'none';
+        document.getElementById('finalStage').style.display = 'block';
+        const firstTryTotal = firstTryCorrect.filter(Boolean).length;
+        document.getElementById('firstTryScore').innerText = `${firstTryTotal} / ${slidesData.length}`;
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        renderSlide(currentSlide);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function restartLesson() {
+      currentSlide = 0;
+      gateUnlocked.fill(false);
+      attemptsCount.fill(0);
+      firstTryCorrect.fill(false);
+      document.getElementById('finalStage').style.display = 'none';
+      document.getElementById('lessonStage').style.display = 'flex';
+      renderSlide(0);
+    }
+
+    function setLangMode(mode, btn) {
+      document.body.className = 'mode-' + mode;
+      document.querySelectorAll('.header-controls .ctrl-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
