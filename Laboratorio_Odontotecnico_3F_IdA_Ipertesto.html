@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I.S.I.S. "Alfonso Casanova" – Ipertesto Bilingue EBM &amp; Word 3F IdA (UDA 1–5)</title>
+  <style>
+    :root {
+      --primary: #1B4F72;
+      --primary-light: #2874A6;
+      --accent: #117864;
+      --word-blue: #185ABD;
+      --bg: #F4F6F9;
+      --card: #FFFFFF;
+      --text: #1C2833;
+      --muted: #566573;
+      --border: #D5D8DC;
+      --success-bg: #EAFAF1;
+      --success-border: #27AE60;
+      --error-bg: #FDEDEC;
+      --error-border: #C0392B;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: #FFFFFF;
+      padding: 20px 24px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .school-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.16);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.84rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: 0.3px;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+    }
+
+    header p {
+      font-size: 0.94rem;
+      opacity: 0.93;
+    }
+
+    .nav-tabs {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 8px;
+      padding: 10px 24px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: #EAEDED;
+      color: var(--text);
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      background: #D5DBDB;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 22px auto;
+      padding: 0 24px 52px;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    /* Hypertext Action Bar inside Slides & Cards */
+    .hyper-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: #EBF5FB;
+      border: 1px solid #AED6F1;
+      border-radius: 8px;
+    }
+
+    .btn-word {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--word-blue);
+      color: #FFFFFF !important;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .btn-word:hover {
+      background: #103F91;
+    }
+
+    .btn-ebm-modal {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #FFFFFF;
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .btn-ebm-modal:hover {
+      background: #0E6251;
+    }
+
+    /* Slide Controls */
+    .slide-toolbar {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 18px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .lang-group {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .lang-btn {
+      padding: 7px 13px;
+      border: 1px solid var(--border);
+      background: #F8F9F9;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .lang-btn.active {
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
+    }
+
+    .slide-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+
+    .pill-btn {
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      background: #FFFFFF;
+      border-radius: 6px;
+      font-size: 0.80rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .pill-btn:hover {
+      background: #EBF5FB;
+      border-color: var(--primary-light);
+    }
+
+    .pill-btn.active {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+    }
+
+    .progress-wrap {
+      width: 100%;
+      height: 8px;
+      background: #E5E8E8;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--accent);
+      width: 6.25%;
+      transition: width 0.25s ease;
+    }
+
+    .slide-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 26px 30px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      min-height: 440px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      touch-action: pan-y;
+    }
+
+    .slide-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #EBF5FB;
+      padding-bottom: 12px;
+      margin-bottom: 18px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .slide-tag {
+      background: #EBF5FB;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 4px 12px;
+      border-radius: 6px;
+    }
+
+    .slide-counter {
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .slide-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .slide-grid.single-col {
+      grid-template-columns: 1fr;
+    }
+
+    .col-box {
+      background: #FAFBFD;
+      border: 1px solid #E5E8E8;
+      border-radius: 10px;
+      padding: 18px 20px;
+    }
+
+    .col-box.en {
+      background: #F4F9F9;
+      border-color: #D1E8E4;
+    }
+
+    .col-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .col-box.en .col-label {
+      color: var(--accent);
+    }
+
+    .col-box h2 {
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+
+    .col-box ul {
+      padding-left: 20px;
+    }
+
+    .col-box li {
+      margin-bottom: 8px;
+    }
+
+    .col-box a {
+      color: var(--word-blue);
+      font-weight: 700;
+    }
+
+    .interactive-box {
+      margin-top: 16px;
+      padding: 14px 18px;
+      background: #FEF9E7;
+      border: 1px solid #F7DC6F;
+      border-radius: 8px;
+    }
+
+    .interactive-box h4 {
+      margin-bottom: 8px;
+      color: #7D6608;
+      font-size: 0.94rem;
+    }
+
+    .mini-options {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .mini-btn {
+      padding: 8px 14px;
+      border: 1px solid #B7950B;
+      background: #FFFFFF;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .mini-btn:hover {
+      background: #FCF3CF;
+    }
+
+    .mini-feedback {
+      margin-top: 10px;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+
+    .slide-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 22px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-arrow {
+      background: var(--primary);
+      color: #FFFFFF;
+      border: none;
+      padding: 11px 20px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .nav-arrow:disabled {
+      background: #BDC3C7;
+      cursor: not-allowed;
+    }
+
+    /* Hypertext Index & EBM Bibliography Tab */
+    .hyper-hub-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .module-link-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 6px solid var(--word-blue);
+      border-radius: 10px;
+      padding: 20px 24px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+
+    .module-link-card h3 {
+      color: var(--primary);
+      margin-bottom: 4px;
+      font-size: 1.15rem;
+    }
+
+    .module-link-card .en-sub {
+      color: var(--accent);
+      font-style: italic;
+      font-weight: 600;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    .ref-list-box {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: #FEF9E7;
+      border: 1px solid #F7DC6F;
+      border-radius: 8px;
+      font-size: 0.88rem;
+    }
+
+    .ref-list-box ul {
+      padding-left: 18px;
+      margin-top: 6px;
+    }
+
+    /* Dispense & Lab Checklists */
+    .uda-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .uda-header {
+      background: #EBF5FB;
+      padding: 16px 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .uda-body {
+      padding: 20px 24px;
+      display: none;
+    }
+
+    .uda-body.open {
+      display: block;
+    }
+
+    .uda-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 12px;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+      padding: 8px 10px;
+      background: #F8F9F9;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .checklist-item input[type="checkbox"] {
+      margin-top: 4px;
+      transform: scale(1.2);
+      cursor: pointer;
+    }
+
+    .checklist-item.done span {
+      text-decoration: line-through;
+      color: var(--muted);
+    }
+
+    /* Gate Quiz */
+    .quiz-header-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+
+    .student-row {
+      display: flex;
+      gap: 16px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .student-row input {
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      min-width: 260px;
+    }
+
+    .question-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-bottom: 14px;
+    }
+
+    .question-card.correct {
+      background: var(--success-bg);
+      border-color: var(--success-border);
+    }
+
+    .question-card.incorrect {
+      background: var(--error-bg);
+      border-color: var(--error-border);
+    }
+
+    .q-badge {
+      display: inline-block;
+      background: #EBF5FB;
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 5px;
+      margin-bottom: 6px;
+    }
+
+    .q-title {
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .q-option {
+      display: block;
+      margin-bottom: 7px;
+      cursor: pointer;
+      padding: 6px 10px;
+      border-radius: 6px;
+    }
+
+    .q-option:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .q-feedback {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .quiz-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn-submit {
+      background: var(--accent);
+      color: #FFFFFF;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-secondary {
+      background: #566573;
+      color: #FFFFFF;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .result-banner {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      font-size: 1.05rem;
+      display: none;
+    }
+
+    /* Embedded Bilingual EBM Reader Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.62);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 18px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-window {
+      background: #FFFFFF;
+      max-width: 980px;
+      width: 100%;
+      max-height: 90vh;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.28);
+    }
+
+    .modal-top {
+      background: var(--primary);
+      color: #FFFFFF;
+      padding: 16px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .modal-body {
+      padding: 22px 26px;
+      overflow-y: auto;
+    }
+
+    .modal-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0;
+      font-size: 0.9rem;
+    }
+
+    .modal-table th {
+      background: var(--primary);
+      color: #FFFFFF;
+      padding: 8px 10px;
+      text-align: left;
+      border: 1px solid #BDC3C7;
+    }
+
+    .modal-table td {
+      padding: 8px 10px;
+      border: 1px solid #D5D8DC;
+    }
+
+    .modal-table tr:nth-child(even) td {
+      background: #F4F6F7;
+    }
+
+    @media (max-width: 820px) {
+      .slide-grid, .uda-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      .nav-tabs, .slide-toolbar, .slide-pills, .quiz-actions, .hyper-bar {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <span class="school-badge">I.S.I.S. "ALFONSO CASANOVA" – NAPOLI | A.S. 2026/2027</span>
+    <h1>Ipertesto Multimediale Bilingue EBM – Laboratorio Odontotecnico Classe 3F IdA</h1>
+    <p>Presenza (80%) + FAD (20%) • Slide Bilingui (IT/EN) + Collegamenti Diretti ai File Word (.docx) + Fonti EBM/ISO + Questionario Gate</p>
+  </div>
+</header>
+
+<nav class="nav-tabs">
+  <div class="nav-inner">
+    <button type="button" class="tab-btn active" data-tab="slides">1. Lezioni Interattive &amp; Link Word (16 Slide)</button>
+    <button type="button" class="tab-btn" data-tab="hyperindex">2. Indice Ipertestuale File Word (.docx) &amp; Fonti EBM</button>
+    <button type="button" class="tab-btn" data-tab="dispense">3. Dispense FAD &amp; Checklist Laboratorio (UDA 1–5)</button>
+    <button type="button" class="tab-btn" data-tab="quiz">4. Questionario Gate Completo (15 Quesiti)</button>
+  </div>
+</nav>
+
+<main>
+  <!-- SEZIONE 1: 16 SLIDE INTERATTIVE CON COLLEGAMENTI IPERTESTUALI AI WORD -->
+  <section id="slides" class="section active">
+    <div class="slide-toolbar">
+      <div class="lang-group">
+        <strong>Modalità Lingua:</strong>
+        <button type="button" class="lang-btn active" data-lang="both">Bilingue (IT + EN)</button>
+        <button type="button" class="lang-btn" data-lang="it">Solo Italiano</button>
+        <button type="button" class="lang-btn" data-lang="en">English Only</button>
+      </div>
+      <div>
+        <label for="slideSelect"><strong>Vai alla slide: </strong></label>
+        <select id="slideSelect" style="padding: 6px 10px; border-radius: 6px; border: 1px solid #D5D8DC;"></select>
+      </div>
+    </div>
+
+    <div id="slidePills" class="slide-pills"></div>
+
+    <div class="progress-wrap">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+
+    <div id="slideCard" class="slide-card">
+      <div>
+        <div class="slide-meta">
+          <span id="slideTag" class="slide-tag">UDA 1–5</span>
+          <span id="slideCounter" class="slide-counter">Slide 1 / 16</span>
+        </div>
+        <div id="slideContent" class="slide-grid"></div>
+        <div id="slideHyperBar" class="hyper-bar"></div>
+        <div id="slideInteractive"></div>
+      </div>
+
+      <div class="slide-nav">
+        <button type="button" id="prevBtn" class="nav-arrow">← Precedente / Previous</button>
+        <span style="font-size: 0.85rem; color: #566573;">Usa i pulsanti, i numeri in alto, i link Word/EBM o le frecce ← →</span>
+        <button type="button" id="nextBtn" class="nav-arrow">Successiva / Next →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEZIONE 2: INDICE IPERTESTUALE FILE WORD (.DOCX) & BIBLIOGRAFIA EBM -->
+  <section id="hyperindex" class="section">
+    <div class="quiz-header-card" style="border-left: 6px solid #185ABD;">
+      <h2 style="color: #1B4F72; margin-bottom: 6px;">Mappa Ipertestuale Bilingue – Collegamenti ai Documenti Word (.docx) e Fonti EBM / ISO</h2>
+      <p>Ogni unità didattica da sviluppare in classe (LIM) e in FAD (Google Classroom) è collegata al corrispondente <strong>file testo bilingue in formato Microsoft Word (.docx)</strong> contenuto nella cartella <code>Dispense_Word_Bilingui/</code>, nonché alla <strong>scheda EBM interattiva integrata</strong> consultabile direttamente in questa pagina.</p>
+    </div>
+    <div id="hyperIndexContainer" class="hyper-hub-grid"></div>
+  </section>
+
+  <!-- SEZIONE 3: DISPENSE FAD & CHECKLIST LABORATORIO -->
+  <section id="dispense" class="section">
+    <div class="uda-card">
+      <div class="uda-header" data-uda="uda1">
+        <span>UDA 1 (Ottobre – Novembre) • Accoglienza, PFI, Sicurezza &amp; D.Lgs. 81/08 (Ed. Civica)</span>
+        <span>▼ Espandi / Chiudi</span>
+      </div>
+      <div id="uda1" class="uda-body open">
+        <div class="hyper-bar" style="margin-top: 0; margin-bottom: 14px;">
+          <a class="btn-word" href="Dispense_Word_Bilingui/UDA1_Sicurezza_DLgs81_Sanitizzazione_IT_EN.docx">📄 Apri Dispensa Word UDA 1 (.docx)</a>
+          <button type="button" class="btn-ebm-modal" data-ebm="uda1">🔬 Leggi Scheda EBM Bilingue + Fonti</button>
+        </div>
+        <div class="uda-columns">
+          <div>
+            <h3 style="color: #1B4F72; margin-bottom: 8px;">Sintesi Teorica (FAD 20%)</h3>
+            <ul style="padding-left: 20px;">
+              <li><strong>D.Lgs. 81/08:</strong> Titolo III (DPI), Titolo IX (agenti chimici), Titolo X (agenti biologici).</li>
+              <li><strong>Regolamento (UE) 2017/745 (MDR):</strong> tracciabilità e requisiti dei dispositivi medici su misura.</li>
+              <li><strong>Protocollo CDC (MMWR 2003):</strong> risciacquo → disinfettante tubercolocida compatibile → risciacquo finale.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 style="color: #117864; margin-bottom: 8px;">Checklist Pratica di Laboratorio (Presenza 80%)</h3>
+            <label class="checklist-item"><input type="checkbox"><span>1. Indossare camice, guanti in nitrile, occhiali antischegge e mascherina FFP2/FFP3.</span></label>
+            <label class="checklist-item"><input type="checkbox"><span>2. Eseguire il protocollo CDC di sanitizzazione delle impronte prima della colatura.</span></label>
+            <label class="checklist-item"><input type="checkbox"><span>3. Attivare l'aspirazione localizzata alla postazione e verificare lo schermo al pulitore.</span></label>
+            <label class="checklist-item"><input type="checkbox"><span>4. Verificare la postura ergonomica al banco e sottoscrivere il PFI.</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="uda-card">
+      <div class="uda-header" data-uda="uda2">
+        <span>UDA 2 (Dicembre – Gennaio) • Materiali da Impronta, Gessi (ISO 6873) e Zoccolatura</span>
+        <span>▼ Espandi / Chiudi</span>
+      </div>
+      <div id="uda2" class="uda-body open">
+        <div class="hyper-bar" style="margin-top: 0; margin-bottom: 14px;">
+          <a class="btn-word" href="Dispense_Word_Bilingui/UDA2_Materiali_Impronta_Gessi_ISO6873_IT_EN.docx">📄 Apri Dispensa Word UDA 2 (.docx)</a>
+          <button type="button" class="btn-ebm-modal" data-ebm="uda2">🔬 Leggi Scheda EBM Bilingue + Fonti</button>
+        </div>
+        <div class="uda-columns">
+          <div>
+            <h3 style="color: #1B4F72; margin-bottom: 8px;">Sintesi Teorica (FAD 20%)</h3>
+            <ul style="padding-left: 20px;">
+              <li><strong>Alginati:</strong> prevenzione di <em>sineresi</em> e <em>imbibizione</em>; colatura entro 15–30 minuti (Nassar et al., 2011).</li>
+              <li><strong>Elastomeri:</strong> siliconi Tipo C (rilascio alcol etilico) vs siliconi per addizione PVS (stabilità elevata).</li>
+              <li><strong>Gessi ISO 6873:2013:</strong> Tipo III (28–30 ml/100 g) e Tipo IV extra-duro (20–23 ml/100 g, espansione ≤ 0,10%).</li>
+            </ul>
+          </div>
+          <div>
+            <h3 style="color: #117864; margin-bottom: 8px;">Checklist Pratica di Laboratorio (Presenza 80%)</h3>
+            <label class="checklist-item"><input type="checkbox"><span>1. Pesare gesso Tipo III/IV e dosare l'acqua con cilindro graduato secondo il rapporto A/P.</span></label>
+            <label class="checklist-item"><input type="checkbox"><span>2. Miscelare sottovuoto e colare l'impronta su vibratore senza intrappolare bolle d'aria.</span></label>
+            <label class="checklist-item"><input type="checkbox"><span>3. Attendere la presa completa (45–60 min) prima della smodellazione.</span></label>
+            <label class="checklist-item"><input type="checkbox"><span>4. Squadrare allo squadramodelli ad acqua e zoccolare in modo simmetrico.</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="uda-card">
+      <div class="uda-header" data-uda="uda3">
+        <span>UDA 3 (Febbraio – Marzo) • Gnatologia di Base e Simulatori Occlusali</span>
+        <span>▼ Espandi / Chiudi</span>
+      </div>
+      <div id="uda3" class="uda-body">
+        <div class="hyper-bar" style="margin-top: 0; margin-bottom: 14px;">
+          <a class="btn-word" href="Dispense_Word_Bilingui/UDA3_Gnatologia_ATM_Articolatori_IT_EN.docx">📄 Apri Dispensa Word UDA 3 (.docx)</a>
+          <button type="button" class="btn-ebm-modal" data-ebm="uda3">🔬 Leggi Scheda EBM Bilingue + Fonti</button>
+        </div>
+        <div class="uda-columns">
+          <div>
+            <h3 style="color: #1B4F72; margin-bottom: 8px;">Sintesi Teorica (FAD 20%)</h3>
+            <ul style="padding-left: 20px;">
+              <li><strong>ATM (Okeson, 2019):</strong> rotazione pura nei primi 20–25 mm attorno all'asse cerniera; traslazione oltre i 20–25 mm.</li>
+              <li><strong>Articolatore a valore medio:</strong> Triangolo di Bonwill (10,5–11 cm), guida condilare 30°, angolo di Bennett 15°.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 style="color: #117864; margin-bottom: 8px;">Checklist Pratica di Laboratorio (Presenza 80%)</h3>
+            <label class="checklist-item"><input type="checkbox"><span>1. Creare ritenzioni a coda di rondine sulle basi dei modelli master in gesso Tipo IV.</span></label>
+            <label class="checklist-item"><input type="checkbox"><span>2. Posizionare il modello superiore secondo il Triangolo di Bonwill e fissare con gesso Tipo II.</span></label>
+            <label class="checklist-item"><input type="checkbox"><span>3. Articolare il modello inferiore in massima intercuspidazione e verificare con cartina 40 µm.</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="uda-card">
+      <div class="uda-header" data-uda="uda4">
+        <span>UDA 4 (Aprile) • Morfologia Dentale, Classi di Kennedy e Ganci a Filo</span>
+        <span>▼ Espandi / Chiudi</span>
+      </div>
+      <div id="uda4" class="uda-body">
+        <div class="hyper-bar" style="margin-top: 0; margin-bottom: 14px;">
+          <a class="btn-word" href="Dispense_Word_Bilingui/UDA4_Morfologia_Kennedy_Applegate_Ganci_IT_EN.docx">📄 Apri Dispensa Word UDA 4 (.docx)</a>
+          <button type="button" class="btn-ebm-modal" data-ebm="uda4">🔬 Leggi Scheda EBM Bilingue + Fonti</button>
+        </div>
+        <div class="uda-columns">
+          <div>
+            <h3 style="color: #1B4F72; margin-bottom: 8px;">Sintesi Teorica (FAD 20%)</h3>
+            <ul style="padding-left: 20px;">
+              <li><strong>Morfologia (Wheeler's):</strong> cuspidi di stampo (palatali sup. / vestibolari inf.) vs cuspidi di taglio.</li>
+              <li><strong>Kennedy-Applegate (McCracken's):</strong> Classi I–IV ed 8 regole di Applegate.</li>
+              <li><strong>Paralelometro &amp; Gancio di Adams:</strong> tracciatura equatore dentale e filo inox Ø 0,7 mm.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 style="color: #117864; margin-bottom: 8px;">Checklist Pratica di Laboratorio (Presenza 80%)</h3>
+            <label class="checklist-item"><input type="checkbox"><span>1. Modellare in cera creste marginali, coni cuspidali, creste triangolari e solchi.</span></label>
+            <label class="checklist-item"><input type="checkbox"><span>2. Analizzare il modello al paralelometro e tracciare l'equatore dentale.</span></label>
+            <label class="checklist-item"><input type="checkbox"><span>3. Piegare un gancio di Adams in filo d'acciaio inox elastico Ø 0,7 mm sul primo molare.</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="uda-card">
+      <div class="uda-header" data-uda="uda5">
+        <span>UDA 5 (Maggio – Giugno) • Protesi Provvisoria, Resina PMMA (ISO 20795-1) e Riparazioni</span>
+        <span>▼ Espandi / Chiudi</span>
+      </div>
+      <div id="uda5" class="uda-body">
+        <div class="hyper-bar" style="margin-top: 0; margin-bottom: 14px;">
+          <a class="btn-word" href="Dispense_Word_Bilingui/UDA5_Protesi_Provvisoria_PMMA_ISO20795_IT_EN.docx">📄 Apri Dispensa Word UDA 5 (.docx)</a>
+          <button type="button" class="btn-ebm-modal" data-ebm="uda5">🔬 Leggi Scheda EBM Bilingue + Fonti</button>
+        </div>
+        <div class="uda-columns">
+          <div>
+            <h3 style="color: #1B4F72; margin-bottom: 8px;">Sintesi Teorica (FAD 20%)</h3>
+            <ul style="padding-left: 20px;">
+              <li><strong>PMMA (ISO 20795-1:2013):</strong> rapporto 3:1, 5 stadi fisici, zaffatura in fase plastica (dough stage).</li>
+              <li><strong>Pentola a pressione:</strong> 45 °C, 2,5 bar per 15 minuti per evitare ebollizione del monomero (100,8 °C).</li>
+            </ul>
+          </div>
+          <div>
+            <h3 style="color: #117864; margin-bottom: 8px;">Checklist Pratica di Laboratorio (Presenza 80%)</h3>
+            <label class="checklist-item"><input type="checkbox"><span>1. Isolare il modello asciutto con due strati di lacca alginica.</span></label>
+            <label class="checklist-item"><input type="checkbox"><span>2. Zaffare in fase plastica e polimerizzare in pentola a pressione (45 °C, 2,5 bar, 15 min).</span></label>
+            <label class="checklist-item"><input type="checkbox"><span>3. Rifinire al carburo e lucidare con pomice ventilata e bianco di Spagna (Ra &lt; 0,2 µm).</span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEZIONE 4: QUESTIONARIO GATE -->
+  <section id="quiz" class="section">
+    <div class="quiz-header-card">
+      <h2 style="color: #1B4F72; margin-bottom: 6px;">Questionario Gate di Verifica Bilingue (IT / EN) – Validazione FAD (UDA 1–5)</h2>
+      <p>Rispondi ai 15 quesiti basati sulle fonti EBM, norme ISO e normative di settore. <strong>Soglia minima di superamento: 11/15 risposte esatte.</strong></p>
+      <div class="student-row">
+        <input type="text" id="studentName" placeholder="Nome e Cognome Studente / Student Name">
+        <input type="text" id="studentClass" value="Classe 3F IdA – Odontotecnico" readonly style="background: #F4F6F7;">
+      </div>
+    </div>
+
+    <div id="quizContainer"></div>
+
+    <div class="quiz-actions">
+      <button type="button" id="submitQuizBtn" class="btn-submit">Verifica Risposte / Submit Quiz</button>
+      <button type="button" id="resetQuizBtn" class="btn-secondary">Azzera / Reset</button>
+      <button type="button" id="printQuizBtn" class="btn-secondary">Stampa / Salva Risultato PDF</button>
+    </div>
+
+    <div id="resultBanner" class="result-banner"></div>
+  </section>
+</main>
+
+<!-- MODALE LETTORE SCHEDA EBM BILINGUE INTEGRATA -->
+<div id="ebmModal" class="modal-backdrop">
+  <div class="modal-window">
+    <div class="modal-top">
+      <div>
+        <strong id="modalTitle" style="font-size: 1.05rem;">Scheda Didattica Bilingue EBM</strong>
+      </div>
+      <div style="display: flex; gap: 8px;">
+        <a id="modalWordLink" class="btn-word" href="#">📄 Scarica Word (.docx)</a>
+        <button type="button" id="closeModalBtn" style="background: #C0392B; color: #FFF; border: none; padding: 8px 14px; border-radius: 6px; font-weight: 700; cursor: pointer;">✕ Chiudi</button>
+      </div>
+    </div>
+    <div id="modalBody" class="modal-body"></div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const slidesData = [{"tag": "Introduzione / Introduction", "short": "1. Copertina", "docFile": "Dispense_Word_Bilingui/UDA1_Sicurezza_DLgs81_Sanitizzazione_IT_EN.docx", "docLabel": "Apri Dispensa Word UDA 1 (.docx)", "ebmId": "uda1", "itTitle": "Esercitazioni di Laboratorio Odontotecnico – Classe 3F IdA", "itPoints": ["<strong>I.S.I.S. \"Alfonso Casanova\" – Napoli</strong> | A.S. 2026/2027.", "Percorso serale Istruzione degli Adulti (Secondo Periodo Didattico).", "Ripartizione oraria: <strong>80% Laboratorio in Presenza</strong> e <strong>20% FAD</strong> su Google Classroom.", "<strong>Ipertesto Multimediale Bilingue (IT/EN):</strong> ogni modulo è collegato alla relativa dispensa Word (.docx) con fonti EBM, ISO e normative verificate."], "enTitle": "Dental Laboratory Exercises – Class 3F Adult Education", "enPoints": ["<strong>I.S.I.S. \"Alfonso Casanova\" – Naples</strong> | Academic Year 2026/2027.", "Evening Adult Education Track (Second Didactic Period).", "Time allocation: <strong>80% In-Person Lab</strong> and <strong>20% Distance Learning (FAD)</strong>.", "<strong>Bilingual Multimedia Hypertext (IT/EN):</strong> each unit links directly to its companion Word (.docx) handout with verified EBM, ISO, and regulatory citations."]}, {"tag": "Programma Annuale / Roadmap", "short": "2. Piano UDA 1–5", "docFile": "Dispense_Word_Bilingui/UDA1_Sicurezza_DLgs81_Sanitizzazione_IT_EN.docx", "docLabel": "Apri Dispensa Word UDA 1 (.docx)", "ebmId": "uda1", "itTitle": "Piano Annuale delle Unità Didattiche (UDA 1–5) & Collegamenti Ipertestuali", "itPoints": ["<strong>UDA 1 (Ott–Nov):</strong> Accoglienza, PFI, Sicurezza &amp; D.Lgs. 81/08 (Ed. Civica) → <a href='Dispense_Word_Bilingui/UDA1_Sicurezza_DLgs81_Sanitizzazione_IT_EN.docx'>Dispensa Word UDA 1</a>.", "<strong>UDA 2 (Dic–Gen):</strong> Materiali da Impronta, Gessi (ISO 6873) e Zoccolatura → <a href='Dispense_Word_Bilingui/UDA2_Materiali_Impronta_Gessi_ISO6873_IT_EN.docx'>Dispensa Word UDA 2</a>.", "<strong>UDA 3 (Feb–Mar):</strong> Gnatologia di Base e Simulatori Occlusali → <a href='Dispense_Word_Bilingui/UDA3_Gnatologia_ATM_Articolatori_IT_EN.docx'>Dispensa Word UDA 3</a>.", "<strong>UDA 4 (Aprile):</strong> Morfologia, Kennedy-Applegate e Ganci a Filo → <a href='Dispense_Word_Bilingui/UDA4_Morfologia_Kennedy_Applegate_Ganci_IT_EN.docx'>Dispensa Word UDA 4</a>.", "<strong>UDA 5 (Mag–Giu):</strong> Protesi Provvisoria, PMMA (ISO 20795-1) e Riparazioni → <a href='Dispense_Word_Bilingui/UDA5_Protesi_Provvisoria_PMMA_ISO20795_IT_EN.docx'>Dispensa Word UDA 5</a>."], "enTitle": "Annual Didactic Units Roadmap (UDA 1–5) & Hypertext Links", "enPoints": ["<strong>UDA 1 (Oct–Nov):</strong> Orientation, PFI, Lab Safety &amp; Decree 81/08 → <a href='Dispense_Word_Bilingui/UDA1_Sicurezza_DLgs81_Sanitizzazione_IT_EN.docx'>UDA 1 Word Handout</a>.", "<strong>UDA 2 (Dec–Jan):</strong> Impression Materials, Gypsum (ISO 6873) &amp; Trimming → <a href='Dispense_Word_Bilingui/UDA2_Materiali_Impronta_Gessi_ISO6873_IT_EN.docx'>UDA 2 Word Handout</a>.", "<strong>UDA 3 (Feb–Mar):</strong> Basic Gnathology &amp; Occlusal Simulators → <a href='Dispense_Word_Bilingui/UDA3_Gnatologia_ATM_Articolatori_IT_EN.docx'>UDA 3 Word Handout</a>.", "<strong>UDA 4 (April):</strong> Morphology, Kennedy-Applegate &amp; Wire Clasps → <a href='Dispense_Word_Bilingui/UDA4_Morfologia_Kennedy_Applegate_Ganci_IT_EN.docx'>UDA 4 Word Handout</a>.", "<strong>UDA 5 (May–Jun):</strong> Provisional Prosthesis, PMMA (ISO 20795-1) &amp; Repairs → <a href='Dispense_Word_Bilingui/UDA5_Protesi_Provvisoria_PMMA_ISO20795_IT_EN.docx'>UDA 5 Word Handout</a>."]}, {"tag": "UDA 1 • Sicurezza 81/08", "short": "3. Sicurezza & DPI", "docFile": "Dispense_Word_Bilingui/UDA1_Sicurezza_DLgs81_Sanitizzazione_IT_EN.docx", "docLabel": "Apri Dispensa Word UDA 1 (.docx)", "ebmId": "uda1", "itTitle": "Sicurezza in Laboratorio Odontotecnico e D.Lgs. 81/08", "itPoints": ["<strong>Quadro normativo:</strong> D.Lgs. 81/08 (Titolo III DPI, Titolo IX Agenti Chimici, Titolo X Agenti Biologici) e Regolamento (UE) 2017/745 (MDR – dispositivi su misura).", "<strong>DPI obbligatori:</strong> camice protettivo, guanti in nitrile, occhiali/visiera antischegge, mascherina FFP2/FFP3 durante fresatura e rifinitura.", "<strong>Prevenzione collettiva:</strong> cappe e bocchette di aspirazione localizzata, schermo protettivo al pulitore, corretta postura ergonomica.", "<em>Fonte: D.Lgs. 81/2008; Reg. (UE) 2017/745; CDC MMWR 2003;52(RR-17).</em>"], "enTitle": "Dental Lab Safety & Legislative Decree 81/08", "enPoints": ["<strong>Regulatory framework:</strong> Italian Decree 81/08 (Title III PPE, Title IX Chemical Agents, Title X Biological Agents) &amp; Regulation (EU) 2017/745 (MDR).", "<strong>Mandatory PPE:</strong> lab coat, nitrile gloves, safety goggles/face shield, FFP2/FFP3 respirator during grinding and finishing.", "<strong>Collective protection:</strong> local exhaust ventilation hoods, lathe protective shield, proper ergonomic posture at the workbench.", "<em>Source: Decree 81/2008; Reg. (EU) 2017/745; CDC MMWR 2003;52(RR-17).</em>"], "interactive": {"prompt": "Verifica rapida (IT/EN): Quale mascherina è indicata durante la rifinitura di gesso e resina? / Which mask is required when grinding gypsum or acrylic?", "options": [{"label": "Mascherina filtrante FFP2/FFP3 + occhiali / FFP2/FFP3 respirator + goggles", "correct": true, "msg": "Esatto! Protegge le vie respiratorie dalle polveri sottili e gli occhi dalle schegge (D.Lgs. 81/08 Titolo III)."}, {"label": "Nessuna protezione se si lavora velocemente / No protection needed", "correct": false, "msg": "Errato: il D.Lgs. 81/08 impone sempre DPI e aspirazione localizzata."}]}}, {"tag": "UDA 1 • Igiene Impronte", "short": "4. Sanitizzazione", "docFile": "Dispense_Word_Bilingui/UDA1_Sicurezza_DLgs81_Sanitizzazione_IT_EN.docx", "docLabel": "Apri Dispensa Word UDA 1 (.docx)", "ebmId": "uda1", "itTitle": "Protocollo EBM di Sanitizzazione delle Impronte e Igiene", "itPoints": ["<strong>Rischio biologico crociato:</strong> ogni impronta proveniente dallo studio va trattata come potenzialmente infetta (HBV, HCV, HIV).", "<strong>Fasi operative CDC:</strong> 1. Risciacquo delicato sotto acqua corrente per rimuovere saliva/sangue; 2. Disinfettante ospedaliero tubercolocida compatibile; 3. Risciacquo finale prima della colatura.", "<strong>Compatibilità materiali:</strong> sugli <strong>alginati</strong> preferire spray disinfettanti o immersione brevissima (max 5–10 min) per evitare assorbimento d'acqua.", "<em>Fonte: CDC Guidelines MMWR 2003;52(RR-17); Almortadi &amp; Chadwick, Br Dent J 2010.</em>"], "enTitle": "EBM Impression Disinfection Protocol & Lab Hygiene", "enPoints": ["<strong>Cross-infection hazard:</strong> every incoming dental impression must be handled as potentially infectious (HBV, HCV, HIV).", "<strong>CDC operating steps:</strong> 1. Gentle rinse under running water to remove bioburden; 2. Compatible tuberculocidal hospital disinfectant; 3. Final rinse prior to pouring.", "<strong>Material compatibility:</strong> for <strong>alginates</strong>, use disinfectant spray or brief immersion (max 5–10 min) to prevent water uptake.", "<em>Source: CDC Guidelines MMWR 2003;52(RR-17); Almortadi &amp; Chadwick, Br Dent J 2010.</em>"]}, {"tag": "UDA 2 • Impronte", "short": "5. Materiali Impronta", "docFile": "Dispense_Word_Bilingui/UDA2_Materiali_Impronta_Gessi_ISO6873_IT_EN.docx", "docLabel": "Apri Dispensa Word UDA 2 (.docx)", "ebmId": "uda2", "itTitle": "Materiali da Impronta: Alginati ed Elastomeri", "itPoints": ["<strong>Idrocolloidi irreversibili (Alginati):</strong> soggetti a <strong>sineresi</strong> (perdita d'acqua/contrazione all'aria) e <strong>imbibizione</strong> (assorbimento d'acqua/espansione). Conservare al 100% UR e colare entro <strong>15–30 minuti</strong>.", "<strong>Siliconi per condensazione (Tipo C):</strong> liberano alcol etilico volatile durante la presa; colatura consigliata entro 30–60 minuti.", "<strong>Siliconi per addizione (PVS) e Polieteri:</strong> elevatissima precisione e stabilità dimensionale; consentono colatura differita e duplicazione.", "<em>Fonte: Anusavice et al., Phillips' Science of Dental Materials; Nassar et al., J Prosthet Dent 2011.</em>"], "enTitle": "Impression Materials: Alginates & Elastomers", "enPoints": ["<strong>Irreversible hydrocolloids (Alginates):</strong> prone to <strong>syneresis</strong> (water loss/shrinkage in air) and <strong>imbibition</strong> (water uptake/swelling). Store at 100% RH and pour within <strong>15–30 minutes</strong>.", "<strong>Condensation silicones (C-type):</strong> release volatile ethyl alcohol byproduct; pour within 30–60 minutes.", "<strong>Addition silicones (PVS) &amp; Polyethers:</strong> superior accuracy and dimensional stability; allow delayed and multiple pours.", "<em>Source: Anusavice et al., Phillips' Science of Dental Materials; Nassar et al., J Prosthet Dent 2011.</em>"], "interactive": {"prompt": "Verifica rapida (IT/EN): Come si chiama la perdita di acqua con contrazione dell'alginato lasciato all'aria? / What is water loss and shrinkage of alginate in air called?", "options": [{"label": "Sineresi / Syneresis", "correct": true, "msg": "Corretto! La sineresi provoca contrazione e imprecisione del modello (Nassar et al., 2011)."}, {"label": "Imbibizione / Imbibition", "correct": false, "msg": "Non corretto: l'imbibizione è l'assorbimento di acqua con rigonfiamento."}]}}, {"tag": "UDA 2 • Gessi e Zoccolatura", "short": "6. Gessi & Zoccoli", "docFile": "Dispense_Word_Bilingui/UDA2_Materiali_Impronta_Gessi_ISO6873_IT_EN.docx", "docLabel": "Apri Dispensa Word UDA 2 (.docx)", "ebmId": "uda2", "itTitle": "Gessi Odontoiatrici (ISO 6873:2013), Rapporti A/P e Zoccolatura", "itPoints": ["<strong>Classificazione ISO 6873:2013:</strong> Tipo II (tenero/alabastro per montaggi), <strong>Tipo III (duro/pietra)</strong> per modelli antagonisti/studio, <strong>Tipo IV (extra-duro)</strong> a bassa espansione (≤ 0,10%) per modelli master.", "<strong>Rapporto Acqua/Polvere (A/P):</strong> Tipo III ≈ <strong>28–30 ml / 100 g</strong>; Tipo IV ≈ <strong>20–23 ml / 100 g</strong>. Meno acqua = minor porosità e maggiore durezza.", "<strong>Colatura e Zoccolatura:</strong> impastamento sottovuoto, colatura su vibratore, squadratura allo squadramodelli ad acqua e zoccolatura parallela al piano occlusale.", "<em>Fonte: Norma Internazionale ISO 6873:2013; Phillips' Science of Dental Materials.</em>"], "enTitle": "Dental Gypsum (ISO 6873:2013), W/P Ratios & Base Trimming", "enPoints": ["<strong>ISO 6873:2013 Classification:</strong> Type II (plaster for mounting), <strong>Type III (dental stone)</strong> for study/opposing casts, <strong>Type IV (die stone)</strong> low expansion (≤ 0.10%) for master models.", "<strong>Water/Powder (W/P) Ratio:</strong> Type III ≈ <strong>28–30 mL / 100 g</strong>; Type IV ≈ <strong>20–23 mL / 100 g</strong>. Less water = lower porosity and higher strength.", "<strong>Pouring &amp; Trimming:</strong> vacuum mixing, vibration pouring, wet model trimming and base forming parallel to the occlusal plane.", "<em>Source: International Standard ISO 6873:2013; Phillips' Science of Dental Materials.</em>"], "interactive": {"prompt": "Verifica rapida (IT/EN): Quale tipo di gesso si utilizza per i modelli master con monconi sfilabili? / Which gypsum type is used for master die models?", "options": [{"label": "Gesso Tipo IV (extra-duro) / Type IV die stone", "correct": true, "msg": "Esatto! Secondo ISO 6873:2013 il Tipo IV unisce altissima resistenza all'abrasione ed espansione ≤ 0,10%."}, {"label": "Gesso Tipo II (alabastro) / Type II plaster", "correct": false, "msg": "Non corretto: il Tipo II è tenero e si usa per il montaggio in articolatore."}]}}, {"tag": "UDA 3 • Gnatologia", "short": "7. ATM e Movimenti", "docFile": "Dispense_Word_Bilingui/UDA3_Gnatologia_ATM_Articolatori_IT_EN.docx", "docLabel": "Apri Dispensa Word UDA 3 (.docx)", "ebmId": "uda3", "itTitle": "Articolazione Temporo-Mandibolare (ATM) e Movimenti Mandibolari", "itPoints": ["<strong>Rotazione condilare pura:</strong> avviene nel compartimento condilo-discale nei primi <strong>20–25 mm</strong> di apertura attorno all'asse cerniera terminale.", "<strong>Traslazione condilare:</strong> scorrimento lungo l'eminenza articolare oltre i 20–25 mm, in protrusione e lateralità.", "<strong>Lato lavorante vs bilanciante:</strong> in lateralità il condilo lavorante ruota, quello bilanciante trasla in basso, in avanti e medialmente.", "<em>Fonte: Okeson JP, Management of Temporomandibular Disorders and Occlusion, 8th ed., Elsevier.</em>"], "enTitle": "Temporomandibular Joint (TMJ) & Mandibular Movements", "enPoints": ["<strong>Pure condylar rotation:</strong> occurs in the inferior condyle-disc compartment during the first <strong>20–25 mm</strong> of opening around the terminal hinge axis.", "<strong>Condylar translation:</strong> gliding along the articular eminence beyond 20–25 mm, in protrusion and laterotrusion.", "<strong>Working vs balancing side:</strong> during lateral movement, the working condyle rotates while the balancing condyle translates downward, forward, and medially.", "<em>Source: Okeson JP, Management of Temporomandibular Disorders and Occlusion, 8th ed., Elsevier.</em>"], "interactive": {"prompt": "Verifica rapida (IT/EN): Quale movimento prevale nei primi 20 mm di apertura? / Which movement predominates in the first 20 mm of opening?", "options": [{"label": "Rotazione pura / Pure rotation", "correct": true, "msg": "Esatto! Nei primi 20–25 mm i condili ruotano attorno all'asse cerniera terminale (Okeson, 2019)."}, {"label": "Traslazione pura / Pure translation", "correct": false, "msg": "Non corretto: la traslazione subentra oltre i 20–25 mm di apertura."}]}}, {"tag": "UDA 3 • Simulatori", "short": "8. Articolatori", "docFile": "Dispense_Word_Bilingui/UDA3_Gnatologia_ATM_Articolatori_IT_EN.docx", "docLabel": "Apri Dispensa Word UDA 3 (.docx)", "ebmId": "uda3", "itTitle": "Occlusore vs Articolatore a Valore Medio", "itPoints": ["<strong>Occlusore a cerniera:</strong> riproduce solo apertura e chiusura verticale.", "<strong>Articolatore a valore medio:</strong> replica anche protrusione e lateralità tramite valori medi anatomici.", "<strong>Parametri standard:</strong> Triangolo di Bonwill (10,5–11 cm), guida condilare sagittale <strong>30°</strong>, angolo di Bennett <strong>15°</strong>.", "<strong>Cartina d'articolazione (40 µm):</strong> rosso per la centrica, blu per i movimenti eccentrici.", "<em>Fonte: Okeson JP (2019); Dawson PE, Functional Occlusion, Mosby Elsevier.</em>"], "enTitle": "Simple Hinge vs Mean-Value Articulator", "enPoints": ["<strong>Simple hinge articulator:</strong> reproduces vertical opening and closing only.", "<strong>Mean-value articulator:</strong> simulates protrusion and laterotrusion using average anatomical values.", "<strong>Standard settings:</strong> Bonwill Triangle (10.5–11 cm), <strong>30°</strong> sagittal condylar guidance, <strong>15°</strong> Bennett angle.", "<strong>Articulating paper (40 µm):</strong> red for centric contacts, blue for eccentric excursions.", "<em>Source: Okeson JP (2019); Dawson PE, Functional Occlusion, Mosby Elsevier.</em>"]}, {"tag": "UDA 4 • Morfologia", "short": "9. Morfologia", "docFile": "Dispense_Word_Bilingui/UDA4_Morfologia_Kennedy_Applegate_Ganci_IT_EN.docx", "docLabel": "Apri Dispensa Word UDA 4 (.docx)", "ebmId": "uda4", "itTitle": "Anatomia Funzionale del Tavolato Occlusale", "itPoints": ["<strong>Cuspidi di stampo (centrice):</strong> palatali superiori e vestibolari inferiori; mantengono la Dimensione Verticale d'Occlusione (DVO).", "<strong>Cuspidi di taglio (guida):</strong> vestibolari superiori e linguali inferiori.", "<strong>Elementi anatomici:</strong> creste marginali, creste triangolari, fosse centrali e solchi di sviluppo.", "<strong>Tecnica di ceratura:</strong> modellazione additiva progressiva a coni cuspidali.", "<em>Fonte: Nelson SJ, Wheeler's Dental Anatomy, Physiology and Occlusion, 11th ed., Elsevier.</em>"], "enTitle": "Functional Anatomy of the Occlusal Table", "enPoints": ["<strong>Stamp (supporting) cusps:</strong> upper palatal and lower buccal; maintain Vertical Dimension of Occlusion (VDO).", "<strong>Shearing (guiding) cusps:</strong> upper buccal and lower lingual.", "<strong>Anatomical landmarks:</strong> marginal ridges, triangular ridges, central fossae and developmental grooves.", "<strong>Wax-up technique:</strong> progressive additive cusp-cone modeling.", "<em>Source: Nelson SJ, Wheeler's Dental Anatomy, Physiology and Occlusion, 11th ed., Elsevier.</em>"], "interactive": {"prompt": "Verifica rapida (IT/EN): Quali sono le cuspidi di stampo nell'arcata superiore? / Which are the stamp cusps in the upper arch?", "options": [{"label": "Cuspidi palatali / Palatal cusps", "correct": true, "msg": "Corretto! Le cuspidi palatali superiori occludono nelle fosse antagoniste (Wheeler's, 2020)."}, {"label": "Cuspidi vestibolari / Buccal cusps", "correct": false, "msg": "Riprova: le vestibolari superiori sono cuspidi di taglio."}]}}, {"tag": "UDA 4 • Kennedy", "short": "10. Kennedy", "docFile": "Dispense_Word_Bilingui/UDA4_Morfologia_Kennedy_Applegate_Ganci_IT_EN.docx", "docLabel": "Apri Dispensa Word UDA 4 (.docx)", "ebmId": "uda4", "itTitle": "Classificazione di Kennedy e Regole di Applegate", "itPoints": ["<strong>Classe I:</strong> edentulia bilaterale posteriore ai denti naturali residui.", "<strong>Classe II:</strong> edentulia monolaterale posteriore ai denti residui.", "<strong>Classe III:</strong> edentulia intercalare delimitata da denti pilastro anteriori e posteriori.", "<strong>Classe IV:</strong> edentulia singola anteriore che attraversa la linea mediana (non ammette modificazioni).", "<strong>Regole di Applegate:</strong> la classe si assegna dopo le estrazioni; l'area più posteriore comanda.", "<em>Fonte: Carr AB, Brown DT, McCracken's Removable Partial Prosthodontics, 13th ed., Elsevier.</em>"], "enTitle": "Kennedy Classification & Applegate's Rules", "enPoints": ["<strong>Class I:</strong> bilateral edentulous areas located posterior to remaining natural teeth.", "<strong>Class II:</strong> unilateral edentulous area located posterior to remaining teeth.", "<strong>Class III:</strong> unilateral bounded edentulous area with anterior and posterior abutments.", "<strong>Class IV:</strong> single anterior edentulous area crossing the midline (cannot have modifications).", "<strong>Applegate's Rules:</strong> classification follows extractions; the most posterior area governs the class.", "<em>Source: Carr AB, Brown DT, McCracken's Removable Partial Prosthodontics, 13th ed., Elsevier.</em>"], "interactive": {"prompt": "Verifica rapida (IT/EN): Un'edentulia bilaterale posteriore appartiene alla: / A bilateral posterior edentulous area is:", "options": [{"label": "Classe I di Kennedy / Kennedy Class I", "correct": true, "msg": "Esatto! Classe I = sella libera bilaterale posteriore (McCracken's, 13th ed.)."}, {"label": "Classe IV di Kennedy / Kennedy Class IV", "correct": false, "msg": "Non corretto: la Classe IV riguarda la zona anteriore."}]}}, {"tag": "UDA 4 • Paralelometro", "short": "11. Ganci e Filo", "docFile": "Dispense_Word_Bilingui/UDA4_Morfologia_Kennedy_Applegate_Ganci_IT_EN.docx", "docLabel": "Apri Dispensa Word UDA 4 (.docx)", "ebmId": "uda4", "itTitle": "Analisi al Paralelometro e Gancio di Adams", "itPoints": ["<strong>Paralelometro:</strong> determina l'asse d'inserzione protesico e individua i sottosquadri ritentivi (0,25–0,50 mm).", "<strong>Equatore dentale:</strong> linea di massima convessità che separa zona espulsiva e ritentiva.", "<strong>Gancio di Adams:</strong> piegato in filo d'acciaio inox elastico <strong>Ø 0,7 mm</strong> sui molari (Ø 0,6 mm sui premolari).", "<strong>Azione ritentiva:</strong> le due anse impegnano i sottosquadri mesiale e distale senza traumatizzare la gengiva.", "<em>Fonte: McCracken's Removable Partial Prosthodontics; Adams CP, Removable Orthodontic Appliances.</em>"], "enTitle": "Dental Surveyor Analysis & Adams Clasp", "enPoints": ["<strong>Dental surveyor:</strong> determines the path of insertion and locates retentive undercuts (0.25–0.50 mm).", "<strong>Survey line:</strong> height of contour dividing non-retentive and retentive zones.", "<strong>Adams clasp:</strong> bent from <strong>Ø 0.7 mm</strong> elastic stainless steel wire on molars (Ø 0.6 mm on premolars).", "<strong>Retentive action:</strong> arrowheads engage mesial and distal undercuts without gingival trauma.", "<em>Source: McCracken's Removable Partial Prosthodontics; Adams CP, Removable Orthodontic Appliances.</em>"]}, {"tag": "UDA 5 • Resina PMMA", "short": "12. Resina PMMA", "docFile": "Dispense_Word_Bilingui/UDA5_Protesi_Provvisoria_PMMA_ISO20795_IT_EN.docx", "docLabel": "Apri Dispensa Word UDA 5 (.docx)", "ebmId": "uda5", "itTitle": "Chimica e Fasi di Polimerizzazione del PMMA (ISO 20795-1)", "itPoints": ["<strong>Composizione:</strong> Polvere (polimero PMMA + perossido di benzoile) + Liquido (monomero MMA + ammina terziaria nelle autopolimerizzanti).", "<strong>Rapporto di miscelazione:</strong> 3 parti di polvere : 1 parte di liquido (in volume).", "<strong>5 Stadi fisici:</strong> 1. Sabbiosa → 2. Filamentosa → 3. <strong>Plastica (lavorabile)</strong> → 4. Elastica → 5. Rigida.", "<em>Fonte: Norma ISO 20795-1:2013; Zafar MS, Polymers 2020;12(10):2299.</em>"], "enTitle": "PMMA Chemistry & Polymerization Stages (ISO 20795-1)", "enPoints": ["<strong>Composition:</strong> Powder (PMMA polymer + benzoyl peroxide) + Liquid (MMA monomer + tertiary amine in autopolymerizing resins).", "<strong>Mixing ratio:</strong> 3 parts powder : 1 part liquid (by volume).", "<strong>5 Physical stages:</strong> 1. Sandy → 2. Stringy → 3. <strong>Dough (working stage)</strong> → 4. Rubbery → 5. Hard.", "<em>Source: ISO 20795-1:2013 Standard; Zafar MS, Polymers 2020;12(10):2299.</em>"], "interactive": {"prompt": "Verifica rapida (IT/EN): In quale fase si deve zaffare/modellare la resina? / At which stage must resin be packed?", "options": [{"label": "Fase plastica / Dough stage", "correct": true, "msg": "Perfetto! Nella fase plastica la resina è omogenea e non appiccicosa (Phillips' Science of Dental Materials)."}, {"label": "Fase elastica / Rubbery stage", "correct": false, "msg": "Attenzione: nella fase elastica la polimerizzazione è troppo avanzata."}]}}, {"tag": "UDA 5 • Polimerizzazione", "short": "13. Provvisori", "docFile": "Dispense_Word_Bilingui/UDA5_Protesi_Provvisoria_PMMA_ISO20795_IT_EN.docx", "docLabel": "Apri Dispensa Word UDA 5 (.docx)", "ebmId": "uda5", "itTitle": "Realizzazione Provvisorio, Pentola a Pressione e Standard ISO 20795-1", "itPoints": ["<strong>Isolamento del modello:</strong> applicazione di lacca separatrice alginica sul gesso asciutto.", "<strong>Pentola a pressione:</strong> acqua a <strong>45 °C</strong>, pressione <strong>2,5 bar</strong> per <strong>15 minuti</strong> per impedire l'ebollizione del monomero (100,8 °C) ed eliminare le porosità.", "<strong>Requisiti ISO 20795-1:2013:</strong> assenza di porosità visibili, resistenza a flessione ≥ 65 MPa (termo) / ≥ 60 MPa (auto), monomero residuo ≤ 2,2% wt (termo).", "<em>Fonte: ISO 20795-1:2013; Anusavice et al., Phillips' Science of Dental Materials.</em>"], "enTitle": "Provisional Fabrication, Pressure Pot & ISO 20795-1 Standard", "enPoints": ["<strong>Model isolation:</strong> application of alginate separating medium on dry stone.", "<strong>Pressure pot:</strong> water at <strong>45 °C</strong>, pressure <strong>2.5 bar</strong> for <strong>15 minutes</strong> to suppress monomer boiling (100.8 °C) and eliminate porosity.", "<strong>ISO 20795-1:2013 requirements:</strong> free of visible voids, flexural strength ≥ 65 MPa (heat-cured) / ≥ 60 MPa (auto), residual monomer ≤ 2.2% wt (heat).", "<em>Source: ISO 20795-1:2013; Anusavice et al., Phillips' Science of Dental Materials.</em>"]}, {"tag": "UDA 5 • Rifinitura", "short": "14. Riparazioni", "docFile": "Dispense_Word_Bilingui/UDA5_Protesi_Provvisoria_PMMA_ISO20795_IT_EN.docx", "docLabel": "Apri Dispensa Word UDA 5 (.docx)", "ebmId": "uda5", "itTitle": "Rifinitura, Lucidatura (Ra < 0,2 µm) e Riparazioni Protesiche", "itPoints": ["<strong>Rifinitura:</strong> frese al carburo di tungsteno a taglio incrociato e carte abrasive a grana fine.", "<strong>Lucidatura:</strong> spazzola di setola con <strong>pomice ventilata</strong> (rugosità Ra &lt; 0,2 µm anti-biofilm), poi ruota di panno con <strong>bianco di Spagna</strong>.", "<strong>Riparazione protesica:</strong> scarico a coda di rondine (2–3 mm), bagnatura con monomero MMA per 60–90 s e zaffatura in fase plastica.", "<em>Fonte: Zafar MS, Polymers 2020;12(10):2299; Phillips' Science of Dental Materials.</em>"], "enTitle": "Finishing, Polishing (Ra < 0.2 µm) & Denture Repairs", "enPoints": ["<strong>Finishing:</strong> cross-cut tungsten carbide burs and fine-grit abrasive papers.", "<strong>Polishing:</strong> bristle brush with <strong>fine pumice</strong> (roughness Ra &lt; 0.2 µm anti-biofilm), followed by cloth wheel with <strong>whiting</strong>.", "<strong>Denture repair:</strong> dovetail beveling (2–3 mm gap), MMA monomer wetting for 60–90 s and dough-stage packing.", "<em>Source: Zafar MS, Polymers 2020;12(10):2299; Phillips' Science of Dental Materials.</em>"]}, {"tag": "Validazione / Gate Check", "short": "15. Gate Check", "docFile": "Dispense_Word_Bilingui/UDA5_Protesi_Provvisoria_PMMA_ISO20795_IT_EN.docx", "docLabel": "Apri Dispensa Word UDA 5 (.docx)", "ebmId": "uda5", "itTitle": "Accesso al Questionario Gate Annuale (UDA 1–5)", "itPoints": ["Compila la scheda <strong>\"4. Questionario Gate Completo (15 Quesiti)\"</strong> in questa pagina.", "Verifica tutte le competenze annuali: <strong>Sicurezza 81/08, Impronte, Gessi ISO 6873, Gnatologia, Kennedy/Ganci e Resina PMMA ISO 20795-1</strong>.", "<strong>Soglia di superamento: 11/15</strong> risposte esatte per validare le ore FAD (20%) e accedere alle prove pratiche.", "Stampa o salva in PDF il risultato per consegnarlo su Google Classroom."], "enTitle": "Annual Gate Verification Quiz Access (UDA 1–5)", "enPoints": ["Open tab <strong>\"4. Questionario Gate Completo (15 Quesiti)\"</strong> in this page.", "Test all annual competencies: <strong>Safety 81/08, Impressions, Gypsum ISO 6873, Gnathology, Kennedy/Clasps &amp; PMMA ISO 20795-1</strong>.", "<strong>Passing threshold: 11/15</strong> correct answers to validate FAD hours (20%) and access final practical exams.", "Print or save the result as PDF to upload on Google Classroom."]}, {"tag": "Contatti Istituzionali / Official Links", "short": "16. Link Istituzionali", "docFile": "Dispense_Word_Bilingui/UDA1_Sicurezza_DLgs81_Sanitizzazione_IT_EN.docx", "docLabel": "Apri Dispensa Word UDA 1 (.docx)", "ebmId": "uda1", "itTitle": "Validazione FAD e Riferimenti Istituzionali Ufficiali", "itPoints": ["<strong>I.S.I.S. \"Alfonso Casanova\" – Napoli</strong> | Piazzetta Casanova, 4 – 80134 Napoli.", "Email istituzionale: <strong>nais051002@istruzione.it</strong> | PEC: <strong>nais051002@pec.istruzione.it</strong>.", "Sito Istituzionale: <a href='https://istitutocasanova.edu.it/' target='_blank' rel='noopener'>https://istitutocasanova.edu.it/</a>", "Offerta Formativa (Odontotecnico IdA): <a href='https://istitutocasanova.edu.it/didattica/offerta-formativa/' target='_blank' rel='noopener'>https://istitutocasanova.edu.it/didattica/offerta-formativa/</a>", "Contatti Segreteria: <a href='https://istitutocasanova.edu.it/servizio/contattaci/' target='_blank' rel='noopener'>https://istitutocasanova.edu.it/servizio/contattaci/</a>", "Portale MIM Istruzione degli Adulti: <a href='https://www.mim.gov.it/web/guest/istruzione-degli-adulti' target='_blank' rel='noopener'>https://www.mim.gov.it/web/guest/istruzione-degli-adulti</a>"], "enTitle": "FAD Validation & Official Institutional References", "enPoints": ["<strong>I.S.I.S. \"Alfonso Casanova\" – Naples</strong> | Piazzetta Casanova, 4 – 80134 Naples, Italy.", "Official Email: <strong>nais051002@istruzione.it</strong>.", "School Institutional Website: <a href='https://istitutocasanova.edu.it/' target='_blank' rel='noopener'>https://istitutocasanova.edu.it/</a>", "Dental Technician Adult Program: <a href='https://istitutocasanova.edu.it/didattica/offerta-formativa/' target='_blank' rel='noopener'>https://istitutocasanova.edu.it/didattica/offerta-formativa/</a>", "School Office Contacts: <a href='https://istitutocasanova.edu.it/servizio/contattaci/' target='_blank' rel='noopener'>https://istitutocasanova.edu.it/servizio/contattaci/</a>", "Italian Ministry of Education (MIM) – Adult Education: <a href='https://www.mim.gov.it/web/guest/istruzione-degli-adulti' target='_blank' rel='noopener'>https://www.mim.gov.it/web/guest/istruzione-degli-adulti</a>"]}];
+  const quizData = [{"uda": "UDA 1 – Sicurezza & D.Lgs. 81/08", "q": "1. [UDA 1] Secondo le linee guida CDC e il D.Lgs. 81/08 (Titolo X), quale protocollo si adotta sulle impronte in arrivo dallo studio prima di colarle? / Per CDC guidelines and Decree 81/08, which protocol is required on incoming impressions before pouring?", "options": ["Colatura diretta senza risciacquo / Direct pouring without rinsing", "Risciacquo, sanitizzazione con disinfettante compatibile e risciacquo finale / Rinse, compatible disinfection and final rinse", "Immersione in acqua bollente per 10 minuti / Immersion in boiling water for 10 minutes"], "answer": 1, "explanation": "CDC Guidelines (MMWR 2003;52[RR-17]) & D.Lgs. 81/08 Titolo X: risciacquo, disinfezione con prodotto compatibile e risciacquo finale."}, {"uda": "UDA 1 – Sicurezza & D.Lgs. 81/08", "q": "2. [UDA 1] Quali DPI sono obbligatori (D.Lgs. 81/08 Titolo III) durante la rifinitura al micromotore di gesso o resina acrilica? / Which PPE are mandatory when grinding gypsum or acrylic resin?", "options": ["Solo camice in cotone / Cotton lab coat only", "Occhiali/visiera protettiva, mascherina filtrante FFP2/FFP3 e aspirazione localizzata / Safety goggles/shield, FFP2/FFP3 mask and local exhaust", "Guanti in lattice senza mascherina / Latex gloves without mask"], "answer": 1, "explanation": "D.Lgs. 81/08 Titolo III: protezione da polveri respirabili e schegge mediante FFP2/FFP3, occhiali/visiera e aspirazione localizzata."}, {"uda": "UDA 2 – Impronte & Gessi (ISO 6873)", "q": "3. [UDA 2] Perché un'impronta in alginato lasciata all'aria deve essere colata entro 15–30 minuti? / Why must an alginate impression left in air be poured within 15–30 minutes?", "options": ["Per evitare la sineresi (perdita d'acqua e contrazione) / To prevent syneresis (water loss and shrinkage)", "Per aumentare l'espansione di presa del gesso / To increase gypsum setting expansion", "Per sciogliere il portaimpronte / To dissolve the impression tray"], "answer": 0, "explanation": "Nassar et al. (J Prosthet Dent 2011): l'alginato lasciato all'aria subisce sineresi (perdita d'acqua con contrazione dimensionale)."}, {"uda": "UDA 2 – Impronte & Gessi (ISO 6873)", "q": "4. [UDA 2] Secondo la norma ISO 6873:2013, quale tipo di gesso si impiega per i modelli master con monconi sfilabili? / Per ISO 6873:2013, which gypsum type is used for master models with removable dies?", "options": ["Gesso Tipo II (alabastro) / Type II plaster", "Gesso Tipo III (duro / pietra) / Type III dental stone", "Gesso Tipo IV (extra-duro a bassa espansione ≤ 0,10%) / Type IV low-expansion die stone (≤ 0.10%)"], "answer": 2, "explanation": "ISO 6873:2013: il gesso Tipo IV ha rapporto A/P 20–23 ml/100 g, altissima resistenza all'abrasione ed espansione lineare ≤ 0,10%."}, {"uda": "UDA 2 – Impronte & Gessi (ISO 6873)", "q": "5. [UDA 2] Come varia il rapporto acqua/polvere passando dal gesso Tipo III al gesso Tipo IV? / How does the water/powder ratio change from Type III to Type IV gypsum?", "options": ["Aumenta la quantità d'acqua (da 30 ml a 50 ml per 100 g) / Water increases (from 30 ml to 50 ml per 100 g)", "Diminuisce la quantità d'acqua (da 28–30 ml a 20–23 ml per 100 g) / Water decreases (from 28–30 ml to 20–23 ml per 100 g)", "Resta identico per tutti i gessi / Remains identical for all gypsum types"], "answer": 1, "explanation": "Phillips' Science of Dental Materials: riducendo l'acqua d'impasto diminuisce la porosità e aumentano durezza e resistenza."}, {"uda": "UDA 3 – Gnatologia & Articolatori", "q": "6. [UDA 3] Secondo Okeson, quale movimento prevale nell'ATM durante i primi 20–25 mm di apertura della bocca? / According to Okeson, which movement predominates in the TMJ during the first 20–25 mm of opening?", "options": ["Traslazione condilare pura / Pure condylar translation", "Rotazione condilare attorno all'asse cerniera terminale / Condylar rotation around the terminal hinge axis", "Lateralità bilanciante / Balancing laterotrusion"], "answer": 1, "explanation": "Okeson JP (Management of Temporomandibular Disorders and Occlusion, 8th ed.): nei primi 20–25 mm i condili ruotano attorno all'asse cerniera."}, {"uda": "UDA 3 – Gnatologia & Articolatori", "q": "7. [UDA 3] Qual è il valore standard dell'angolo di Bennett impostato su un articolatore a valore medio? / What is the standard Bennett angle on a mean-value articulator?", "options": ["0°", "15°", "45°"], "answer": 1, "explanation": "L'articolatore a valore medio imposta l'angolo di Bennett a 15° e la guida condilare sagittale a 30°."}, {"uda": "UDA 3 – Gnatologia & Articolatori", "q": "8. [UDA 3] Qual è il lato del Triangolo equilatero di Bonwill? / What is the side length of Bonwill's equilateral triangle?", "options": ["5,5 cm", "10,5–11 cm", "18 cm"], "answer": 1, "explanation": "Dawson PE (Functional Occlusion): il Triangolo di Bonwill ha lato medio di 10,5–11 cm tra i due condili e il punto interincisivo."}, {"uda": "UDA 4 – Morfologia, Kennedy & Ganci", "q": "9. [UDA 4] Quali cuspidi sono definite \"cuspidi di stampo\" nell'arcata superiore? / Which cusps are defined as \"stamp\" cusps in the maxillary arch?", "options": ["Le cuspidi palatali / Palatal cusps", "Le cuspidi vestibolari / Buccal cusps", "I margini incisali / Incisal edges"], "answer": 0, "explanation": "Wheeler's Dental Anatomy (11th ed.): nell'arcata superiore le cuspidi di stampo sono le cuspidi palatali."}, {"uda": "UDA 4 – Morfologia, Kennedy & Ganci", "q": "10. [UDA 4] Come si classifica secondo Kennedy un'edentulia bilaterale posteriore ai denti naturali residui? / How is a bilateral posterior edentulous area classified according to Kennedy?", "options": ["Classe I di Kennedy / Kennedy Class I", "Classe III di Kennedy / Kennedy Class III", "Classe IV di Kennedy / Kennedy Class IV"], "answer": 0, "explanation": "McCracken's Removable Partial Prosthodontics (13th ed.): la Classe I identifica le selle libere bilaterali posteriori."}, {"uda": "UDA 4 – Morfologia, Kennedy & Ganci", "q": "11. [UDA 4] Secondo le Regole di Applegate, quale area edentula determina sempre la classe principale? / According to Applegate's Rules, which edentulous area always determines the primary class?", "options": ["L'area anteriore più estesa / The widest anterior area", "L'area edentula più posteriore / The most posterior edentulous area", "L'area con più pilastri / The area with the most abutments"], "answer": 1, "explanation": "Regola 5 di Applegate (McCracken's): l'area edentula più posteriore determina sempre la classe principale."}, {"uda": "UDA 4 – Morfologia, Kennedy & Ganci", "q": "12. [UDA 4] Quale strumento individua l'equatore dentale e i sottosquadri e quale filo si usa per il gancio di Adams? / Which instrument finds the survey line and which wire is used for an Adams clasp?", "options": ["Occlusore e filo Ø 0,2 mm / Hinge articulator and Ø 0.2 mm wire", "Paralelometro e filo d'acciaio inox elastico Ø 0,7 mm / Dental surveyor and Ø 0.7 mm stainless steel wire", "Squadramodelli e filo Ø 2,0 mm / Model trimmer and Ø 2.0 mm wire"], "answer": 1, "explanation": "Il paralelometro traccia l'equatore dentale; il gancio di Adams sui molari si piega in filo inox elastico Ø 0,7 mm."}, {"uda": "UDA 5 – Provvisori & Resina PMMA (ISO 20795-1)", "q": "13. [UDA 5] In quale fase della polimerizzazione del PMMA la resina deve essere zaffata? / At which stage of PMMA polymerization must the resin be packed?", "options": ["Fase sabbiosa / Sandy stage", "Fase plastica / Dough (plastic) stage", "Fase elastica / Rubbery stage"], "answer": 1, "explanation": "Phillips' Science of Dental Materials: la fase plastica (dough stage) è l'unica fase idonea alla modellazione e zaffatura."}, {"uda": "UDA 5 – Provvisori & Resina PMMA (ISO 20795-1)", "q": "14. [UDA 5] Perché si utilizza la pentola a pressione (45 °C, 2,5 bar) durante la polimerizzazione? / Why is a pressure pot (45 °C, 2.5 bar) used during acrylic curing?", "options": ["Per impedire l'ebollizione del monomero (100,8 °C) ed eliminare le porosità interne / To suppress monomer boiling (100.8 °C) and eliminate internal porosity", "Per sciogliere la cera da modellazione / To melt modeling wax", "Per indurire il gesso tipo IV / To harden Type IV stone"], "answer": 0, "explanation": "ISO 20795-1:2013 & Zafar (Polymers 2020): la pressione impedisce l'evaporazione del monomero eliminando porosità interne."}, {"uda": "UDA 5 – Provvisori & Resina PMMA (ISO 20795-1)", "q": "15. [UDA 5] Qual è la corretta sequenza di lucidatura al pulitore per ridurre la rugosità Ra < 0,2 µm? / What is the correct polishing sequence on the lathe to achieve Ra < 0.2 µm?", "options": ["Bianco di Spagna e poi fresa al carburo / Whiting first, then carbide bur", "Spazzola di setola con pomice ventilata e poi ruota di panno con bianco di Spagna / Bristle brush with fine pumice, then cloth wheel with whiting", "Solo acqua fredda senza paste abrasive / Cold water only without polishing agents"], "answer": 1, "explanation": "Zafar MS (Polymers 2020): prima pomice ventilata con spazzola di setola, poi bianco di Spagna con ruota di panno morbido."}];
+  const ebmModules = [{"id": "uda1", "filename": "UDA1_Sicurezza_DLgs81_Sanitizzazione_IT_EN.docx", "uda_code": "UDA 1 (Ottobre – Novembre)", "title_it": "Sicurezza in Laboratorio Odontotecnico (D.Lgs. 81/08) e Sanitizzazione Impronte", "title_en": "Dental Laboratory Safety (Italian Legislative Decree 81/08) & Impression Disinfection", "subtitle_it": "Accoglienza, Patto Formativo Individuale (PFI), prevenzione dei rischi biologico, chimico, meccanico/polveri ed ergonomico secondo le linee guida CDC e il D.Lgs. 81/2008.", "subtitle_en": "Orientation, Individual Training Pact (PFI), biological, chemical, mechanical/dust and ergonomic hazard prevention according to CDC guidelines and Italian Legislative Decree 81/2008.", "sections": [{"head_it": "Quadro Normativo: D.Lgs. 81/08 e Regolamento (UE) 2017/745 (MDR)", "head_en": "Regulatory Framework: Legislative Decree 81/08 & Regulation (EU) 2017/745 (MDR)", "body_it": "• Il D.Lgs. 9 aprile 2008, n. 81 (Testo Unico sulla Salute e Sicurezza sul Lavoro) disciplina nel Titolo III l'uso dei Dispositivi di Protezione Individuale (DPI), nel Titolo IX la protezione da agenti chimici (monomero MMA, disinfettanti, solventi) e nel Titolo X la protezione da agenti biologici (saliva e sangue su impronte e protesi).\n• Il Regolamento (UE) 2017/745 (MDR, Art. 2 punto 3 e Allegato XIII) definisce l'odontotecnico fabbricante di dispositivi medici su misura su prescrizione scritta dell'odontoiatra, imponendo tracciabilità dei materiali, igiene e dichiarazione di conformità.", "body_en": "• Italian Legislative Decree 81/2008 regulates Personal Protective Equipment (PPE) under Title III, protection against chemical agents (MMA monomer, disinfectants, solvents) under Title IX, and protection against biological agents (saliva and blood on incoming impressions/prostheses) under Title X.\n• Regulation (EU) 2017/745 (MDR, Art. 2(3) & Annex XIII) defines the dental technician as manufacturer of custom-made medical devices upon written dental prescription, requiring material traceability, hygiene, and statement of conformity."}, {"head_it": "Protocollo EBM di Sanitizzazione delle Impronte (CDC Guidelines)", "head_en": "EBM Impression Disinfection Protocol (CDC Guidelines)", "body_it": "• Secondo le linee guida CDC (MMWR 2003;52[RR-17]), ogni impronta o manufatto proveniente dallo studio va trattato come potenzialmente infetto (rischio HBV, HCV, HIV, Mycobacterium tuberculosis).\n• Sequenza operativa obbligatoria: (1) Indossare guanti in nitrile, camice e visiera; (2) Risciacquare delicatamente sotto acqua corrente per rimuovere residui organici; (3) Applicare un disinfettante ospedaliero ad attività almeno intermedia (tubercolocida) compatibile con il materiale; (4) Risciacquare nuovamente prima della colatura.\n• Sugli alginati privilegiare spray disinfettanti o immersione brevissima (max 5–10 min) per evitare imbibizione e alterazioni dimensionali.", "body_en": "• According to CDC Guidelines (MMWR 2003;52[RR-17]), every incoming impression or appliance must be handled as potentially infectious (HBV, HCV, HIV, Mycobacterium tuberculosis risk).\n• Mandatory workflow: (1) Wear nitrile gloves, lab coat and face shield; (2) Gently rinse under running water to remove bioburden; (3) Apply an intermediate-level (tuberculocidal) hospital disinfectant compatible with the impression material; (4) Rinse thoroughly prior to pouring.\n• For alginates, prefer disinfectant spray or short immersion (max 5–10 min) to prevent water imbibition and dimensional distortion."}, {"head_it": "Prevenzione Polveri, Rischi Chimici ed Ergonomia al Banco", "head_en": "Dust Control, Chemical Safety & Workbench Ergonomics", "body_it": "• La fresatura di gessi, resine PMMA e rivestimenti refrattari genera polveri inalabili/respirabili: obbligo di aspirazione localizzata attiva alla postazione, schermo trasparente al pulitore, occhiali antischegge e facciale filtrante FFP2/FFP3.\n• Ergonomia: regolazione dell'altezza del sedile con pianta dei piedi ben appoggiata, avambracci sostenuti sui braccioli/bordo banco e illuminazione localizzata antiriflesso per prevenire disturbi muscolo-scheletrici (DMS).", "body_en": "• Grinding gypsum, PMMA resins and investments releases inhalable/respirable dust: local exhaust ventilation at the workbench, transparent lathe shield, safety goggles and FFP2/FFP3 filtering respirators are mandatory.\n• Ergonomics: adjust chair height with feet flat on the floor, support forearms on armrests/bench edge, and use glare-free task lighting to prevent work-related musculoskeletal disorders (WMSDs)."}], "table_data": {"caption": "Tabella 1 – Matrice Rischi, DPI e Protocolli di Prevenzione in Laboratorio (D.Lgs. 81/08 & CDC)", "headers": ["Fattore di Rischio / Hazard", "Sorgente in Laboratorio / Source", "Dispositivo Collettivo / Engineering Control", "DPI Obbligatorio / Mandatory PPE"], "rows": [["Biologico (Titolo X)", "Impronte, cere occlusali, protesi usate", "Area dedicata accettazione/disinfezione", "Guanti in nitrile, camice, visiera protettiva"], ["Chimico (Titolo IX)", "Monomero MMA, disinfettanti, acidi/solventi", "Cappa aspirante con ricambio d'aria", "Guanti nitrile spessi, occhiali, maschera ABEK/FFP2"], ["Polveri e Schegge (Titolo III)", "Squadratura gesso, fresatura PMMA/metalli", "Aspirazione localizzata al banco e schermo pulitore", "Occhiali antischegge + respiratore FFP2/FFP3"], ["Ergonomico (Titolo VI/VII)", "Lavorazioni prolungate di precisione al banco", "Banco regolabile, lampada LED 4000–5000 K", "Seduta ergonomica con supporto lombare e avambracci"]]}, "sources": ["Repubblica Italiana. Decreto Legislativo 9 aprile 2008, n. 81 – Testo Unico sulla Salute e Sicurezza sul Lavoro (Titolo III, Titolo IX Agenti Chimici, Titolo X Agenti Biologici). Gazzetta Ufficiale n. 101 del 30 aprile 2008.", "Parlamento Europeo e Consiglio dell'Unione Europea. Regolamento (UE) 2017/745 del 5 aprile 2017 relativo ai dispositivi medici (MDR), Art. 2(3) e Allegato XIII (Dispositivi su misura). GUUE L 117/1.", "Centers for Disease Control and Prevention (CDC). Guidelines for Infection Control in Dental Health-Care Settings — 2003. MMWR Recomm Rep. 2003;52(RR-17):1–61.", "Almortadi N, Chadwick RG. Disinfection of dental impressions – compliance to accepted standards. Br Dent J. 2010;209(12):607–611. doi:10.1038/sj.bdj.2010.1134."]}, {"id": "uda2", "filename": "UDA2_Materiali_Impronta_Gessi_ISO6873_IT_EN.docx", "uda_code": "UDA 2 (Dicembre – Gennaio)", "title_it": "Materiali da Impronta, Gessi Odontoiatrici (ISO 6873) e Zoccolatura Modelli", "title_en": "Impression Materials, Dental Gypsum Products (ISO 6873) & Model Base Trimming", "subtitle_it": "Stabilità dimensionale degli idrocolloidi irreversibili (alginati) ed elastomeri, chimica del solfato di calcio emiidrato, rapporti Acqua/Polvere (A/P) e tecniche di colatura e zoccolatura.", "subtitle_en": "Dimensional stability of irreversible hydrocolloids (alginates) and elastomers, calcium sulfate hemihydrate chemistry, Water/Powder (W/P) ratios, pouring and model base trimming.", "sections": [{"head_it": "Idrocolloidi Irreversibili (Alginati): Sineresi, Imbibizione e Tempi di Colatura", "head_en": "Irreversible Hydrocolloids (Alginates): Syneresis, Imbibition & Pouring Time", "body_it": "• Gli alginati formano un gel elastico di alginato di calcio insolubile. Poiché il reticolo contiene circa l'80–85% di acqua, sono dimensionalmente instabili.\n• Sineresi: esposizione all'aria → essudazione di acqua sulla superficie con contrazione dell'impronta e modello sottodimensionato.\n• Imbibizione: immersione prolungata in acqua → assorbimento di liquido con rigonfiamento e distorsione.\n• Evidenza EBM (Nassar et al., J Prosthet Dent 2011): gli alginati convenzionali vanno conservati in ambiente al 100% di umidità relativa (tovagliolo umido in sacchetto sigillato, mai immersi) e colati entro 15–30 minuti.", "body_en": "• Alginates gel into an insoluble calcium alginate network containing ~80–85% water, making them dimensionally unstable over time.\n• Syneresis: exposure to air → exudation of water onto the surface causing impression shrinkage and an undersized cast.\n• Imbibition: prolonged immersion in water → fluid uptake causing swelling and distortion.\n• EBM Evidence (Nassar et al., J Prosthet Dent 2011): conventional alginates must be stored at 100% relative humidity (damp paper towel in a sealed bag, never submerged) and poured within 15–30 minutes."}, {"head_it": "Elastomeri da Impronta: Siliconi C, Siliconi A (PVS) e Polieteri", "head_en": "Elastomeric Impression Materials: C-Silicones, A-Silicones (PVS) & Polyethers", "body_it": "• Siliconi per condensazione (Tipo C): polimerizzano liberando alcol etilico come sottoprodotto volatile; la sua evaporazione induce contrazione lineare (0,2–0,4% nelle prime ore), richiedendo colatura entro 30–60 minuti.\n• Siliconi per addizione (Polivinilsilossani – PVS): reazione senza sottoprodotti volatili, recupero elastico > 99% e massima stabilità dimensionale (colatura differibile fino a 7–14 giorni e possibilità di doppia colatura).\n• Polieteri: elevata idrofilia e rigidità; ottima precisione nei dettagli ma sensibili all'umidità ambientale prolungata.", "body_en": "• Condensation silicones (C-type): cross-link by releasing ethyl alcohol as a volatile byproduct; alcohol evaporation causes linear shrinkage (0.2–0.4%), requiring pouring within 30–60 minutes.\n• Addition silicones (Polyvinyl siloxanes – PVS): cure without volatile byproducts, exhibiting >99% elastic recovery and superior dimensional stability (delayed pouring up to 7–14 days and multiple pours).\n• Polyethers: intrinsically hydrophilic and rigid; high detail reproduction but sensitive to prolonged high ambient humidity."}, {"head_it": "Gessi Odontoiatrici (ISO 6873:2013), Rapporto A/P e Zoccolatura", "head_en": "Dental Gypsum Products (ISO 6873:2013), W/P Ratio & Base Trimming", "body_it": "• Tutti i gessi derivano dalla calcinazione del solfato di calcio biidrato (CaSO4·2H2O) a emiidrato (CaSO4·½H2O): cristalli β-emiidrato porosi (Tipo II) vs cristalli α-emiidrato densi e prismatici (Tipi III, IV, V).\n• Il rapporto Acqua/Polvere (A/P) governa la resistenza meccanica: minore è l'acqua in eccesso, minore è la porosità finale e maggiore è la durezza superficiale (Tipo IV: 20–23 ml/100 g, espansione lineare di presa ≤ 0,10% secondo ISO 6873).\n• Procedura di laboratorio: pesatura elettronica della polvere, acqua distillata dosata a cilindro, miscelazione sottovuoto (20–30 s), colatura su vibratore a bassa frequenza, squadratura allo squadramodelli ad acqua e zoccolatura parallela al piano occlusale.", "body_en": "• All dental gypsum products derive from calcining calcium sulfate dihydrate (CaSO4·2H2O) into hemihydrate (CaSO4·½H2O): porous β-hemihydrate crystals (Type II) vs dense prismatic α-hemihydrate crystals (Types III, IV, V).\n• The Water/Powder (W/P) ratio governs mechanical properties: less excess gauging water reduces porosity and increases compressive strength and abrasion resistance (Type IV: 20–23 mL/100 g, linear setting expansion ≤ 0.10% per ISO 6873).\n• Lab workflow: electronic weighing of powder, graduated cylinder water dosing, vacuum mixing (20–30 s), low-frequency vibration pouring, wet model trimming and base forming parallel to the occlusal plane."}], "table_data": {"caption": "Tabella 2 – Classificazione e Parametri Fisici dei Gessi Odontoiatrici secondo Norma ISO 6873:2013", "headers": ["Tipo ISO 6873 / Type", "Denominazione & Struttura", "Rapporto A/P (ml/100 g)", "Espansione di Presa", "Impiego Odontotecnico / Application"], "rows": [["Tipo II (Classe 1–2)", "Gesso tenero / Alabastro (β-emiidrato)", "45 – 50 ml / 100 g", "0,00% – 0,30%", "Montaggio in articolatore, muffole, zoccoli provvisori"], ["Tipo III", "Gesso duro / Pietra (α-emiidrato)", "28 – 30 ml / 100 g", "≤ 0,20%", "Modelli studio, antagonisti, protesi totale/rimovibile"], ["Tipo IV", "Gesso extra-duro (α-emiidrato modificato)", "20 – 23 ml / 100 g", "≤ 0,10%", "Modelli master con monconi sfilabili, protesi fissa"], ["Tipo V", "Gesso extra-duro ad alta espansione", "18 – 22 ml / 100 g", "0,10% – 0,30%", "Compensazione contrazione leghe ad alto punto di fusione"]]}, "sources": ["International Organization for Standardization. ISO 6873:2013 – Dentistry — Gypsum products. 3rd ed. Geneva: ISO; 2013.", "Anusavice KJ, Shen C, Rawls HR. Phillips' Science of Dental Materials. 12th ed. St. Louis: Elsevier Saunders; 2013. (Ch. 8: Impression Materials; Ch. 9: Gypsum Products).", "Nassar U, Aziz T, Flores-Mir C. Dimensional stability of irreversible hydrocolloid impression materials as a function of pouring time: a systematic review. J Prosthet Dent. 2011;106(2):126–133. doi:10.1016/S0022-3913(11)60108-X."]}, {"id": "uda3", "filename": "UDA3_Gnatologia_ATM_Articolatori_IT_EN.docx", "uda_code": "UDA 3 (Febbraio – Marzo)", "title_it": "Gnatologia di Base, Biomeccanica dell'ATM e Simulatori Occlusali", "title_en": "Basic Gnathology, TMJ Biomechanics & Occlusal Simulators", "subtitle_it": "Cinematica condilare (rotazione pura e traslazione), movimentazione mandibolare nei tre piani dello spazio e montaggio in articolatore a valore medio secondo Okeson e Dawson.", "subtitle_en": "Condylar kinematics (pure rotation and translation), mandibular movements in three spatial planes, and mean-value articulator mounting according to Okeson and Dawson.", "sections": [{"head_it": "Biomeccanica dell'Articolazione Temporo-Mandibolare (ATM / TMJ)", "head_en": "Biomechanics of the Temporomandibular Joint (TMJ)", "body_it": "• L'ATM è una diartrosi ginglimo-artroidale composta che consente due tipi distinti di movimento grazie all'interposizione del disco articolare biconcavo:\n• 1. Rotazione pura: avviene nel compartimento inferiore (condilo-discale) attorno all'asse cerniera terminale nei primi 20–25 mm di apertura interincisiva (Relazione Centrica).\n• 2. Traslazione condilare: avviene nel compartimento superiore (disco-temporale) lungo l'eminenza articolare oltre i 20–25 mm di apertura, nella protrusione e nei movimenti di lateralità.\n• Lateralità (laterotrusione): il condilo del lato lavorante ruota su se stesso (movimento di Bennett), mentre il condilo del lato bilanciante (mediotrusivo) trasla in basso, in avanti e medialmente descrivendo l'angolo di Bennett.", "body_en": "• The TMJ is a compound ginglymoarthrodial joint permitting two distinct movements via the biconcave articular disc:\n• 1. Pure rotation: occurs in the inferior (condyle-disc) compartment around the terminal hinge axis during the first 20–25 mm of interincisal opening (Centric Relation).\n• 2. Condylar translation: occurs in the superior (disc-temporal) compartment along the articular eminence beyond 20–25 mm of opening, during protrusion, and during lateral excursions.\n• Laterotrusion: the working-side condyle rotates (Bennett shift), while the non-working/balancing-side condyle translates downward, forward, and medially forming the Bennett angle."}, {"head_it": "Occlusore a Cerniera vs Articolatore a Valore Medio", "head_en": "Simple Hinge Articulator vs Mean-Value Articulator", "body_it": "• Occlusore semplice: riproduce esclusivamente un arco di apertura e chiusura attorno a un asse arbitrario ravvicinato; introduce errori nei contatti eccentrici e nelle interferenze cuspidali.\n• Articolatore a valore medio (es. tipo Arcon / Non-Arcon): orienta il modello superiore mediante il Triangolo equilatero di Bonwill (lato medio 10,5–11 cm tra i due condili e il punto interincisivo inferiore) e il piano di Camper/Francoforte.\n• Impostazioni medie standard: inclinazione della guida condilare sagittale a 30° e angolo di Bennett a 15°.\n• Controllo occlusale con cartina d'articolazione (spessore 40 µm): marcature rosse per la Massima Intercuspidazione (MI / centrica) e marcature blu per le guide protrusive e laterali.", "body_en": "• Simple hinge articulator: reproduces only vertical opening and closing around a close arbitrary hinge axis; introduces errors in eccentric contacts and cuspal interferences.\n• Mean-value articulator (Arcon / Non-Arcon): orients the maxillary cast using Bonwill's equilateral triangle (10.5–11 cm side between condyles and lower incisal point) and Camper's/Frankfort plane.\n• Standard average settings: 30° sagittal condylar guidance inclination and 15° Bennett angle.\n• Occlusal verification with 40 µm articulating paper: red marks for Maximum Intercuspation (MI / centric) and blue marks for protrusive and lateral guidance."}], "table_data": {"caption": "Tabella 3 – Parametri Anatomo-Funzionali per il Montaggio in Articolatore a Valore Medio (Okeson, 2019)", "headers": ["Parametro / Parameter", "Valore Medio / Standard Value", "Riferimento Anatomico / Landmark", "Rilevanza Odontotecnica / Lab Relevance"], "rows": [["Rotazione Condilare Pura", "Primi 20 – 25 mm di apertura", "Asse cerniera terminale (Relazione Centrica)", "Variazioni minime della Dimensione Verticale (DVO)"], ["Triangolo di Bonwill", "Lato equilatero 10,5 – 11 cm", "Condilo dx – Condilo sx – Punto interincisivo", "Centratura spaziale del modello superiore"], ["Guida Condilare Sagittale", "30° (range fisiologico 25°–35°)", "Inclinazione eminenza articolare / Piano Francoforte", "Determina l'altezza cuspidale e la profondità delle fosse"], ["Angolo di Bennett", "15° (range fisiologico 10°–20°)", "Spostamento mediale condilo bilanciante", "Determina direzione dei solchi di fuga lavoranti/bilancianti"]]}, "sources": ["Okeson JP. Management of Temporomandibular Disorders and Occlusion. 8th ed. St. Louis: Elsevier; 2019. ISBN: 978-0-323-58210-0.", "Dawson PE. Functional Occlusion: From TMJ to Smile Design. St. Louis: Mosby Elsevier; 2007. ISBN: 978-0-323-03371-8.", "Klineberg I, Eckert SE, editors. Functional Occlusion in Restorative Dentistry and Prosthodontics. St. Louis: Elsevier; 2016."]}, {"id": "uda4", "filename": "UDA4_Morfologia_Kennedy_Applegate_Ganci_IT_EN.docx", "uda_code": "UDA 4 (Aprile)", "title_it": "Morfologia Occlusale, Classificazione di Kennedy, Regole di Applegate e Ganci a Filo", "title_en": "Occlusal Morphology, Kennedy Classification, Applegate's Rules & Wire Clasps", "subtitle_it": "Anatomia funzionale del tavolato occlusale, classificazione topografica delle arcate parzialmente edentule secondo Kennedy-Applegate, analisi al paralelometro e piegatura del gancio di Adams.", "subtitle_en": "Functional occlusal table anatomy, topographic classification of partially edentulous arches per Kennedy-Applegate, dental surveyor analysis, and Adams clasp wire bending.", "sections": [{"head_it": "Morfologia Dentale Funzionale e Ceratura Additiva", "head_en": "Functional Dental Morphology & Additive Wax-Up", "body_it": "• Cuspidi di stampo (o di supporto / centriche): cuspidi palatali superiori e cuspidi vestibolari inferiori; occludono nelle fosse centrali e sulle creste marginali antagoniste mantenendo la Dimensione Verticale d'Occlusione (DVO).\n• Cuspidi di taglio (o di guida): cuspidi vestibolari superiori e cuspidi linguali inferiori; proteggono i tessuti molli (guancia e lingua) e guidano i movimenti eccentrici.\n• Ceratura additiva progressiva: posizionamento sequenziale di coni cuspidali, creste marginali, creste triangolari, fosse centrali e solchi di sviluppo.", "body_en": "• Stamp (supporting / centric) cusps: maxillary palatal and mandibular buccal cusps; occlude into opposing central fossae and marginal ridges to maintain Vertical Dimension of Occlusion (VDO).\n• Shearing (guiding) cusps: maxillary buccal and mandibular lingual cusps; protect soft tissues (cheek and tongue) and guide eccentric excursions.\n• Progressive additive wax-up: sequential placement of cusp cones, marginal ridges, triangular ridges, central fossae, and developmental grooves."}, {"head_it": "Classificazione di Kennedy e Regole di Applegate (McCracken)", "head_en": "Kennedy Classification & Applegate's Rules (McCracken)", "body_it": "• Classe I: aree edentule bilaterali situate posteriormente ai denti naturali residui (sella libera bilaterale).\n• Classe II: area edentula monolaterale situata posteriormente ai denti naturali residui (sella libera monolaterale).\n• Classe III: area edentula intercalare monolaterale delimitata sia anteriormente sia posteriormente da denti pilastro.\n• Classe IV: area edentula singola, ma bilaterale (attraversa la linea mediana), situata anteriormente ai denti residui.\n• Regole di Applegate (sintesi EBM): (1) La classificazione deve seguire eventuali estrazioni; (2) Se manca il terzo molare e non viene sostituito, non entra nella classificazione; (3) Se un terzo molare è presente e usato come pilastro, viene considerato; (4) Le aree edentule più posteriori determinano sempre la classe principale; (5) Le aree aggiuntive oltre a quella che determina la classe si indicano come \"modificazioni\" (es. Classe II, Modificazione 1); (6) La Classe IV non ammette modificazioni.", "body_en": "• Class I: bilateral edentulous areas located posterior to the remaining natural teeth.\n• Class II: unilateral edentulous area located posterior to the remaining natural teeth.\n• Class III: unilateral bounded edentulous area with natural teeth remaining both anterior and posterior to it.\n• Class IV: single, but bilateral (crossing the midline), edentulous area located anterior to the remaining natural teeth.\n• Applegate's Rules (EBM summary): (1) Classification follows rather than precedes extractions; (2) Missing third molars not to be replaced are excluded; (3) Present third molars used as abutments are included; (4) The most posterior edentulous area(s) always determine the primary classification; (5) Additional edentulous areas are designated as \"modifications\" (e.g., Class II, Modification 1); (6) Class IV cannot have modifications."}, {"head_it": "Analisi al Paralelometro e Gancio di Adams (Filo Ø 0,7 mm)", "head_en": "Dental Surveyor Analysis & Adams Clasp (Ø 0.7 mm Wire)", "body_it": "• Il paralelometro (Ney/Jelenko) consente di determinare l'asse d'inserzione protesico, parallelizzare i piani guida e tracciare con la mina di grafite l'equatore dentale (linea di massima convessità).\n• L'equatore separa la zona sopraequatoriale (espulsiva) dalla zona sottoequatoriale (ritentiva), misurata con i misuratori di sottosquadro (0,25 mm / 0,50 mm).\n• Gancio di Adams: costruito in filo d'acciaio inox elastico (18-8) Ø 0,7 mm sui molari (Ø 0,6 mm sui premolari). Le due anse (arrowheads) impegnano i sottosquadri mesiale e distale del colletto vestibolare garantendo ritenzione meccanica senza traumatizzare la papilla gengivale.", "body_en": "• The dental surveyor determines the prosthodontic path of insertion, parallels guiding planes, and scribes the height of contour (survey line) with a carbon marker.\n• The survey line separates the non-retentive supra-bulge zone from the retentive infra-bulge undercut zone, measured with undercut gauges (0.25 mm / 0.50 mm).\n• Adams clasp: bent from Ø 0.7 mm elastic 18-8 stainless steel wire on molars (Ø 0.6 mm on premolars). Its two arrowheads engage the mesial and distal buccal cervical undercuts, providing reliable retention without impinging on gingival papillae."}], "table_data": {"caption": "Tabella 4 – Riepilogo Topografico Classi di Kennedy e Applicazione Regole di Applegate", "headers": ["Classe Kennedy / Class", "Topografia Edentulia / Topography", "Supporto Protesico / Support", "Modificazioni Applegate"], "rows": [["Classe I", "Bilaterale posteriore (selle libere)", "Misto (dento-mucoso)", "Ammesse (Mod. 1, 2, ...)"], ["Classe II", "Monolaterale posteriore (sella libera)", "Misto (dento-mucoso)", "Ammesse (Mod. 1, 2, ...)"], ["Classe III", "Intercalare (pilastri ant. e post.)", "Prevalentemente dentale", "Ammesse (Mod. 1, 2, ...)"], ["Classe IV", "Singola anteriore oltre linea mediana", "Dentale / Misto", "Non ammesse (mai modificazioni)"]]}, "sources": ["Carr AB, Brown DT. McCracken's Removable Partial Prosthodontics. 13th ed. St. Louis: Elsevier; 2016. ISBN: 978-0-323-33990-2. (Ch. 3: Classification of Partially Edentulous Arches).", "Nelson SJ. Wheeler's Dental Anatomy, Physiology and Occlusion. 11th ed. St. Louis: Elsevier; 2020. ISBN: 978-0-323-63878-4.", "Adams CP. The Design and Construction of Removable Orthodontic Appliances. 6th ed. Oxford: Wright / Butterworth-Heinemann; 1990."]}, {"id": "uda5", "filename": "UDA5_Protesi_Provvisoria_PMMA_ISO20795_IT_EN.docx", "uda_code": "UDA 5 (Maggio – Giugno)", "title_it": "Protesi Provvisoria, Chimica del PMMA (ISO 20795-1), Polimerizzazione e Riparazioni", "title_en": "Provisional Prosthesis, PMMA Chemistry (ISO 20795-1), Polymerization & Repairs", "subtitle_it": "Polimerizzazione radicalica per addizione delle resine acriliche (PMMA), 5 stadi fisici, ciclo in pentola a pressione per il controllo della porosità e protocolli di lucidatura e riparazione.", "subtitle_en": "Free-radical addition polymerization of acrylic resins (PMMA), 5 physical stages, pressure-pot curing for porosity control, and finishing/polishing/repair protocols.", "sections": [{"head_it": "Chimica del Polimetilmetacrilato (PMMA) e 5 Stadi Fisici di Polimerizzazione", "head_en": "Polymethyl Methacrylate (PMMA) Chemistry & 5 Physical Polymerization Stages", "body_it": "• Sistema polvere-liquido (rapporto volumetrico 3:1): la polvere contiene perle di polimero PMMA pre-polimerizzato e perossido di benzoile (iniziatore); il liquido contiene monomero metilmetacrilato (MMA), agente reticolante (dimetacrilato di glicole etilenico) e, nelle resine autopolimerizzanti (ISO 20795-1 Tipo 2), un'ammina terziaria come attivatore chimico.\n• I 5 stadi fisici della miscela: (1) Sabbiosa (bagnatura iniziale); (2) Filamentosa (dissoluzione superficiale delle perle, massa appiccicosa); (3) Plastica / Dough (massa omogenea, modellabile e non appiccicosa: UNICA fase idonea alla zaffatura); (4) Elastica (reticolazione avanzata, memoria elastica); (5) Rigida (polimerizzazione completata con picco esotermico).", "body_en": "• Powder-liquid system (3:1 volumetric ratio): powder contains pre-polymerized PMMA beads and benzoyl peroxide (initiator); liquid contains methyl methacrylate (MMA) monomer, cross-linking agent (ethylene glycol dimethacrylate), and—in autopolymerizing resins (ISO 20795-1 Type 2)—a tertiary amine chemical activator.\n• The 5 physical stages: (1) Sandy (initial wetting); (2) Stringy (surface bead dissolution, tacky mass); (3) Dough / Plastic (homogeneous, moldable, non-tacky mass: ONLY working stage for packing); (4) Rubbery (advanced cross-linking, elastic rebound); (5) Hard (cured solid following exothermic peak)."}, {"head_it": "Polimerizzazione in Pentola a Pressione e Standard ISO 20795-1:2013", "head_en": "Pressure-Pot Curing & ISO 20795-1:2013 Standard Requirements", "body_it": "• Il monomero MMA ha punto di ebollizione a 100,8 °C; durante la reazione esotermica il calore interno può vaporizzare il monomero creando porosità interne che indeboliscono la protesi e favoriscono la colonizzazione microbica (Candida albicans).\n• Ciclo ottimale per resine autopolimerizzanti / provvisori: isolamento del modello in gesso asciutto con due strati di lacca alginica, zaffatura in fase plastica nella mascherina in silicone e polimerizzazione in pentola a pressione con acqua a 45 °C alla pressione di 2,5 bar per 15 minuti.\n• Requisiti ISO 20795-1:2013: assenza di bolle/porosità visibili, resistenza a flessione ≥ 65 MPa (Tipo 1) / ≥ 60 MPa (Tipo 2), monomero residuo ≤ 2,2% in massa (Tipo 1) / ≤ 4,5% (Tipo 2).", "body_en": "• MMA monomer boils at 100.8 °C; exothermic reaction heat can vaporize unpolymerized monomer, creating internal porosity that weakens the prosthesis and promotes microbial colonization (Candida albicans).\n• Optimal curing protocol for autopolymerizing resins / provisionals: isolate dry stone cast with two coats of alginate separating medium, pack at the dough stage into a silicone matrix, and cure in a pressure pot with water at 45 °C under 2.5 bar pressure for 15 minutes.\n• ISO 20795-1:2013 requirements: free of visible voids/porosity, flexural strength ≥ 65 MPa (Type 1) / ≥ 60 MPa (Type 2), residual monomer ≤ 2.2% wt (Type 1) / ≤ 4.5% (Type 2)."}, {"head_it": "Rifinitura, Lucidatura a Specchio e Riparazioni Protesiche", "head_en": "Finishing, Mirror Polishing & Denture Repairs", "body_it": "• Rifinitura: frese al carburo di tungsteno a taglio incrociato a bassa/media velocità per evitare surriscaldamento del PMMA, seguite da carte abrasive a grana decrescente.\n• Lucidatura: spazzola di setola nera con sospensione acquosa di pomice ventilata (abbattimento microrugosità < 0,2 µm per prevenire adesione di placca), quindi ruota di panno morbido con bianco di Spagna per brillantatura a specchio.\n• Riparazione di frattura: stabilizzazione dei frammenti con cera collante e colatura del controstampo in gesso, fresatura dei margini a coda di rondine con spazio di 2–3 mm, bagnatura delle superfici con monomero MMA per 60–90 secondi (swelling chimico) e zaffatura in fase plastica.", "body_en": "• Finishing: cross-cut tungsten carbide burs at low/moderate speed to prevent PMMA overheating, followed by progressively finer abrasive papers.\n• Polishing: black bristle brush with wet fine pumice slurry (reducing surface roughness Ra < 0.2 µm to minimize biofilm adhesion), followed by soft cloth wheel with whiting for high-gloss mirror polish.\n• Denture fracture repair: stabilize fragments with sticky wax and pour a stone index, bevel fractured margins into a dovetail with a 2–3 mm gap, wet bonding surfaces with MMA monomer for 60–90 s (chemical swelling), and pack dough-stage resin."}], "table_data": {"caption": "Tabella 5 – Parametri Chimico-Fisici del PMMA e Protocolli Operativi (ISO 20795-1 & Zafar, 2020)", "headers": ["Fase / Parametro", "Valore / Specifiche Tecniche", "Razionale EBM / Scientifico"], "rows": [["Rapporto Polvere / Liquido", "3 : 1 in volume (≈ 2,5 : 1 in peso)", "Minimizza contrazione volumetrica (da ~21% del solo MMA a ~6–7%)"], ["Finestra di Lavorabilità", "Stadio 3 – Fase Plastica (Dough stage)", "Massima plasticità e adattamento senza intrappolamento d'aria"], ["Pentola a Pressione", "45 °C • 2,5 bar • 15 minuti", "Sopprime ebollizione del monomero ed elimina porosità interne"], ["Resistenza a Flessione ISO", "≥ 65 MPa (Termo) / ≥ 60 MPa (Auto)", "Garantisce resistenza ai carichi masticatori ciclici"], ["Monomero Residuo ISO", "≤ 2,2% wt (Termo) / ≤ 4,5% wt (Auto)", "Previene citotossicità e stomatite allergica da contatto"]]}, "sources": ["International Organization for Standardization. ISO 20795-1:2013 – Dentistry — Base polymers — Part 1: Denture base polymers. Geneva: ISO; 2013.", "Zafar MS. Prosthodontic Applications of Polymethyl Methacrylate (PMMA): An Update. Polymers (Basel). 2020;12(10):2299. doi:10.3390/polym12102299. (PMCID: PMC7599472).", "Anusavice KJ, Shen C, Rawls HR. Phillips' Science of Dental Materials. 12th ed. St. Louis: Elsevier Saunders; 2013. (Ch. 19: Prosthetic Applications of Polymers)."]}];
+
+  let currentSlide = 0;
+  let currentLang = 'both';
+  let touchStartX = 0;
+
+  function openEbmModal(ebmId) {
+    const mod = ebmModules.find(function(m) { return m.id === ebmId; });
+    if (!mod) return;
+    document.getElementById('modalTitle').textContent = mod.uda_code + ' – ' + mod.title_it;
+    document.getElementById('modalWordLink').setAttribute('href', 'Dispense_Word_Bilingui/' + mod.filename);
+
+    let html = '<p style="color:#1B4F72; font-weight:700; margin-bottom:4px;">IT: ' + mod.subtitle_it + '</p>' +
+               '<p style="color:#117864; font-style:italic; margin-bottom:16px;">EN: ' + mod.subtitle_en + '</p>';
+
+    mod.sections.forEach(function(sec, i) {
+      html += '<h3 style="color:#1B4F72; margin: 14px 0 8px;">' + (i + 1) + '. ' + sec.head_it + ' / ' + sec.head_en + '</h3>' +
+        '<div class="slide-grid">' +
+          '<div class="col-box"><span class="col-label">Italiano (IT)</span><div style="white-space:pre-line;">' + sec.body_it + '</div></div>' +
+          '<div class="col-box en"><span class="col-label">English (EN)</span><div style="white-space:pre-line;">' + sec.body_en + '</div></div>' +
+        '</div>';
+    });
+
+    if (mod.table_data) {
+      html += '<h3 style="color:#117864; margin: 16px 0 6px;">' + mod.table_data.caption + '</h3>' +
+        '<table class="modal-table"><thead><tr>' +
+        mod.table_data.headers.map(function(h) { return '<th>' + h + '</th>'; }).join('') +
+        '</tr></thead><tbody>' +
+        mod.table_data.rows.map(function(r) {
+          return '<tr>' + r.map(function(c) { return '<td>' + c + '</td>'; }).join('') + '</tr>';
+        }).join('') +
+        '</tbody></table>';
+    }
+
+    html += '<div class="ref-list-box"><strong>Fonti Verificate EBM / ISO / Normative:</strong><ul>' +
+      mod.sources.map(function(s) { return '<li>' + s + '</li>'; }).join('') +
+      '</ul></div>';
+
+    document.getElementById('modalBody').innerHTML = html;
+    document.getElementById('ebmModal').classList.add('open');
+  }
+
+  function renderSlide() {
+    const slide = slidesData[currentSlide];
+    document.getElementById('slideTag').textContent = slide.tag;
+    document.getElementById('slideCounter').textContent = 'Slide ' + (currentSlide + 1) + ' / ' + slidesData.length;
+    document.getElementById('slideSelect').value = String(currentSlide);
+    document.getElementById('progressBar').style.width = (((currentSlide + 1) / slidesData.length) * 100) + '%';
+
+    document.querySelectorAll('.pill-btn').forEach(function(btn, idx) {
+      btn.classList.toggle('active', idx === currentSlide);
+    });
+
+    const grid = document.getElementById('slideContent');
+    grid.className = currentLang === 'both' ? 'slide-grid' : 'slide-grid single-col';
+    let html = '';
+
+    if (currentLang === 'both' || currentLang === 'it') {
+      html += '<div class="col-box">' +
+        '<span class="col-label">Italiano (IT)</span>' +
+        '<h2>' + slide.itTitle + '</h2>' +
+        '<ul>' + slide.itPoints.map(function(p) { return '<li>' + p + '</li>'; }).join('') + '</ul>' +
+      '</div>';
+    }
+
+    if (currentLang === 'both' || currentLang === 'en') {
+      html += '<div class="col-box en">' +
+        '<span class="col-label">English (EN)</span>' +
+        '<h2>' + slide.enTitle + '</h2>' +
+        '<ul>' + slide.enPoints.map(function(p) { return '<li>' + p + '</li>'; }).join('') + '</ul>' +
+      '</div>';
+    }
+
+    grid.innerHTML = html;
+
+    // Hypertext bar linking directly to the bilingual Word file + embedded EBM reader
+    const hBar = document.getElementById('slideHyperBar');
+    hBar.innerHTML =
+      '<strong style="font-size:0.88rem; color:#1B4F72;">Approfondimento Ipertestuale EBM:</strong>' +
+      '<a class="btn-word" href="' + slide.docFile + '">📄 ' + slide.docLabel + '</a>' +
+      '<button type="button" class="btn-ebm-modal" id="slideEbmBtn">🔬 Leggi Scheda EBM + Fonti in Pagina</button>';
+
+    document.getElementById('slideEbmBtn').addEventListener('click', function() {
+      openEbmModal(slide.ebmId);
+    });
+
+    const interDiv = document.getElementById('slideInteractive');
+    interDiv.innerHTML = '';
+    if (slide.interactive) {
+      const box = document.createElement('div');
+      box.className = 'interactive-box';
+      const title = document.createElement('h4');
+      title.textContent = slide.interactive.prompt;
+      box.appendChild(title);
+
+      const optsRow = document.createElement('div');
+      optsRow.className = 'mini-options';
+
+      const fb = document.createElement('div');
+      fb.className = 'mini-feedback';
+
+      slide.interactive.options.forEach(function(o) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'mini-btn';
+        btn.textContent = o.label;
+        btn.addEventListener('click', function() {
+          fb.style.color = o.correct ? '#1E8449' : '#C0392B';
+          fb.textContent = o.msg;
+        });
+        optsRow.appendChild(btn);
+      });
+
+      box.appendChild(optsRow);
+      box.appendChild(fb);
+      interDiv.appendChild(box);
+    }
+
+    document.getElementById('prevBtn').disabled = (currentSlide === 0);
+    document.getElementById('nextBtn').disabled = (currentSlide === slidesData.length - 1);
+  }
+
+  function goToSlide(idx) {
+    if (idx >= 0 && idx < slidesData.length) {
+      currentSlide = idx;
+      renderSlide();
+    }
+  }
+
+  function initHyperIndex() {
+    const container = document.getElementById('hyperIndexContainer');
+    container.innerHTML = ebmModules.map(function(mod) {
+      return '<div class="module-link-card">' +
+        '<span class="q-badge">' + mod.uda_code + '</span>' +
+        '<h3>' + mod.title_it + '</h3>' +
+        '<div class="en-sub">' + mod.title_en + '</div>' +
+        '<p style="margin-bottom:12px;">' + mod.subtitle_it + '</p>' +
+        '<div style="display:flex; gap:10px; flex-wrap:wrap;">' +
+          '<a class="btn-word" href="Dispense_Word_Bilingui/' + mod.filename + '">📄 Apri File Word Bilingue: ' + mod.filename + '</a>' +
+          '<button type="button" class="btn-ebm-modal" data-ebm="' + mod.id + '">🔬 Apri Scheda EBM Interattiva in Pagina</button>' +
+        '</div>' +
+        '<div class="ref-list-box"><strong>Fonti Verificate EBM / ISO / Normative riportate nel documento:</strong><ul>' +
+          mod.sources.map(function(s) { return '<li>' + s + '</li>'; }).join('') +
+        '</ul></div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function initSlides() {
+    const select = document.getElementById('slideSelect');
+    const pills = document.getElementById('slidePills');
+    select.innerHTML = '';
+    pills.innerHTML = '';
+
+    slidesData.forEach(function(s, idx) {
+      const opt = document.createElement('option');
+      opt.value = String(idx);
+      opt.textContent = 'Slide ' + (idx + 1) + ': ' + s.itTitle;
+      select.appendChild(opt);
+
+      const pill = document.createElement('button');
+      pill.type = 'button';
+      pill.className = 'pill-btn' + (idx === 0 ? ' active' : '');
+      pill.textContent = s.short;
+      pill.addEventListener('click', function() {
+        goToSlide(idx);
+      });
+      pills.appendChild(pill);
+    });
+
+    select.addEventListener('change', function() {
+      goToSlide(parseInt(this.value, 10));
+    });
+
+    document.getElementById('prevBtn').addEventListener('click', function() {
+      goToSlide(currentSlide - 1);
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', function() {
+      goToSlide(currentSlide + 1);
+    });
+
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        currentLang = this.getAttribute('data-lang');
+        document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
+        this.classList.add('active');
+        renderSlide();
+      });
+    });
+
+    const card = document.getElementById('slideCard');
+    card.addEventListener('touchstart', function(e) {
+      if (e.changedTouches && e.changedTouches.length > 0) {
+        touchStartX = e.changedTouches[0].screenX;
+      }
+    }, { passive: true });
+
+    card.addEventListener('touchend', function(e) {
+      if (e.changedTouches && e.changedTouches.length > 0) {
+        const diff = e.changedTouches[0].screenX - touchStartX;
+        if (diff < -50) goToSlide(currentSlide + 1);
+        if (diff > 50) goToSlide(currentSlide - 1);
+      }
+    }, { passive: true });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.getElementById('ebmModal').classList.remove('open');
+      }
+      if (!document.getElementById('slides').classList.contains('active')) return;
+      if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
+      if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
+    });
+
+    renderSlide();
+  }
+
+  function initTabsAndDispense() {
+    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        const tabId = this.getAttribute('data-tab');
+        document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+        document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+        document.getElementById(tabId).classList.add('active');
+        this.classList.add('active');
+      });
+    });
+
+    document.querySelectorAll('.uda-header').forEach(function(hdr) {
+      hdr.addEventListener('click', function() {
+        const targetId = this.getAttribute('data-uda');
+        document.getElementById(targetId).classList.toggle('open');
+      });
+    });
+
+    document.querySelectorAll('.checklist-item input[type="checkbox"]').forEach(function(cb) {
+      cb.addEventListener('change', function() {
+        this.parentElement.classList.toggle('done', this.checked);
+      });
+    });
+
+    document.body.addEventListener('click', function(e) {
+      const btn = e.target.closest('[data-ebm]');
+      if (btn) {
+        openEbmModal(btn.getAttribute('data-ebm'));
+      }
+    });
+
+    document.getElementById('closeModalBtn').addEventListener('click', function() {
+      document.getElementById('ebmModal').classList.remove('open');
+    });
+
+    document.getElementById('ebmModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.remove('open');
+      }
+    });
+  }
+
+  function initQuiz() {
+    const container = document.getElementById('quizContainer');
+    container.innerHTML = quizData.map(function(item, qIdx) {
+      const optsHtml = item.options.map(function(opt, oIdx) {
+        return '<label class="q-option"><input type="radio" name="q_' + qIdx + '" value="' + oIdx + '"> ' + opt + '</label>';
+      }).join('');
+      return '<div id="qCard_' + qIdx + '" class="question-card">' +
+        '<span class="q-badge">' + item.uda + '</span>' +
+        '<div class="q-title">' + item.q + '</div>' +
+        optsHtml +
+        '<div id="qFb_' + qIdx + '" class="q-feedback"></div>' +
+      '</div>';
+    }).join('');
+
+    document.getElementById('submitQuizBtn').addEventListener('click', function() {
+      let score = 0;
+      const total = quizData.length;
+      quizData.forEach(function(item, qIdx) {
+        const card = document.getElementById('qCard_' + qIdx);
+        const fb = document.getElementById('qFb_' + qIdx);
+        const selected = document.querySelector('input[name="q_' + qIdx + '"]:checked');
+        card.classList.remove('correct', 'incorrect');
+
+        if (selected && parseInt(selected.value, 10) === item.answer) {
+          score++;
+          card.classList.add('correct');
+          fb.style.color = '#1E8449';
+          fb.textContent = '✓ Risposta esatta! ' + item.explanation;
+        } else {
+          card.classList.add('incorrect');
+          fb.style.color = '#C0392B';
+          fb.textContent = '✗ Risposta errata. Corretta: ' + item.options[item.answer] + ' — ' + item.explanation;
+        }
+      });
+
+      const student = document.getElementById('studentName').value.trim() || 'Studente 3F IdA';
+      const passed = score >= 11;
+      const banner = document.getElementById('resultBanner');
+      banner.style.display = 'block';
+      banner.style.background = passed ? '#EAFAF1' : '#FDEDEC';
+      banner.style.border = passed ? '2px solid #27AE60' : '2px solid #C0392B';
+      banner.style.color = passed ? '#145A32' : '#78281F';
+      banner.innerHTML =
+        '<strong>Esito Questionario Gate Annuale – ' + student + ' (Classe 3F IdA):</strong><br>' +
+        'Punteggio ottenuto: <strong>' + score + ' / ' + total + '</strong> (Soglia minima: 11/15).<br>' +
+        'Stato: <strong>' + (passed
+          ? 'SUPERATO / PASSED – Ore FAD (UDA 1–5) validate per accesso alle prove pratiche.'
+          : 'NON SUPERATO / NOT PASSED – Ripassare le dispense UDA 1–5 e ripetere il test.') + '</strong>';
+    });
+
+    document.getElementById('resetQuizBtn').addEventListener('click', function() {
+      document.querySelectorAll('#quizContainer input[type="radio"]').forEach(function(r) { r.checked = false; });
+      quizData.forEach(function(_, qIdx) {
+        document.getElementById('qCard_' + qIdx).classList.remove('correct', 'incorrect');
+        document.getElementById('qFb_' + qIdx).textContent = '';
+      });
+      document.getElementById('resultBanner').style.display = 'none';
+    });
+
+    document.getElementById('printQuizBtn').addEventListener('click', function() {
+      window.print();
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      initHyperIndex();
+      initSlides();
+      initTabsAndDispense();
+      initQuiz();
+    });
+  } else {
+    initHyperIndex();
+    initSlides();
+    initTabsAndDispense();
+    initQuiz();
+  }
+})();
+</script>
+</body>
+</html>
