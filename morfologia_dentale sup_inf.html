@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Morfologia Dentale Bilingue (IT / EN) - LIM 3° Anno</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #0f172a;
+      background: #090d16;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', 'Consolas', monospace;
+    }
+    #lim-stage-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 8px;
+    }
+    #lim-stage {
+      width: 1280px;
+      height: 720px;
+      transform-origin: center center;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .slide-container {
+      width: 1280px;
+      height: 720px;
+      margin: 0 auto;
+      overflow: hidden;
+      box-sizing: border-box;
+      display: none;
+    }
+    .view-btn {
+      border: 1.5px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 13px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .view-btn.active {
+      background: #0f4c81;
+      color: #ffffff;
+      border-color: #0f4c81;
+    }
+    .lang-switch {
+      display: inline-flex;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: #334155;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      padding: 8px 11px;
+      cursor: pointer;
+    }
+    .lang-btn.active {
+      background: #ea580c;
+      color: #ffffff;
+    }
+    .svg-view, .text-view {
+      display: none;
+    }
+    .svg-view.active, .text-view.active {
+      display: block;
+    }
+    .quiz-opt {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 13px;
+      margin-bottom: 6px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #1e293b;
+      cursor: pointer;
+    }
+    body.lang-bi .quiz-opt {
+      font-size: 14px;
+      padding: 6px 12px;
+      margin-bottom: 5px;
+    }
+    .quiz-opt.correct {
+      background: #dcfce7;
+      border-color: #15803d;
+      color: #14532d;
+    }
+    .quiz-opt.wrong {
+      background: #fee2e2;
+      border-color: #b91c1c;
+      color: #7f1d1d;
+    }
+    .quiz-opt:disabled {
+      cursor: default;
+    }
+    #lim-toolbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 56px;
+      background: #111827;
+      border-top: 1px solid #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 9999;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: #f8fafc;
+    }
+    .lim-nav-btn {
+      background: #1e293b;
+      border: 1.5px solid #334155;
+      color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .lim-nav-btn.primary {
+      background: #0f4c81;
+      border-color: #0284c7;
+    }
+    .lim-select {
+      background: #1e293b;
+      border: 1.5px solid #334155;
+      color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      outline: none;
+    }
+  </style>
+</head>
+<body class="lang-bi">
+
+  <div id="lim-stage-wrapper">
+    <div id="lim-stage">
+
+      <!-- SLIDE 1: Copertina -->
+      <div class="slide-container" id="slide1" style="display:flex;padding:52px 68px;background:#0f172a;flex-direction:column;justify-content:space-between;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <p data-it="Laboratorio Odontotecnico • Classe 3ª" data-en="Dental Technology Lab • 3rd Year" style="font-size:15px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#38bdf8;margin:0;">
+            Laboratorio Odontotecnico • Classe 3ª
+          </p>
+          <div style="display:flex;align-items:center;gap:18px;">
+            <p class="mono" style="font-size:15px;font-weight:700;color:#fb923c;margin:0;">
+              FDI 11–17 / 21–27 • 31–37 / 41–47
+            </p>
+            <div class="lang-switch" style="background:#1e293b;border-color:#475569;">
+              <button class="lang-btn active" data-mode="bi" onclick="setLang('bi')" style="color:#f8fafc;">IT/EN</button>
+              <button class="lang-btn" data-mode="it" onclick="setLang('it')" style="color:#f8fafc;">IT</button>
+              <button class="lang-btn" data-mode="en" onclick="setLang('en')" style="color:#f8fafc;">EN</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:56px;">
+          <div style="flex:1.45 1 0;">
+            <h1 data-it="Morfologia Dentale per la Modellazione" data-en="Dental Morphology for Wax-Up Modeling" style="font-size:44px;font-weight:800;color:#f8fafc;margin:0;line-height:1.15;">
+              Morfologia Dentale per la Modellazione
+            </h1>
+            <p data-it="Atlante anatomico interattivo dei settori frontali e diatorici superiori e inferiori con Questionari Gate di sblocco pratico" data-en="Interactive anatomical atlas of maxillary and mandibular anterior and posterior teeth with practical Gate Quizzes" style="font-size:18px;color:#cbd5e1;margin:16px 0 0 0;line-height:1.45;max-width:740px;">
+              Atlante anatomico interattivo dei settori frontali e diatorici superiori e inferiori con Questionari Gate di sblocco pratico
+            </p>
+            <div style="width:80px;height:4px;background:#ea580c;margin:22px 0 0 0;"></div>
+          </div>
+
+          <div style="flex:0.85 1 0;background:#1e293b;border:1px solid #334155;border-radius:16px;padding:24px;display:flex;flex-direction:column;align-items:center;">
+            <svg width="260" height="190" viewBox="0 0 260 190">
+              <path d="M 35 160 C 35 60, 225 60, 225 160" fill="none" stroke="#38bdf8" stroke-width="3" stroke-dasharray="6 5"></path>
+              <rect x="103" y="54" width="22" height="26" rx="6" fill="#f8fafc" stroke="#0f4c81" stroke-width="2.5"></rect>
+              <rect x="135" y="54" width="22" height="26" rx="6" fill="#f8fafc" stroke="#0f4c81" stroke-width="2.5"></rect>
+              <rect x="75" y="64" width="19" height="24" rx="6" fill="#f8fafc" stroke="#0f4c81" stroke-width="2.5"></rect>
+              <rect x="166" y="64" width="19" height="24" rx="6" fill="#f8fafc" stroke="#0f4c81" stroke-width="2.5"></rect>
+              <polygon points="58,82 69,75 76,94 56,98" fill="#fb923c" stroke="#ea580c" stroke-width="2.5"></polygon>
+              <polygon points="202,82 191,75 184,94 204,98" fill="#fb923c" stroke="#ea580c" stroke-width="2.5"></polygon>
+              <ellipse cx="52" cy="115" rx="13" ry="11" fill="#f8fafc" stroke="#0f4c81" stroke-width="2.5"></ellipse>
+              <ellipse cx="208" cy="115" rx="13" ry="11" fill="#f8fafc" stroke="#0f4c81" stroke-width="2.5"></ellipse>
+              <rect x="30" y="135" width="28" height="26" rx="7" fill="#38bdf8" stroke="#0284c7" stroke-width="2.5"></rect>
+              <rect x="202" y="135" width="28" height="26" rx="7" fill="#38bdf8" stroke="#0284c7" stroke-width="2.5"></rect>
+            </svg>
+            <p class="mono" data-it="SETTORI FRONTALI E DIATORICI" data-en="ANTERIOR &amp; POSTERIOR SECTORS" style="font-size:14px;font-weight:700;color:#94a3b8;margin:8px 0 0 0;">
+              SETTORI FRONTALI E DIATORICI
+            </p>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:24px;width:100%;">
+          <div onclick="showSlide(1)" style="flex:1 1 0;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:18px 22px;cursor:pointer;">
+            <p class="mono" data-it="MODULO 01 • 5 SLIDE" data-en="MODULE 01 • 5 SLIDES" style="font-size:14px;font-weight:700;color:#38bdf8;margin:0 0 4px 0;">MODULO 01 • 5 SLIDE</p>
+            <p data-it="Arcata Superiore (11–17) + Gate 1" data-en="Maxillary Arch (11–17) + Gate 1" style="font-size:18px;font-weight:700;color:#f8fafc;margin:0;">Arcata Superiore (11–17) + Gate 1</p>
+          </div>
+          <div onclick="showSlide(6)" style="flex:1 1 0;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:18px 22px;cursor:pointer;">
+            <p class="mono" data-it="MODULO 02 • 5 SLIDE" data-en="MODULE 02 • 5 SLIDES" style="font-size:14px;font-weight:700;color:#38bdf8;margin:0 0 4px 0;">MODULO 02 • 5 SLIDE</p>
+            <p data-it="Arcata Inferiore (31–37) + Gate 2" data-en="Mandibular Arch (31–37) + Gate 2" style="font-size:18px;font-weight:700;color:#f8fafc;margin:0;">Arcata Inferiore (31–37) + Gate 2</p>
+          </div>
+          <div onclick="showSlide(10)" style="flex:1 1 0;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:18px 22px;cursor:pointer;">
+            <p class="mono" data-it="VERIFICA PRATICA" data-en="PRACTICAL CHECK" style="font-size:14px;font-weight:700;color:#fb923c;margin:0 0 4px 0;">VERIFICA PRATICA</p>
+            <p data-it="Sblocco Modellazione in Cera" data-en="Wax-Up Modeling Pass" style="font-size:18px;font-weight:700;color:#f8fafc;margin:0;">Sblocco Modellazione in Cera</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: Incisivi Superiori (11-12 / 21-22) -->
+      <div class="slide-container" id="slide2" style="padding:40px 56px;background:#faf9f6;flex-direction:column;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin:0 0 20px 0;">
+          <div>
+            <p data-it="Arcata Superiore • Slide 1 di 5" data-en="Maxillary Arch • Slide 1 of 5" style="font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#0f4c81;margin:0 0 4px 0;">
+              Arcata Superiore • Slide 1 di 5
+            </p>
+            <h2 data-it="Incisivi Superiori (11–12 / 21–22)" data-en="Maxillary Incisors (11–12 / 21–22)" style="font-size:28px;font-weight:800;color:#0f172a;margin:0;">
+              Incisivi Superiori (11–12 / 21–22)
+            </h2>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button class="view-btn active" data-it="Vista Vestibolare" data-en="Labial View" onclick="switchView('slide2', 0, this)">Vista Vestibolare</button>
+            <button class="view-btn" data-it="Faccia Palatale" data-en="Palatal Surface" onclick="switchView('slide2', 1, this)">Faccia Palatale</button>
+            <button class="view-btn" data-it="Sezione Prossimale" data-en="Proximal Section" onclick="switchView('slide2', 2, this)">Sezione Prossimale</button>
+            <div class="lang-switch">
+              <button class="lang-btn active" data-mode="bi" onclick="setLang('bi')">IT/EN</button>
+              <button class="lang-btn" data-mode="it" onclick="setLang('it')">IT</button>
+              <button class="lang-btn" data-mode="en" onclick="setLang('en')">EN</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-grow:1;display:flex;align-items:center;gap:40px;">
+          <div style="flex:0.95 1 0;background:#ffffff;border:1.5px solid #cbd5e1;border-radius:16px;padding:20px;display:flex;flex-direction:column;align-items:center;">
+            <div class="svg-view active">
+              <svg width="360" height="270" viewBox="0 0 360 270">
+                <line x1="180" y1="12" x2="180" y2="258" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 5"></line>
+                <path d="M 152 108 C 154 62, 168 24, 180 20 C 192 24, 206 62, 208 108 Z" fill="#fef3c7" stroke="#b45309" stroke-width="2.5"></path>
+                <path d="M 152 108 C 166 116, 194 116, 208 108 L 222 222 C 222 232, 212 236, 200 236 L 146 236 C 142 236, 140 234, 140 228 Z" fill="#fffbeb" stroke="#0f4c81" stroke-width="3"></path>
+                <line x1="164" y1="125" x2="162" y2="220" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"></line>
+                <line x1="196" y1="125" x2="198" y2="220" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4"></line>
+                <circle cx="141" cy="233" r="6" fill="#ea580c"></circle>
+                <circle cx="215" cy="226" r="6" fill="#0284c7"></circle>
+              </svg>
+              <div style="display:flex;justify-content:center;gap:16px;margin-top:8px;">
+                <p data-it="● Angolo Mesiale 90°" data-en="● 90° Mesial Angle" style="font-size:15px;font-weight:700;color:#ea580c;margin:0;">● Angolo Mesiale 90°</p>
+                <p data-it="● Angolo Distale Tondo" data-en="● Rounded Distal Angle" style="font-size:15px;font-weight:700;color:#0284c7;margin:0;">● Angolo Distale Tondo</p>
+              </div>
+            </div>
+
+            <div class="svg-view">
+              <svg width="360" height="270" viewBox="0 0 360 270">
+                <path d="M 154 106 C 156 60, 170 24, 180 20 C 190 24, 204 60, 206 106 Z" fill="#fef3c7" stroke="#b45309" stroke-width="2.5"></path>
+                <path d="M 154 106 C 168 114, 192 114, 206 106 L 220 226 L 140 228 Z" fill="#fffbeb" stroke="#0f4c81" stroke-width="3"></path>
+                <ellipse cx="182" cy="126" rx="22" ry="15" fill="#fed7aa" stroke="#ea580c" stroke-width="2.5"></ellipse>
+                <path d="M 156 122 L 146 226" stroke="#0284c7" stroke-width="4" stroke-linecap="round"></path>
+                <path d="M 204 122 L 214 224" stroke="#0284c7" stroke-width="4" stroke-linecap="round"></path>
+                <ellipse cx="180" cy="182" rx="24" ry="30" fill="#e0f2fe" opacity="0.7"></ellipse>
+              </svg>
+              <div style="display:flex;justify-content:center;gap:16px;margin-top:8px;">
+                <p data-it="● Cingolo Cervicale" data-en="● Cervical Cingulum" style="font-size:15px;font-weight:700;color:#ea580c;margin:0;">● Cingolo Cervicale</p>
+                <p data-it="● Creste Marginali" data-en="● Marginal Ridges" style="font-size:15px;font-weight:700;color:#0284c7;margin:0;">● Creste Marginali</p>
+              </div>
+            </div>
+
+            <div class="svg-view">
+              <svg width="360" height="270" viewBox="0 0 360 270">
+                <line x1="180" y1="14" x2="180" y2="256" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 5"></line>
+                <path d="M 156 112 L 178 22 L 200 112 Z" fill="#fef3c7" stroke="#b45309" stroke-width="2.5"></path>
+                <path d="M 156 112 C 138 148, 154 196, 176 234 L 182 234 C 186 202, 206 182, 206 150 C 206 130, 200 118, 200 112 Z" fill="#fffbeb" stroke="#0f4c81" stroke-width="3"></path>
+                <circle cx="147" cy="144" r="6" fill="#ea580c"></circle>
+                <circle cx="204" cy="140" r="6" fill="#ea580c"></circle>
+                <path d="M 184 226 C 194 202, 202 184, 202 162" fill="none" stroke="#0284c7" stroke-width="3"></path>
+              </svg>
+              <div style="display:flex;justify-content:center;gap:16px;margin-top:8px;">
+                <p data-it="● Equatore Cervicale" data-en="● Cervical Height of Contour" style="font-size:15px;font-weight:700;color:#ea580c;margin:0;">● Equatore Cervicale</p>
+                <p data-it="● Guida Incisiva" data-en="● Incisal Guidance" style="font-size:15px;font-weight:700;color:#0284c7;margin:0;">● Guida Incisiva</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="flex:1.15 1 0;">
+            <div class="text-view active">
+              <p class="mono" data-it="VISTA VESTIBOLARE • DIAMETRO MD 8,5 MM (11) / 6,5 MM (12)" data-en="LABIAL VIEW • MD WIDTH 8.5 MM (11) / 6.5 MM (12)" style="font-size:15px;font-weight:700;color:#ea580c;margin:0 0 6px 0;">
+                VISTA VESTIBOLARE • DIAMETRO MD 8,5 MM (11) / 6,5 MM (12)
+              </p>
+              <h3 data-it="Corona a Pala e Asimmetria degli Angoli" data-en="Shovel-Shaped Crown &amp; Incisal Angle Asymmetry" style="font-size:23px;font-weight:800;color:#0f172a;margin:0 0 14px 0;">
+                Corona a Pala e Asimmetria degli Angoli
+              </h3>
+              <ul style="list-style:none;margin:0;padding:0;">
+                <li data-it="<strong style='color:#0f4c81;'>Angolo mesio-incisale:</strong> Netto e retto (90°), punto di contatto nel terzo incisale." data-en="<strong style='color:#0f4c81;'>Mesio-incisal angle:</strong> Sharp 90° corner, contact area in the incisal third." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Angolo mesio-incisale:</strong> Netto e retto (90°), punto di contatto nel terzo incisale.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Angolo disto-incisale:</strong> Arrotondato con punto di contatto più cervicale (terzo medio)." data-en="<strong style='color:#0f4c81;'>Disto-incisal angle:</strong> Rounded corner with contact area located in the middle third." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Angolo disto-incisale:</strong> Arrotondato con punto di contatto più cervicale (terzo medio).
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Tre lobi di sviluppo:</strong> Delimitati da due solchi verticali poco profondi sulla faccia labiale." data-en="<strong style='color:#0f4c81;'>Three developmental lobes:</strong> Separated by two shallow vertical labial depressions." style="font-size:18px;color:#1e293b;margin:0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Tre lobi di sviluppo:</strong> Delimitati da due solchi verticali poco profondi sulla faccia labiale.
+                </li>
+              </ul>
+            </div>
+
+            <div class="text-view">
+              <p class="mono" data-it="FACCIA PALATALE • DIFFERENZIAZIONE 11 VS 12" data-en="PALATAL SURFACE • 11 VS 12 DIFFERENTIATION" style="font-size:15px;font-weight:700;color:#0284c7;margin:0 0 6px 0;">
+                FACCIA PALATALE • DIFFERENZIAZIONE 11 VS 12
+              </p>
+              <h3 data-it="Cingolo, Creste Marginali e Fossa Palatale" data-en="Cingulum, Marginal Ridges &amp; Palatal Fossa" style="font-size:23px;font-weight:800;color:#0f172a;margin:0 0 14px 0;">
+                Cingolo, Creste Marginali e Fossa Palatale
+              </h3>
+              <ul style="list-style:none;margin:0;padding:0;">
+                <li data-it="<strong style='color:#0f4c81;'>Cingolo cervicale:</strong> Rilievo convesso spostato leggermente verso distale." data-en="<strong style='color:#0f4c81;'>Cervical cingulum:</strong> Convex eminence offset slightly toward the distal side." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Cingolo cervicale:</strong> Rilievo convesso spostato leggermente verso distale.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Creste marginali:</strong> Due bordi rilevati che convergono dal margine incisale al cingolo." data-en="<strong style='color:#0f4c81;'>Marginal ridges:</strong> Prominent mesial and distal borders converging toward the cingulum." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Creste marginali:</strong> Due bordi rilevati che convergono dal margine incisale al cingolo.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Incisivo laterale (12/22):</strong> Corona più stretta e convessa con possibile foro cieco." data-en="<strong style='color:#0f4c81;'>Lateral incisor (12/22):</strong> Narrower, more convex crown often featuring a lingual pit." style="font-size:18px;color:#1e293b;margin:0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Incisivo laterale (12/22):</strong> Corona più stretta e convessa con possibile foro cieco.
+                </li>
+              </ul>
+            </div>
+
+            <div class="text-view">
+              <p class="mono" data-it="CHECKLIST DI LABORATORIO • MODELLAZIONE IN CERA" data-en="LABORATORY CHECKLIST • WAX-UP MODELING" style="font-size:15px;font-weight:700;color:#15803d;margin:0 0 6px 0;">
+                CHECKLIST DI LABORATORIO • MODELLAZIONE IN CERA
+              </p>
+              <h3 data-it="Profilo d'Emergenza e Svincolo Protrusivo" data-en="Emergence Profile &amp; Protrusive Disclusion" style="font-size:23px;font-weight:800;color:#0f172a;margin:0 0 14px 0;">
+                Profilo d'Emergenza e Svincolo Protrusivo
+              </h3>
+              <ul style="list-style:none;margin:0;padding:0;">
+                <li data-it="<strong style='color:#0f4c81;'>Equatore protesico:</strong> Posizionato nel terzo cervicale sia vestibolarmente che palatale." data-en="<strong style='color:#0f4c81;'>Height of contour:</strong> Located in the cervical third on both labial and palatal surfaces." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Equatore protesico:</strong> Posizionato nel terzo cervicale sia vestibolarmente che palatale.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Concavità palatale:</strong> Indispensabile per guidare lo svincolo degli incisivi inferiori." data-en="<strong style='color:#0f4c81;'>Palatal concavity:</strong> Essential to guide mandibular incisor movement during protrusion." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Concavità palatale:</strong> Indispensabile per guidare lo svincolo degli incisivi inferiori.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Asse radicolare:</strong> Radice conica unica con apice inclinato distalmente." data-en="<strong style='color:#0f4c81;'>Root axis:</strong> Single conical root with slight distal apical inclination." style="font-size:18px;color:#1e293b;margin:0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Asse radicolare:</strong> Radice conica unica con apice inclinato distalmente.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: Canino Superiore (13 / 23) -->
+      <div class="slide-container" id="slide3" style="padding:40px 56px;background:#ffffff;flex-direction:column;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin:0 0 20px 0;">
+          <div>
+            <p data-it="Arcata Superiore • Slide 2 di 5" data-en="Maxillary Arch • Slide 2 of 5" style="font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#0f4c81;margin:0 0 4px 0;">
+              Arcata Superiore • Slide 2 di 5
+            </p>
+            <h2 data-it="Canino Superiore (13 / 23)" data-en="Maxillary Canine (13 / 23)" style="font-size:28px;font-weight:800;color:#0f172a;margin:0;">
+              Canino Superiore (13 / 23)
+            </h2>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button class="view-btn active" data-it="Vista Vestibolare" data-en="Labial View" onclick="switchView('slide3', 0, this)">Vista Vestibolare</button>
+            <button class="view-btn" data-it="Faccia Palatale" data-en="Palatal Surface" onclick="switchView('slide3', 1, this)">Faccia Palatale</button>
+            <button class="view-btn" data-it="Guida Canina" data-en="Canine Guidance" onclick="switchView('slide3', 2, this)">Guida Canina</button>
+            <div class="lang-switch">
+              <button class="lang-btn active" data-mode="bi" onclick="setLang('bi')">IT/EN</button>
+              <button class="lang-btn" data-mode="it" onclick="setLang('it')">IT</button>
+              <button class="lang-btn" data-mode="en" onclick="setLang('en')">EN</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-grow:1;display:flex;align-items:center;gap:40px;">
+          <div style="flex:1.15 1 0;">
+            <div class="text-view active">
+              <p class="mono" data-it="PILASTRO ANGOLARE • LUNGHEZZA TOTALE 27 MM" data-en="CORNERSTONE TOOTH • TOTAL LENGTH 27 MM" style="font-size:15px;font-weight:700;color:#ea580c;margin:0 0 6px 0;">
+                PILASTRO ANGOLARE • LUNGHEZZA TOTALE 27 MM
+              </p>
+              <h3 data-it="Cuspide Singola e Versanti Asimmetrici" data-en="Single Cusp &amp; Asymmetric Cusp Slopes" style="font-size:23px;font-weight:800;color:#0f172a;margin:0 0 14px 0;">
+                Cuspide Singola e Versanti Asimmetrici
+              </h3>
+              <ul style="list-style:none;margin:0;padding:0;">
+                <li data-it="<strong style='color:#0f4c81;'>Versante mesiale:</strong> Più corto e meno inclinato, con contatto nel terzo incisale-medio." data-en="<strong style='color:#0f4c81;'>Mesial cusp slope:</strong> Shorter and less steep, contact at junction of incisal/middle thirds." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Versante mesiale:</strong> Più corto e meno inclinato, con contatto nel terzo incisale-medio.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Versante distale:</strong> Più lungo e ripido, scende verso il punto di contatto medio." data-en="<strong style='color:#0f4c81;'>Distal cusp slope:</strong> Longer and steeper, descending to the middle third contact area." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Versante distale:</strong> Più lungo e ripido, scende verso il punto di contatto medio.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Cresta vestibolare:</strong> Rilievo longitudinale marcato che divide la faccia in due piani." data-en="<strong style='color:#0f4c81;'>Labial ridge:</strong> Prominent vertical ridge dividing the labial face into two planes." style="font-size:18px;color:#1e293b;margin:0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Cresta vestibolare:</strong> Rilievo longitudinale marcato che divide la faccia in due piani.
+                </li>
+              </ul>
+            </div>
+
+            <div class="text-view">
+              <p class="mono" data-it="FACCIA PALATALE • DOPPIA CONCAVITÀ" data-en="PALATAL SURFACE • DOUBLE FOSSA" style="font
