@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Il Gesso Dentale Bilingue (IT / EN) - LIM 3° Anno</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@600;700&display=swap">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #0f172a;
+      background: #090d16;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
+    }
+    #lim-stage-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 8px;
+    }
+    #lim-stage {
+      width: 1280px;
+      height: 720px;
+      transform-origin: center center;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .slide-container {
+      width: 1280px;
+      height: 720px;
+      margin: 0 auto;
+      overflow: hidden;
+      box-sizing: border-box;
+      display: none;
+    }
+    .view-btn {
+      border: 1.5px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 13px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .view-btn.active {
+      background: #0f4c81;
+      color: #ffffff;
+      border-color: #0f4c81;
+    }
+    .lang-switch {
+      display: inline-flex;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+    .lang-btn {
+      border: none;
+      background: transparent;
+      color: #334155;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      padding: 8px 11px;
+      cursor: pointer;
+    }
+    .lang-btn.active {
+      background: #ea580c;
+      color: #ffffff;
+    }
+    .svg-view, .text-view {
+      display: none;
+    }
+    .svg-view.active, .text-view.active {
+      display: block;
+    }
+    .quiz-opt {
+      display: block;
+      width: 100%;
+      text-align: left;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 8px 13px;
+      margin-bottom: 6px;
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: #1e293b;
+      cursor: pointer;
+    }
+    body.lang-bi .quiz-opt {
+      font-size: 14px;
+      padding: 6px 12px;
+      margin-bottom: 5px;
+    }
+    .quiz-opt.correct {
+      background: #dcfce7;
+      border-color: #15803d;
+      color: #14532d;
+    }
+    .quiz-opt.wrong {
+      background: #fee2e2;
+      border-color: #b91c1c;
+      color: #7f1d1d;
+    }
+    .quiz-opt:disabled {
+      cursor: default;
+    }
+    #lim-toolbar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 56px;
+      background: #111827;
+      border-top: 1px solid #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 9999;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      color: #f8fafc;
+    }
+    .lim-nav-btn {
+      background: #1e293b;
+      border: 1.5px solid #334155;
+      color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .lim-nav-btn.primary {
+      background: #0f4c81;
+      border-color: #0284c7;
+    }
+    .lim-select {
+      background: #1e293b;
+      border: 1.5px solid #334155;
+      color: #f8fafc;
+      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      outline: none;
+    }
+  </style>
+</head>
+<body class="lang-bi">
+
+  <div id="lim-stage-wrapper">
+    <div id="lim-stage">
+
+      <!-- SLIDE 1: Copertina -->
+      <div class="slide-container" id="slide1" style="display:flex;padding:52px 68px;background:#0f172a;flex-direction:column;justify-content:space-between;">
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <p data-it="Scienza dei Materiali Dentali • Classe 3ª" data-en="Dental Materials Science • 3rd Year" style="font-size:15px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#38bdf8;margin:0;">
+            Scienza dei Materiali Dentali • Classe 3ª
+          </p>
+          <div style="display:flex;align-items:center;gap:18px;">
+            <p class="mono" style="font-size:15px;font-weight:700;color:#fb923c;margin:0;">
+              CaSO₄ · ½H₂O • UNI EN ISO 6873
+            </p>
+            <div class="lang-switch" style="background:#1e293b;border-color:#475569;">
+              <button class="lang-btn active" data-mode="bi" onclick="setLang('bi')" style="color:#f8fafc;">IT/EN</button>
+              <button class="lang-btn" data-mode="it" onclick="setLang('it')" style="color:#f8fafc;">IT</button>
+              <button class="lang-btn" data-mode="en" onclick="setLang('en')" style="color:#f8fafc;">EN</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:56px;">
+          <div style="flex:1.45 1 0;">
+            <h1 data-it="Il Gesso Dentale in Laboratorio" data-en="Dental Gypsum in the Laboratory" style="font-size:44px;font-weight:800;color:#f8fafc;margin:0;line-height:1.15;">
+              Il Gesso Dentale in Laboratorio
+            </h1>
+            <p data-it="Chimica dell'emiidrato α e β, classificazione ISO 6873 (Tipi I–V), rapporto acqua/polvere, cinetica di presa e Questionario Gate pratico" data-en="α and β hemihydrate chemistry, ISO 6873 classification (Types I–V), water/powder ratio, setting kinetics and practical Gate Quiz" style="font-size:18px;color:#cbd5e1;margin:16px 0 0 0;line-height:1.45;max-width:740px;">
+              Chimica dell'emiidrato α e β, classificazione ISO 6873 (Tipi I–V), rapporto acqua/polvere, cinetica di presa e Questionario Gate pratico
+            </p>
+            <div style="width:80px;height:4px;background:#ea580c;margin:22px 0 0 0;"></div>
+          </div>
+
+          <div style="flex:0.85 1 0;background:#1e293b;border:1px solid #334155;border-radius:16px;padding:24px;display:flex;flex-direction:column;align-items:center;">
+            <svg width="260" height="190" viewBox="0 0 260 190">
+              <path d="M 48 64 C 48 118, 212 118, 212 64 Z" fill="#0f172a" stroke="#38bdf8" stroke-width="3"></path>
+              <ellipse cx="130" cy="64" rx="82" ry="16" fill="#1e293b" stroke="#38bdf8" stroke-width="2.5"></ellipse>
+              <line x1="88" y1="84" x2="122" y2="52" stroke="#fb923c" stroke-width="3.5" stroke-linecap="round"></line>
+              <line x1="108" y1="92" x2="152" y2="54" stroke="#f8fafc" stroke-width="3.5" stroke-linecap="round"></line>
+              <line x1="138" y1="90" x2="176" y2="56" stroke="#38bdf8" stroke-width="3.5" stroke-linecap="round"></line>
+              <line x1="94" y1="58" x2="146" y2="88" stroke="#fb923c" stroke-width="3" stroke-linecap="round"></line>
+              <line x1="124" y1="52" x2="172" y2="86" stroke="#f8fafc" stroke-width="3" stroke-linecap="round"></line>
+              <polygon points="62,136 198,136 212,166 48,166" fill="#fef3c7" stroke="#ea580c" stroke-width="2.5"></polygon>
+            </svg>
+            <p class="mono" data-it="CRISTALLIZZAZIONE • ISO 6873" data-en="CRYSTALLIZATION • ISO 6873" style="font-size:14px;font-weight:700;color:#94a3b8;margin:8px 0 0 0;">
+              CRISTALLIZZAZIONE • ISO 6873
+            </p>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:24px;width:100%;">
+          <div onclick="showSlide(1)" style="flex:1 1 0;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:18px 22px;cursor:pointer;">
+            <p class="mono" data-it="MODULO 01 • SLIDE 02–03" data-en="MODULE 01 • SLIDES 02–03" style="font-size:14px;font-weight:700;color:#38bdf8;margin:0 0 4px 0;">MODULO 01 • SLIDE 02–03</p>
+            <p data-it="Chimica α/β e Classi ISO 6873" data-en="α/β Chemistry &amp; ISO 6873 Types" style="font-size:18px;font-weight:700;color:#f8fafc;margin:0;">Chimica α/β e Classi ISO 6873</p>
+          </div>
+          <div onclick="showSlide(3)" style="flex:1 1 0;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:18px 22px;cursor:pointer;">
+            <p class="mono" data-it="MODULO 02 • SLIDE 04–05" data-en="MODULE 02 • SLIDES 04–05" style="font-size:14px;font-weight:700;color:#38bdf8;margin:0 0 4px 0;">MODULO 02 • SLIDE 04–05</p>
+            <p data-it="Rapporto A/P, Presa ed Espansione" data-en="W/P Ratio, Setting &amp; Expansion" style="font-size:18px;font-weight:700;color:#f8fafc;margin:0;">Rapporto A/P, Presa ed Espansione</p>
+          </div>
+          <div onclick="showSlide(5)" style="flex:1 1 0;background:#1e293b;border:1px solid #334155;border-radius:10px;padding:18px 22px;cursor:pointer;">
+            <p class="mono" data-it="VERIFICA PRATICA • SLIDE 06" data-en="PRACTICAL CHECK • SLIDE 06" style="font-size:14px;font-weight:700;color:#fb923c;margin:0 0 4px 0;">VERIFICA PRATICA • SLIDE 06</p>
+            <p data-it="Gate Quiz: Sblocco Colatura" data-en="Gate Quiz: Model Pouring Pass" style="font-size:18px;font-weight:700;color:#f8fafc;margin:0;">Gate Quiz: Sblocco Colatura</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 2: Chimica e Produzione: Emiidrato α vs β -->
+      <div class="slide-container" id="slide2" style="padding:40px 56px;background:#faf9f6;flex-direction:column;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin:0 0 20px 0;">
+          <div>
+            <p data-it="Scienza dei Materiali • Slide 1 di 5" data-en="Materials Science • Slide 1 of 5" style="font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#0f4c81;margin:0 0 4px 0;">
+              Scienza dei Materiali • Slide 1 di 5
+            </p>
+            <h2 data-it="Chimica e Produzione: Emiidrato α vs β" data-en="Chemistry &amp; Production: α vs β Hemihydrate" style="font-size:28px;font-weight:800;color:#0f172a;margin:0;">
+              Chimica e Produzione: Emiidrato α vs β
+            </h2>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button class="view-btn active" data-it="Ciclo Calcinazione" data-en="Calcination Cycle" onclick="switchView('slide2', 0, this)">Ciclo Calcinazione</button>
+            <button class="view-btn" data-it="Cristalli α vs β" data-en="α vs β Crystals" onclick="switchView('slide2', 1, this)">Cristalli α vs β</button>
+            <button class="view-btn" data-it="Porosità &amp; Durezza" data-en="Porosity &amp; Hardness" onclick="switchView('slide2', 2, this)">Porosità &amp; Durezza</button>
+            <div class="lang-switch">
+              <button class="lang-btn active" data-mode="bi" onclick="setLang('bi')">IT/EN</button>
+              <button class="lang-btn" data-mode="it" onclick="setLang('it')">IT</button>
+              <button class="lang-btn" data-mode="en" onclick="setLang('en')">EN</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-grow:1;display:flex;align-items:center;gap:40px;">
+          <div style="flex:0.95 1 0;background:#ffffff;border:1.5px solid #cbd5e1;border-radius:16px;padding:20px;display:flex;flex-direction:column;align-items:center;">
+            <div class="svg-view active">
+              <svg width="360" height="270" viewBox="0 0 360 270">
+                <polygon points="52,72 132,58 144,124 44,132" fill="#e0f2fe" stroke="#0f4c81" stroke-width="3"></polygon>
+                <circle cx="76" cy="96" r="6" fill="#0f4c81"></circle>
+                <circle cx="110" cy="88" r="6" fill="#0f4c81"></circle>
+                <path d="M 154 78 L 208 78" stroke="#ea580c" stroke-width="4" stroke-linecap="round"></path>
+                <polygon points="216,78 202,70 202,86" fill="#ea580c"></polygon>
+                <polygon points="224,130 274,62 324,130" fill="#fef3c7" stroke="#b45309" stroke-width="3"></polygon>
+                <path d="M 274 146 C 274 206, 94 206, 94 146" fill="none" stroke="#15803d" stroke-width="3.5" stroke-dasharray="6 4"></path>
+                <polygon points="94,138 86,152 102,152" fill="#15803d"></polygon>
+                <circle cx="184" cy="192" r="14" fill="#dcfce7" stroke="#15803d" stroke-width="2.5"></circle>
+              </svg>
+              <div style="display:flex;justify-content:center;gap:16px;margin-top:8px;">
+                <p data-it="● Calcinazione 110–130°C" data-en="● 110–130°C Calcination" style="font-size:15px;font-weight:700;color:#ea580c;margin:0;">● Calcinazione 110–130°C</p>
+                <p data-it="● Presa Esotermica (+H₂O)" data-en="● Exothermic Set (+H₂O)" style="font-size:15px;font-weight:700;color:#15803d;margin:0;">● Presa Esotermica (+H₂O)</p>
+              </div>
+            </div>
+
+            <div class="svg-view">
+              <svg width="360" height="270" viewBox="0 0 360 270">
+                <line x1="180" y1="18" x2="180" y2="250" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 5"></line>
+                <polygon points="48,74 96,58 134,82 118,128 62,122" fill="#fed7aa" stroke="#ea580c" stroke-width="2.5"></polygon>
+                <circle cx="84" cy="90" r="6" fill="#ffffff" stroke="#ea580c" stroke-width="1.5"></circle>
+                <circle cx="106" cy="102" r="5" fill="#ffffff" stroke="#ea580c" stroke-width="1.5"></circle>
+                <polygon points="42,158 102,144 138,176 112,216 54,204" fill="#fed7aa" stroke="#ea580c" stroke-width="2.5"></polygon>
+                <circle cx="78" cy="176" r="7" fill="#ffffff" stroke="#ea580c" stroke-width="1.5"></circle>
+                <circle cx="104" cy="188" r="5" fill="#ffffff" stroke="#ea580c" stroke-width="1.5"></circle>
+                <polygon points="214,62 248,46 282,62 282,116 248,132 214,116" fill="#e0f2fe" stroke="#0f4c81" stroke-width="3"></polygon>
+                <line x1="248" y1="46" x2="248" y2="132" stroke="#0284c7" stroke-width="1.5"></line>
+                <polygon points="256,144 290,128 324,144 324,198 290,214 256,198" fill="#e0f2fe" stroke="#0f4c81" stroke-width="3"></polygon>
+                <line x1="290" y1="128" x2="290" y2="214" stroke="#0284c7" stroke-width="1.5"></line>
+              </svg>
+              <div style="display:flex;justify-content:center;gap:16px;margin-top:8px;">
+                <p data-it="● β: Spugnoso (45–50 ml)" data-en="● β: Spongy (45–50 ml)" style="font-size:15px;font-weight:700;color:#ea580c;margin:0;">● β: Spugnoso (45–50 ml)</p>
+                <p data-it="● α: Prismatico (20–30 ml)" data-en="● α: Prismatic (20–30 ml)" style="font-size:15px;font-weight:700;color:#0f4c81;margin:0;">● α: Prismatico (20–30 ml)</p>
+              </div>
+            </div>
+
+            <div class="svg-view">
+              <svg width="360" height="270" viewBox="0 0 360 270">
+                <rect x="38" y="54" width="124" height="162" rx="12" fill="#e0f2fe" stroke="#0f4c81" stroke-width="3"></rect>
+                <line x1="54" y1="74" x2="146" y2="196" stroke="#0f4c81" stroke-width="4"></line>
+                <line x1="146" y1="74" x2="54" y2="196" stroke="#0f4c81" stroke-width="4"></line>
+                <line x1="54" y1="135" x2="146" y2="135" stroke="#0284c7" stroke-width="4"></line>
+                <line x1="100" y1="70" x2="100" y2="200" stroke="#0284c7" stroke-width="4"></line>
+                <rect x="198" y="54" width="124" height="162" rx="12" fill="#fffbeb" stroke="#ea580c" stroke-width="3"></rect>
+                <circle cx="232" cy="92" r="13" fill="#ffffff" stroke="#ea580c" stroke-width="2"></circle>
+                <circle cx="284" cy="108" r="16" fill="#ffffff" stroke="#ea580c" stroke-width="2"></circle>
+                <circle cx="242" cy="156" r="15" fill="#ffffff" stroke="#ea580c" stroke-width="2"></circle>
+                <circle cx="288" cy="182" r="12" fill="#ffffff" stroke="#ea580c" stroke-width="2"></circle>
+              </svg>
+              <div style="display:flex;justify-content:center;gap:16px;margin-top:8px;">
+                <p data-it="● Basso A/P: Alta Densità" data-en="● Low W/P: High Density" style="font-size:15px;font-weight:700;color:#0f4c81;margin:0;">● Basso A/P: Alta Densità</p>
+                <p data-it="● Eccesso H₂O: Pori Capillari" data-en="● Excess H₂O: Capillary Pores" style="font-size:15px;font-weight:700;color:#ea580c;margin:0;">● Eccesso H₂O: Pori Capillari</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="flex:1.15 1 0;">
+            <div class="text-view active">
+              <p class="mono" data-it="CHIMICA DEL GESSO • CaSO₄·2H₂O ⇌ CaSO₄·½H₂O" data-en="GYPSUM CHEMISTRY • CaSO₄·2H₂O ⇌ CaSO₄·½H₂O" style="font-size:15px;font-weight:700;color:#ea580c;margin:0 0 6px 0;">
+                CHIMICA DEL GESSO • CaSO₄·2H₂O ⇌ CaSO₄·½H₂O
+              </p>
+              <h3 data-it="Calcinazione e Reazione di Idratazione" data-en="Calcination &amp; Hydration Setting Reaction" style="font-size:23px;font-weight:800;color:#0f172a;margin:0 0 14px 0;">
+                Calcinazione e Reazione di Idratazione
+              </h3>
+              <ul style="list-style:none;margin:0;padding:0;">
+                <li data-it="<strong style='color:#0f4c81;'>Minerale di partenza:</strong> Solfato di calcio biidrato naturale (CaSO₄ · 2H₂O) macinato." data-en="<strong style='color:#0f4c81;'>Raw mineral:</strong> Ground natural calcium sulfate dihydrate (CaSO₄ · 2H₂O)." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Minerale di partenza:</strong> Solfato di calcio biidrato naturale (CaSO₄ · 2H₂O) macinato.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Calcinazione (110–130 °C):</strong> Perdita parziale di 1,5 molecole d'acqua con formazione di emiidrato." data-en="<strong style='color:#0f4c81;'>Calcination (110–130 °C):</strong> Partial loss of 1.5 water molecules forming hemihydrate powder." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Calcinazione (110–130 °C):</strong> Perdita parziale di 1,5 molecole d'acqua con formazione di emiidrato.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Presa in laboratorio:</strong> L'aggiunta di acqua ricostituisce aghi intrecciati di biidrato con sviluppo di calore." data-en="<strong style='color:#0f4c81;'>Laboratory setting:</strong> Adding water reforms interlocking dihydrate needles with exothermic heat." style="font-size:18px;color:#1e293b;margin:0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Presa in laboratorio:</strong> L'aggiunta di acqua ricostituisce aghi intrecciati di biidrato con sviluppo di calore.
+                </li>
+              </ul>
+            </div>
+
+            <div class="text-view">
+              <p class="mono" data-it="ALLOTROPIA CRISTALLINA • FORMA BETA VS FORMA ALFA" data-en="CRYSTAL ALLOTROPY • BETA VS ALPHA HEMIHYDRATE" style="font-size:15px;font-weight:700;color:#0284c7;margin:0 0 6px 0;">
+                ALLOTROPIA CRISTALLINA • FORMA BETA VS FORMA ALFA
+              </p>
+              <h3 data-it="Metodo di Produzione e Morfologia delle Particelle" data-en="Production Method &amp; Particle Morphology" style="font-size:23px;font-weight:800;color:#0f172a;margin:0 0 14px 0;">
+                Metodo di Produzione e Morfologia delle Particelle
+              </h3>
+              <ul style="list-style:none;margin:0;padding:0;">
+                <li data-it="<strong style='color:#0f4c81;'>β-emiidrato (Alabastro):</strong> Calcinazione a secco in forno aperto; cristalli irregolari e spugnosi." data-en="<strong style='color:#0f4c81;'>β-hemihydrate (Plaster):</strong> Dry calcination in open kiln; irregular, porous, spongy particles." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">β-emiidrato (Alabastro):</strong> Calcinazione a secco in forno aperto; cristalli irregolari e spugnosi.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>α-emiidrato (Gesso duro):</strong> Calcinazione in autoclave sotto pressione di vapore; cristalli prismatici densi." data-en="<strong style='color:#0f4c81;'>α-hemihydrate (Stone):</strong> Autoclave calcination under steam pressure; dense prismatic rods." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">α-emiidrato (Gesso duro):</strong> Calcinazione in autoclave sotto pressione di vapore; cristalli prismatici densi.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>α-modificato (Extra-duro):</strong> Bollitura in soluzione di CaCl₂ al 30%; particelle ancora più compatte." data-en="<strong style='color:#0f4c81;'>Modified α (Die stone):</strong> Boiled in 30% CaCl₂ solution; ultra-dense, low-porosity crystals." style="font-size:18px;color:#1e293b;margin:0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">α-modificato (Extra-duro):</strong> Bollitura in soluzione di CaCl₂ al 30%; particelle ancora più compatte.
+                </li>
+              </ul>
+            </div>
+
+            <div class="text-view">
+              <p class="mono" data-it="FISICA DEI MATERIALI • ACQUA STECHIOMETRICA VS ECCESSO" data-en="MATERIALS PHYSICS • STOICHIOMETRIC VS EXCESS WATER" style="font-size:15px;font-weight:700;color:#15803d;margin:0 0 6px 0;">
+                FISICA DEI MATERIALI • ACQUA STECHIOMETRICA VS ECCESSO
+              </p>
+              <h3 data-it="Impatto dell'Acqua Libera sulla Resistenza Finale" data-en="Impact of Free Gauging Water on Final Strength" style="font-size:23px;font-weight:800;color:#0f172a;margin:0 0 14px 0;">
+                Impatto dell'Acqua Libera sulla Resistenza Finale
+              </h3>
+              <ul style="list-style:none;margin:0;padding:0;">
+                <li data-it="<strong style='color:#0f4c81;'>Quota stechiometrica:</strong> Servono solo 18,6 ml di acqua per idratare chimicamente 100 g di polvere." data-en="<strong style='color:#0f4c81;'>Stoichiometric water:</strong> Only 18.6 ml of water is chemically required to hydrate 100 g of powder." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Quota stechiometrica:</strong> Servono solo 18,6 ml di acqua per idratare chimicamente 100 g di polvere.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Acqua di lavorabilità:</strong> L'acqua eccedente evapora lasciando micro-pori che riducono la durezza." data-en="<strong style='color:#0f4c81;'>Gauging excess water:</strong> Excess water evaporates leaving micro-pores that weaken the set mass." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Acqua di lavorabilità:</strong> L'acqua eccedente evapora lasciando micro-pori che riducono la durezza.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Resistenza umido vs secco:</strong> Il modello asciutto (dopo 24–48 ore) raddoppia la resistenza alla compressione." data-en="<strong style='color:#0f4c81;'>Wet vs dry strength:</strong> Dry models (after 24–48 hours) achieve roughly double compressive strength." style="font-size:18px;color:#1e293b;margin:0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Resistenza umido vs secco:</strong> Il modello asciutto (dopo 24–48 ore) raddoppia la resistenza alla compressione.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 3: Classificazione ISO 6873: Tipi I – V -->
+      <div class="slide-container" id="slide3" style="padding:40px 56px;background:#ffffff;flex-direction:column;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin:0 0 20px 0;">
+          <div>
+            <p data-it="Scienza dei Materiali • Slide 2 di 5" data-en="Materials Science • Slide 2 of 5" style="font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#0f4c81;margin:0 0 4px 0;">
+              Scienza dei Materiali • Slide 2 di 5
+            </p>
+            <h2 data-it="Classificazione ISO 6873: Tipi I – V" data-en="ISO 6873 Classification: Types I – V" style="font-size:28px;font-weight:800;color:#0f172a;margin:0;">
+              Classificazione ISO 6873: Tipi I – V
+            </h2>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button class="view-btn active" data-it="Tipi I – III" data-en="Types I – III" onclick="switchView('slide3', 0, this)">Tipi I – III</button>
+            <button class="view-btn" data-it="Tipi IV – V (Monconi)" data-en="Types IV – V (Dies)" onclick="switchView('slide3', 1, this)">Tipi IV – V (Monconi)</button>
+            <button class="view-btn" data-it="Parametri ISO" data-en="ISO Benchmarks" onclick="switchView('slide3', 2, this)">Parametri ISO</button>
+            <div class="lang-switch">
+              <button class="lang-btn active" data-mode="bi" onclick="setLang('bi')">IT/EN</button>
+              <button class="lang-btn" data-mode="it" onclick="setLang('it')">IT</button>
+              <button class="lang-btn" data-mode="en" onclick="setLang('en')">EN</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-grow:1;display:flex;align-items:center;gap:40px;">
+          <div style="flex:1.15 1 0;">
+            <div class="text-view active">
+              <p class="mono" data-it="NORMATIVA UNI EN ISO 6873 • GESSI DA IMPRONTA, ZOCCOLATURA E MODELLI" data-en="UNI EN ISO 6873 • IMPRESSION, MODEL PLASTER &amp; DENTAL STONE" style="font-size:15px;font-weight:700;color:#ea580c;margin:0 0 6px 0;">
+                NORMATIVA UNI EN ISO 6873 • GESSI DA IMPRONTA, ZOCCOLATURA E MODELLI
+              </p>
+              <h3 data-it="Tipo I (Impronte), Tipo II (Alabastro) e Tipo III (Duro)" data-en="Type I (Impression), Type II (Plaster) &amp; Type III (Stone)" style="font-size:23px;font-weight:800;color:#0f172a;margin:0 0 14px 0;">
+                Tipo I (Impronte), Tipo II (Alabastro) e Tipo III (Duro)
+              </h3>
+              <ul style="list-style:none;margin:0;padding:0;">
+                <li data-it="<strong style='color:#0f4c81;'>Tipo I (Gesso da impronta):</strong> β-emiidrato con additivi; oggi sostituito dagli elastomeri." data-en="<strong style='color:#0f4c81;'>Type I (Impression plaster):</strong> β-hemihydrate with modifiers; largely replaced by elastomers." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Tipo I (Gesso da impronta):</strong> β-emiidrato con additivi; oggi sostituito dagli elastomeri.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Tipo II (Alabastro / Tenero):</strong> β-emiidrato (45–50 ml/100g); per zoccolature, muffole e articolatore." data-en="<strong style='color:#0f4c81;'>Type II (Model plaster):</strong> β-hemihydrate (45–50 ml/100g); used for base pouring, flasking and mounting." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Tipo II (Alabastro / Tenero):</strong> β-emiidrato (45–50 ml/100g); per zoccolature, muffole e articolatore.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Tipo III (Gesso duro):</strong> α-emiidrato (28–30 ml/100g); ideale per antagonisti, ortodonzia e protesi mobile." data-en="<strong style='color:#0f4c81;'>Type III (Dental stone):</strong> α-hemihydrate (28–30 ml/100g); ideal for opposing casts, ortho and dentures." style="font-size:18px;color:#1e293b;margin:0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Tipo III (Gesso duro):</strong> α-emiidrato (28–30 ml/100g); ideale per antagonisti, ortodonzia e protesi mobile.
+                </li>
+              </ul>
+            </div>
+
+            <div class="text-view">
+              <p class="mono" data-it="PROTESI FISSA E CAD/CAM • GESSI EXTRA-DURI" data-en="FIXED PROSTHODONTICS &amp; CAD/CAM • DIE STONES" style="font-size:15px;font-weight:700;color:#0284c7;margin:0 0 6px 0;">
+                PROTESI FISSA E CAD/CAM • GESSI EXTRA-DURI
+              </p>
+              <h3 data-it="Tipo IV (Bassa Espansione) e Tipo V (Alta Espansione)" data-en="Type IV (Low Expansion) &amp; Type V (High Expansion)" style="font-size:23px;font-weight:800;color:#0f172a;margin:0 0 14px 0;">
+                Tipo IV (Bassa Espansione) e Tipo V (Alta Espansione)
+              </h3>
+              <ul style="list-style:none;margin:0;padding:0;">
+                <li data-it="<strong style='color:#0f4c81;'>Tipo IV (Extra-duro per monconi):</strong> A/P 19–22 ml/100g, espansione &lt; 0,10%, massima resistenza all'abrasione." data-en="<strong style='color:#0f4c81;'>Type IV (Die stone, low exp.):</strong> W/P 19–22 ml/100g, expansion &lt; 0.10%, superior edge abrasion resistance." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Tipo IV (Extra-duro per monconi):</strong> A/P 19–22 ml/100g, espansione &lt; 0,10%, massima resistenza all'abrasione.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Tipo V (Extra-duro alta espansione):</strong> Espansione 0,10–0,30% per compensare la contrazione delle leghe vili." data-en="<strong style='color:#0f4c81;'>Type V (Die stone, high exp.):</strong> 0.10–0.30% expansion to compensate for base-metal casting shrinkage." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Tipo V (Extra-duro alta espansione):</strong> Espansione 0,10–0,30% per compensare la contrazione delle leghe vili.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Gessi speciali CAD/CAM:</strong> Tipo IV opachi e scansionabili senza spray antiriflesso." data-en="<strong style='color:#0f4c81;'>CAD/CAM optical stones:</strong> Matte Type IV formulations scannable without anti-glare powder." style="font-size:18px;color:#1e293b;margin:0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Gessi speciali CAD/CAM:</strong> Tipo IV opachi e scansionabili senza spray antiriflesso.
+                </li>
+              </ul>
+            </div>
+
+            <div class="text-view">
+              <p class="mono" data-it="CRITERI DI SCELTA IN LABORATORIO • SINTESI ISO 6873" data-en="LAB SELECTION CRITERIA • ISO 6873 SUMMARY" style="font-size:15px;font-weight:700;color:#15803d;margin:0 0 6px 0;">
+                CRITERI DI SCELTA IN LABORATORIO • SINTESI ISO 6873
+              </p>
+              <h3 data-it="Relazione Inversa tra Acqua di Impasto e Resistenza" data-en="Inverse Relation Between Gauging Water &amp; Strength" style="font-size:23px;font-weight:800;color:#0f172a;margin:0 0 14px 0;">
+                Relazione Inversa tra Acqua di Impasto e Resistenza
+              </h3>
+              <ul style="list-style:none;margin:0;padding:0;">
+                <li data-it="<strong style='color:#0f4c81;'>Tipo II (Alabastro):</strong> A/P 45–50 ml • Espansione ≤ 0,30% • Compressione ≥ 9 MPa." data-en="<strong style='color:#0f4c81;'>Type II (Plaster):</strong> W/P 45–50 ml • Expansion ≤ 0.30% • Compressive ≥ 9 MPa." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Tipo II (Alabastro):</strong> A/P 45–50 ml • Espansione ≤ 0,30% • Compressione ≥ 9 MPa.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Tipo III (Duro):</strong> A/P 28–30 ml • Espansione ≤ 0,20% • Compressione ≥ 20–33 MPa." data-en="<strong style='color:#0f4c81;'>Type III (Stone):</strong> W/P 28–30 ml • Expansion ≤ 0.20% • Compressive ≥ 20–33 MPa." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Tipo III (Duro):</strong> A/P 28–30 ml • Espansione ≤ 0,20% • Compressione ≥ 20–33 MPa.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Tipo IV (Extra-duro):</strong> A/P 19–22 ml • Espansione ≤ 0,10% • Compressione ≥ 35–70 MPa." data-en="<strong style='color:#0f4c81;'>Type IV (Die stone):</strong> W/P 19–22 ml • Expansion ≤ 0.10% • Compressive ≥ 35–70 MPa." style="font-size:18px;color:#1e293b;margin:0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Tipo IV (Extra-duro):</strong> A/P 19–22 ml • Espansione ≤ 0,10% • Compressione ≥ 35–70 MPa.
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="flex:0.95 1 0;background:#faf9f6;border:1.5px solid #cbd5e1;border-radius:16px;padding:20px;display:flex;flex-direction:column;align-items:center;">
+            <div class="svg-view active">
+              <svg width="360" height="270" viewBox="0 0 360 270">
+                <line x1="40" y1="224" x2="320" y2="224" stroke="#64748b" stroke-width="2"></line>
+                <rect x="64" y="54" width="52" height="170" rx="8" fill="#e2e8f0" stroke="#64748b" stroke-width="2.5"></rect>
+                <rect x="154" y="76" width="52" height="148" rx="8" fill="#fed7aa" stroke="#ea580c" stroke-width="2.5"></rect>
+                <rect x="244" y="132" width="52" height="92" rx="8" fill="#bae6fd" stroke="#0f4c81" stroke-width="2.5"></rect>
+                <circle cx="90" cy="40" r="6" fill="#64748b"></circle>
+                <circle cx="180" cy="62" r="6" fill="#ea580c"></circle>
+                <circle cx="270" cy="118" r="6" fill="#0f4c81"></circle>
+              </svg>
+              <div style="display:flex;justify-content:center;gap:16px;margin-top:8px;">
+                <p data-it="● Tipo II: 45–50 ml H₂O" data-en="● Type II: 45–50 ml H₂O" style="font-size:15px;font-weight:700;color:#ea580c;margin:0;">● Tipo II: 45–50 ml H₂O</p>
+                <p data-it="● Tipo III: 28–30 ml H₂O" data-en="● Type III: 28–30 ml H₂O" style="font-size:15px;font-weight:700;color:#0f4c81;margin:0;">● Tipo III: 28–30 ml H₂O</p>
+              </div>
+            </div>
+
+            <div class="svg-view">
+              <svg width="360" height="270" viewBox="0 0 360 270">
+                <polygon points="154,148 206,148 196,244 164,244" fill="#e2e8f0" stroke="#475569" stroke-width="2.5"></polygon>
+                <path d="M 134 148 L 146 64 C 156 54, 204 54, 214 64 L 226 148 Z" fill="#fef3c7" stroke="#0f4c81" stroke-width="3"></path>
+                <path d="M 132 148 C 156 156, 204 156, 228 148" fill="none" stroke="#ea580c" stroke-width="4.5" stroke-linecap="round"></path>
+                <circle cx="132" cy="148" r="6" fill="#ea580c"></circle>
+                <circle cx="228" cy="148" r="6" fill="#ea580c"></circle>
+              </svg>
+              <div style="display:flex;justify-content:center;gap:16px;margin-top:8px;">
+                <p data-it="● Margine Integro (Tipo IV)" data-en="● Sharp Finish Line (Type IV)" style="font-size:15px;font-weight:700;color:#ea580c;margin:0;">● Margine Integro (Tipo IV)</p>
+                <p data-it="● Espansione &lt; 0,10%" data-en="● Expansion &lt; 0.10%" style="font-size:15px;font-weight:700;color:#0f4c81;margin:0;">● Espansione &lt; 0,10%</p>
+              </div>
+            </div>
+
+            <div class="svg-view">
+              <svg width="360" height="270" viewBox="0 0 360 270">
+                <line x1="48" y1="36" x2="48" y2="236" stroke="#64748b" stroke-width="2"></line>
+                <rect x="48" y="48" width="54" height="32" rx="6" fill="#fed7aa" stroke="#ea580c" stroke-width="2"></rect>
+                <rect x="48" y="96" width="126" height="32" rx="6" fill="#bae6fd" stroke="#0284c7" stroke-width="2"></rect>
+                <rect x="48" y="144" width="232" height="32" rx="6" fill="#0f4c81"></rect>
+                <rect x="48" y="192" width="268" height="32" rx="6" fill="#15803d"></rect>
+              </svg>
+              <div style="display:flex;justify-content:center;gap:16px;margin-top:8px;">
+                <p data-it="● Tipo II: 9 MPa → Tipo III: 30 MPa" data-en="● Type II: 9 MPa → Type III: 30 MPa" style="font-size:15px;font-weight:700;color:#0284c7;margin:0;">● Tipo II: 9 MPa → Tipo III: 30 MPa</p>
+                <p data-it="● Tipo IV–V: 60–75 MPa" data-en="● Type IV–V: 60–75 MPa" style="font-size:15px;font-weight:700;color:#15803d;margin:0;">● Tipo IV–V: 60–75 MPa</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 4: Rapporto Acqua/Polvere e Miscelazione -->
+      <div class="slide-container" id="slide4" style="padding:40px 56px;background:#faf9f6;flex-direction:column;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin:0 0 20px 0;">
+          <div>
+            <p data-it="Tecnica di Laboratorio • Slide 3 di 5" data-en="Laboratory Technique • Slide 3 of 5" style="font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#0f4c81;margin:0 0 4px 0;">
+              Tecnica di Laboratorio • Slide 3 di 5
+            </p>
+            <h2 data-it="Rapporto Acqua/Polvere e Miscelazione" data-en="Water/Powder Ratio &amp; Mixing" style="font-size:28px;font-weight:800;color:#0f172a;margin:0;">
+              Rapporto Acqua/Polvere e Miscelazione
+            </h2>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button class="view-btn active" data-it="Dosaggio Ponderale" data-en="Weighing &amp; Dosing" onclick="switchView('slide4', 0, this)">Dosaggio Ponderale</button>
+            <button class="view-btn" data-it="Spatolazione Sottovuoto" data-en="Vacuum Mixing" onclick="switchView('slide4', 1, this)">Spatolazione Sottovuoto</button>
+            <button class="view-btn" data-it="Colatura su Vibratore" data-en="Vibrator Pouring" onclick="switchView('slide4', 2, this)">Colatura su Vibratore</button>
+            <div class="lang-switch">
+              <button class="lang-btn active" data-mode="bi" onclick="setLang('bi')">IT/EN</button>
+              <button class="lang-btn" data-mode="it" onclick="setLang('it')">IT</button>
+              <button class="lang-btn" data-mode="en" onclick="setLang('en')">EN</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-grow:1;display:flex;align-items:center;gap:40px;">
+          <div style="flex:0.95 1 0;background:#ffffff;border:1.5px solid #cbd5e1;border-radius:16px;padding:20px;display:flex;flex-direction:column;align-items:center;">
+            <div class="svg-view active">
+              <svg width="360" height="270" viewBox="0 0 360 270">
+                <rect x="64" y="42" width="44" height="120" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="2.5"></rect>
+                <line x1="64" y1="88" x2="108" y2="88" stroke="#0284c7" stroke-width="3"></line>
+                <rect x="194" y="134" width="116" height="32" rx="8" fill="#1e293b"></rect>
+                <polygon points="212,134 252,72 292,134" fill="#fef3c7" stroke="#ea580c" stroke-width="2.5"></polygon>
+                <path d="M 114 184 C 114 236, 246 236, 246 184 Z" fill="#f1f5f9" stroke="#0f4c81" stroke-width="3"></path>
+                <path d="M 96 164 L 136 196" stroke="#0284c7" stroke-width="3.5" stroke-linecap="round"></path>
+                <path d="M 248 168 L 216 196" stroke="#ea580c" stroke-width="3.5" stroke-dasharray="4 4"></path>
+              </svg>
+              <div style="display:flex;justify-content:center;gap:16px;margin-top:8px;">
+                <p data-it="● 1° Acqua Distillata (ml)" data-en="● 1st Distilled Water (ml)" style="font-size:15px;font-weight:700;color:#0284c7;margin:0;">● 1° Acqua Distillata (ml)</p>
+                <p data-it="● 2° Polvere Pesata (g)" data-en="● 2nd Weighed Powder (g)" style="font-size:15px;font-weight:700;color:#ea580c;margin:0;">● 2° Polvere Pesata (g)</p>
+              </div>
+            </div>
+
+            <div class="svg-view">
+              <svg width="360" height="270" viewBox="0 0 360 270">
+                <rect x="108" y="34" width="144" height="26" rx="8" fill="#0f4c81"></rect>
+                <path d="M 252 46 L 308 46" stroke="#ea580c" stroke-width="4" stroke-linecap="round"></path>
+                <polygon points="318,46 304,38 304,54" fill="#ea580c"></polygon>
+                <path d="M 114 60 L 246 60 L 232 214 C 228 226, 132 226, 128 214 Z" fill="#fffbeb" stroke="#0f4c81" stroke-width="3"></path>
+                <line x1="180" y1="60" x2="180" y2="196" stroke="#475569" stroke-width="5"></line>
+                <rect x="142" y="114" width="76" height="62" rx="10" fill="none" stroke="#0284c7" stroke-width="3.5"></rect>
+                <path d="M 148 92 A 34 12 0 1 1 212 92" fill="none" stroke="#15803d" stroke-width="3"></path>
+              </svg>
+              <div style="display:flex;justify-content:center;gap:16px;margin-top:8px;">
+                <p data-it="● Vuoto -0,85 bar (Zero Bolle)" data-en="● Vacuum -0.85 bar (Void-Free)" style="font-size:15px;font-weight:700;color:#ea580c;margin:0;">● Vuoto -0,85 bar (Zero Bolle)</p>
+                <p data-it="● 30–45 sec a 350 rpm" data-en="● 30–45 sec at 350 rpm" style="font-size:15px;font-weight:700;color:#15803d;margin:0;">● 30–45 sec a 350 rpm</p>
+              </div>
+            </div>
+
+            <div class="svg-view">
+              <svg width="360" height="270" viewBox="0 0 360 270">
+                <rect x="74" y="198" width="212" height="30" rx="8" fill="#1e293b"></rect>
+                <line x1="88" y1="186" x2="272" y2="186" stroke="#ea580c" stroke-width="4" stroke-dasharray="8 6"></line>
+                <path d="M 94 128 L 258 158 L 248 176 L 86 146 Z" fill="#bae6fd" stroke="#0f4c81" stroke-width="3"></path>
+                <path d="M 118 44 C 122 82, 114 106, 114 130 L 234 152" fill="none" stroke="#f59e0b" stroke-width="7" stroke-linecap="round"></path>
+                <circle cx="114" cy="130" r="6" fill="#ea580c"></circle>
+              </svg>
+              <div style="display:flex;justify-content:center;gap:16px;margin-top:8px;">
+                <p data-it="● Colata Sottile da Distale" data-en="● Thin Stream from Distal" style="font-size:15px;font-weight:700;color:#ea580c;margin:0;">● Colata Sottile da Distale</p>
+                <p data-it="● Vibrazione Bassa/Media" data-en="● Low/Medium Vibration" style="font-size:15px;font-weight:700;color:#0f4c81;margin:0;">● Vibrazione Bassa/Media</p>
+              </div>
+            </div>
+          </div>
+
+          <div style="flex:1.15 1 0;">
+            <div class="text-view active">
+              <p class="mono" data-it="PROTOCOLLO DI DOSAGGIO • PRECISIONE PONDERALE" data-en="PROPORTIONING PROTOCOL • GRAVIMETRIC PRECISION" style="font-size:15px;font-weight:700;color:#ea580c;margin:0 0 6px 0;">
+                PROTOCOLLO DI DOSAGGIO • PRECISIONE PONDERALE
+              </p>
+              <h3 data-it="Regole Fondamentali per l'Impasto" data-en="Essential Rules for Proportioning" style="font-size:23px;font-weight:800;color:#0f172a;margin:0 0 14px 0;">
+                Regole Fondamentali per l'Impasto
+              </h3>
+              <ul style="list-style:none;margin:0;padding:0;">
+                <li data-it="<strong style='color:#0f4c81;'>Acqua sempre per prima:</strong> Versare i ml misurati nella tazza, poi aggiungere la polvere pesata." data-en="<strong style='color:#0f4c81;'>Water always first:</strong> Pour measured water into the bowl first, then sift in weighed powder." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Acqua sempre per prima:</strong> Versare i ml misurati nella tazza, poi aggiungere la polvere pesata.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Mai dosare a occhio:</strong> Scarti di soli 2 ml su 100 g alterano espansione e durezza superficiale." data-en="<strong style='color:#0f4c81;'>Never eyeball ratios:</strong> Even a 2 ml error per 100 g alters setting expansion and surface hardness." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Mai dosare a occhio:</strong> Scarti di soli 2 ml su 100 g alterano espansione e durezza superficiale.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Acqua distillata (20–23 °C):</strong> Evita sali disciolti che possono accelerare o ritardare la presa." data-en="<strong style='color:#0f4c81;'>Distilled water (20–23 °C):</strong> Prevents dissolved minerals from altering the setting rate." style="font-size:18px;color:#1e293b;margin:0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Acqua distillata (20–23 °C):</strong> Evita sali disciolti che possono accelerare o ritardare la presa.
+                </li>
+              </ul>
+            </div>
+
+            <div class="text-view">
+              <p class="mono" data-it="OMOGENEIZZAZIONE • CONTROLLO DELLE BOLLE D'ARIA" data-en="HOMOGENIZATION • AIR BUBBLE ELIMINATION" style="font-size:15px;font-weight:700;color:#0284c7;margin:0 0 6px 0;">
+                OMOGENEIZZAZIONE • CONTROLLO DELLE BOLLE D'ARIA
+              </p>
+              <h3 data-it="Spatolazione Manuale vs Impastatrice Sottovuoto" data-en="Hand Spatulation vs Vacuum Mixing" style="font-size:23px;font-weight:800;color:#0f172a;margin:0 0 14px 0;">
+                Spatolazione Manuale vs Impastatrice Sottovuoto
+              </h3>
+              <ul style="list-style:none;margin:0;padding:0;">
+                <li data-it="<strong style='color:#0f4c81;'>Bagnatura (15–20 sec):</strong> Incorporare tutta la polvere prima di avviare il vuoto." data-en="<strong style='color:#0f4c81;'>Wetting phase (15–20 sec):</strong> Wet all powder manually before engaging the vacuum mixer." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Bagnatura (15–20 sec):</strong> Incorporare tutta la polvere prima di avviare il vuoto.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Ciclo sottovuoto (30–45 sec):</strong> Elimina l'aria inglobata aumentando la resistenza del +20%." data-en="<strong style='color:#0f4c81;'>Vacuum cycle (30–45 sec):</strong> Removes trapped air, boosting compressive strength by ~20%." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Ciclo sottovuoto (30–45 sec):</strong> Elimina l'aria inglobata aumentando la resistenza del +20%.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>No sovraspatolazione:</strong> Frantuma i primi cristalli accelerando la presa e l'espansione." data-en="<strong style='color:#0f4c81;'>Avoid overspatulation:</strong> Breaks up early crystals, accelerating set and increasing expansion." style="font-size:18px;color:#1e293b;margin:0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">No sovraspatolazione:</strong> Frantuma i primi cristalli accelerando la presa e l'espansione.
+                </li>
+              </ul>
+            </div>
+
+            <div class="text-view">
+              <p class="mono" data-it="TRASFERIMENTO SU IMPRONTA • FEDELTÀ DEI MARGINI" data-en="IMPRESSION POURING • MARGINAL FIDELITY" style="font-size:15px;font-weight:700;color:#15803d;margin:0 0 6px 0;">
+                TRASFERIMENTO SU IMPRONTA • FEDELTÀ DEI MARGINI
+              </p>
+              <h3 data-it="Tecnica di Colatura e Base del Modello" data-en="Pouring Technique &amp; Model Base Formation" style="font-size:23px;font-weight:800;color:#0f172a;margin:0 0 14px 0;">
+                Tecnica di Colatura e Base del Modello
+              </h3>
+              <ul style="list-style:none;margin:0;padding:0;">
+                <li data-it="<strong style='color:#0f4c81;'>Flusso continuo e sottile:</strong> Partire da un estremo distale facendo avanzare l'onda di gesso." data-en="<strong style='color:#0f4c81;'>Thin continuous stream:</strong> Start from one distal end, letting the stone wave push air ahead." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Flusso continuo e sottile:</strong> Partire da un estremo distale facendo avanzare l'onda di gesso.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Vibrazione moderata:</strong> Frequenze troppo alte fanno risalire acqua in superficie indebolendo i denti." data-en="<strong style='color:#0f4c81;'>Moderate vibration:</strong> Excessive vibration drives water to the surface, weakening cusp tips." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Vibrazione moderata:</strong> Frequenze troppo alte fanno risalire acqua in superficie indebolendo i denti.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Doppia colata:</strong> Mai capovolgere l'impronta su gesso fluido prima della presa iniziale." data-en="<strong style='color:#0f4c81;'>Two-pour technique:</strong> Never invert the tray into soft base plaster before initial set." style="font-size:18px;color:#1e293b;margin:0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Doppia colata:</strong> Mai capovolgere l'impronta su gesso fluido prima della presa iniziale.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 5: Cinetica di Presa, Espansione e Controllo -->
+      <div class="slide-container" id="slide5" style="padding:40px 56px;background:#ffffff;flex-direction:column;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin:0 0 20px 0;">
+          <div>
+            <p data-it="Tecnica di Laboratorio • Slide 4 di 5" data-en="Laboratory Technique • Slide 4 of 5" style="font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#0f4c81;margin:0 0 4px 0;">
+              Tecnica di Laboratorio • Slide 4 di 5
+            </p>
+            <h2 data-it="Cinetica di Presa, Espansione e Controllo" data-en="Setting Kinetics, Expansion &amp; Control" style="font-size:28px;font-weight:800;color:#0f172a;margin:0;">
+              Cinetica di Presa, Espansione e Controllo
+            </h2>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <button class="view-btn active" data-it="Fasi di Presa (Vicat)" data-en="Setting Stages (Vicat)" onclick="switchView('slide5', 0, this)">Fasi di Presa (Vicat)</button>
+            <button class="view-btn" data-it="Espansione di Presa" data-en="Setting Expansion" onclick="switchView('slide5', 1, this)">Espansione di Presa</button>
+            <button class="view-btn" data-it="Acceleranti &amp; Ritardanti" data-en="Accelerators &amp; Retarders" onclick="switchView('slide5', 2, this)">Acceleranti &amp; Ritardanti</button>
+            <div class="lang-switch">
+              <button class="lang-btn active" data-mode="bi" onclick="setLang('bi')">IT/EN</button>
+              <button class="lang-btn" data-mode="it" onclick="setLang('it')">IT</button>
+              <button class="lang-btn" data-mode="en" onclick="setLang('en')">EN</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="flex-grow:1;display:flex;align-items:center;gap:40px;">
+          <div style="flex:1.15 1 0;">
+            <div class="text-view active">
+              <p class="mono" data-it="CRONOMETRIA DI LABORATORIO • AGHI DI VICAT E GILLMORE" data-en="LABORATORY TIMELINE • VICAT &amp; GILLMORE NEEDLES" style="font-size:15px;font-weight:700;color:#ea580c;margin:0 0 6px 0;">
+                CRONOMETRIA DI LABORATORIO • AGHI DI VICAT E GILLMORE
+              </p>
+              <h3 data-it="Tempo di Lavorazione, Presa Iniziale e Finale" data-en="Working Time, Initial Set &amp; Final Set" style="font-size:23px;font-weight:800;color:#0f172a;margin:0 0 14px 0;">
+                Tempo di Lavorazione, Presa Iniziale e Finale
+              </h3>
+              <ul style="list-style:none;margin:0;padding:0;">
+                <li data-it="<strong style='color:#0f4c81;'>Tempo di lavorazione (5–7 min):</strong> Intervallo utile per colare il gesso fluido nell'impronta." data-en="<strong style='color:#0f4c81;'>Working time (5–7 min):</strong> Available interval to pour fluid stone into the impression." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Tempo di lavorazione (5–7 min):</strong> Intervallo utile per colare il gesso fluido nell'impronta.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Presa iniziale (8–12 min):</strong> Coincide con la perdita di lucentezza superficiale (loss of gloss)." data-en="<strong style='color:#0f4c81;'>Initial set (8–12 min):</strong> Marked by surface loss of gloss; stop any manipulation." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Presa iniziale (8–12 min):</strong> Coincide con la perdita di lucentezza superficiale (loss of gloss).
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Presa finale e smodellamento (45–60 min):</strong> Separazione dall'impronta solo a raffreddamento avvenuto." data-en="<strong style='color:#0f4c81;'>Final set &amp; separation (45–60 min):</strong> Separate cast from impression only after exothermic cooling." style="font-size:18px;color:#1e293b;margin:0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Presa finale e smodellamento (45–60 min):</strong> Separazione dall'impronta solo a raffreddamento avvenuto.
+                </li>
+              </ul>
+            </div>
+
+            <div class="text-view">
+              <p class="mono" data-it="STABILITÀ DIMENSIONALE • SPINTA CRISTALLINA" data-en="DIMENSIONAL STABILITY • CRYSTAL OUTWARD THRUST" style="font-size:15px;font-weight:700;color:#0284c7;margin:0 0 6px 0;">
+                STABILITÀ DIMENSIONALE • SPINTA CRISTALLINA
+              </p>
+              <h3 data-it="Espansione Normale vs Espansione Igroscopica" data-en="Normal Setting Expansion vs Hygroscopic Expansion" style="font-size:23px;font-weight:800;color:#0f172a;margin:0 0 14px 0;">
+                Espansione Normale vs Espansione Igroscopica
+              </h3>
+              <ul style="list-style:none;margin:0;padding:0;">
+                <li data-it="<strong style='color:#0f4c81;'>Espansione normale di presa:</strong> Causata dalla spinta reciproca degli aghi di biidrato in crescita." data-en="<strong style='color:#0f4c81;'>Normal setting expansion:</strong> Caused by outward thrust of growing dihydrate crystal needles." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Espansione normale di presa:</strong> Causata dalla spinta reciproca degli aghi di biidrato in crescita.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Espansione igroscopica (2×):</strong> Raddoppia se il gesso viene immerso in acqua prima della presa iniziale." data-en="<strong style='color:#0f4c81;'>Hygroscopic expansion (2×):</strong> Doubles if submerged in water before initial set completes." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Espansione igroscopica (2×):</strong> Raddoppia se il gesso viene immerso in acqua prima della presa iniziale.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Protezione dell'impronta:</strong> Non immergere mai l'impronta colata in acqua durante la cristallizzazione." data-en="<strong style='color:#0f4c81;'>Impression care:</strong> Never immerse a freshly poured impression in water during crystallization." style="font-size:18px;color:#1e293b;margin:0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Protezione dell'impronta:</strong> Non immergere mai l'impronta colata in acqua durante la cristallizzazione.
+                </li>
+              </ul>
+            </div>
+
+            <div class="text-view">
+              <p class="mono" data-it="MODIFICATORI CHIMICI E FISICI • CONTROLLO DEI TEMPI" data-en="CHEMICAL &amp; PHYSICAL MODIFIERS • RATE CONTROL" style="font-size:15px;font-weight:700;color:#15803d;margin:0 0 6px 0;">
+                MODIFICATORI CHIMICI E FISICI • CONTROLLO DEI TEMPI
+              </p>
+              <h3 data-it="Acceleranti e Ritardanti della Cristallizzazione" data-en="Accelerators &amp; Retarders of Crystallization" style="font-size:23px;font-weight:800;color:#0f172a;margin:0 0 14px 0;">
+                Acceleranti e Ritardanti della Cristallizzazione
+              </h3>
+              <ul style="list-style:none;margin:0;padding:0;">
+                <li data-it="<strong style='color:#0f4c81;'>Acceleranti chimici:</strong> Solfato di potassio (K₂SO₄ al 2%) accelera la presa e riduce l'espansione." data-en="<strong style='color:#0f4c81;'>Chemical accelerators:</strong> Potassium sulfate (2% K₂SO₄) speeds up set and lowers expansion." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Acceleranti chimici:</strong> Solfato di potassio (K₂SO₄ al 2%) accelera la presa e riduce l'espansione.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Acceleranti fisici:</strong> Acqua di squadratura (slurry) ricca di nuclei cristallini e spatolazione veloce." data-en="<strong style='color:#0f4c81;'>Physical accelerators:</strong> Trimmer slurry water rich in crystal nuclei and longer spatulation." style="font-size:18px;color:#1e293b;margin:0 0 12px 0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Acceleranti fisici:</strong> Acqua di squadratura (slurry) ricca di nuclei cristallini e spatolazione veloce.
+                </li>
+                <li data-it="<strong style='color:#0f4c81;'>Ritardanti:</strong> Borace (1–2%) e citrato di sodio; mai acqua calda &gt; 35 °C (blocca la presa)." data-en="<strong style='color:#0f4c81;'>Retarders:</strong> Borax (1–2%) and sodium citrate; never use hot water &gt; 35 °C (inhibits set)." style="font-size:18px;color:#1e293b;margin:0;line-height:1.35;">
+                  <strong style="color:#0f4c81;">Ritardanti:</strong> Borace (1–2%) e citrato di sodio; mai acqua calda &gt; 35 °C (blocca la presa).
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="flex:0.95 1 0;background:#faf9f6;border:1.5px solid #cbd5e1;border-radius:16px;padding:20px;display:flex;flex-direction:column;align-items:center;">
+            <div class="svg-view active">
+              <svg width="360" height="270" viewBox="0 0 360 270">
+                <line x1="36" y1="196" x2="324" y2="196" stroke="#94a3b8" stroke-width="3"></line>
+                <path d="M 48 192 C 110 190, 148 158, 184 96 C 216 42, 268 42, 314 54" fill="none" stroke="#0f4c81" stroke-width="4"></path>
+                <circle cx="48" cy="196" r="8" fill="#0284c7"></circle>
+                <circle cx="164" cy="134" r="9" fill="#ea580c"></circle>
+                <line x1="164" y1="68" x2="164" y2="122" stroke="#ea580c" stroke-width="3"></line>
+                <circle cx="304" cy="54" r="9" fill="#15803d"></circle>
+              </svg>
+              <div style="display:flex;justify-content:center;gap:16px;margin-top:8px;">
+                <p data-it="● 10 min: Presa Iniziale" data-en="● 10 min: Initial Set" style="font-size:15px;font-weight:700;color:#ea580c;margin:0;">● 10 min: Presa Iniziale</p>
+                <p data-it="● 45 min: Smodellamento" data-en="● 45 min: Cast Removal" style="font-size:15px;font-weight:700;color:#15803d;margin:0;">● 45 min: Smodellamento</p>
+              </div>
+            </div>
+
+            <div class="svg-view">
+              <svg width="360" height="270" viewBox="0 0 360 270">
+                <circle cx="180" cy="135" r="26" fill="#0f4c81"></circle>
+                <line x1="180" y1="102" x2="180" y2="54" stroke="#0284c7" stroke-width="4" stroke-linecap="round"></line>
+                <line x1="180" y1="168" x2="180" y2="216" stroke="#0284c7" stroke-width="4" stroke-linecap="round"></line>
+                <line x1="147" y1="135" x2="96" y2="135" stroke="#0284c7" stroke-width="4" stroke-linecap="round"></line>
+                <line x1="213" y1="135" x2="264" y2="135" stroke="#0284c7" stroke-width="4" stroke-linecap="round"></line>
+                <circle cx="180" cy="135" r="72" fill="none" stroke="#0284c7" stroke-width="2.5"></circle>
+                <circle cx="180" cy="135" r="108" fill="none" stroke="#ea580c" stroke-width="3" stroke-dasharray="7 5"></circle>
+              </svg>
+              <div style="display:flex;justify-content:center;gap:16px;margin-top:8px;">
+                <p data-it="● Normale (0,08–0,15%)" data-en="● Normal (0.08–0.15%)" style="font-size:15px;font-weight:700;color:#0284c7;margin:0;">● Normale (0,08–0,15%)</p>
+                <p data-it="● Igroscopica in H₂O (2×)" data-en="● Hygroscopic in H₂O (2×)" style="font-size:15px;font-weight:700;color:#ea580c;margin:0;">● Igroscopica in H₂O (2×)</p>
+              </div>
+            </div>
+
+            <div class="svg-view">
+              <svg width="360" height="270" viewBox="0 0 360 270">
+                <line x1="180" y1="24" x2="180" y2="246" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="5 5"></line>
+                <rect x="44" y="64" width="104" height="142" rx="14" fill="#dcfce7" stroke="#15803d" stroke-width="2.5"></rect>
+                <path d="M 96 174 L 96 96" stroke="#15803d" stroke-width="6" stroke-linecap="round"></path>
+                <polygon points="96,82 82,104 110,104" fill="#15803d"></polygon>
+                <rect x="212" y="64" width="104" height="142" rx="14" fill="#fed7aa" stroke="#ea580c" stroke-width="2.5"></rect>
+                <path d="M 264 96 L 264 174" stroke="#ea580c" stroke-width="6" stroke-linecap="round"></path>
+                <polygon points="264,188 250,166 278,166" fill="#ea580c"></polygon>
+              </svg>
+              <div style="display:flex;justify-content:center;gap:16px;margin-top:8px;">
+                <p data-it="● K₂SO₄ / Slurry (+Velocità)" data-en="● K₂SO₄ / Slurry (+Speed)" style="font-size:15px;font-weight:700;color:#15803d;margin:0;">● K₂SO₄ / Slurry (+Velocità)</p>
+                <p data-it="● Borace / Citrato (-Velocità)" data-en="● Borax / Citrate (-Speed)" style="font-size:15px;font-weight:700;color:#ea580c;margin:0;">● Borace / Citrato (-Velocità)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SLIDE 6: QUESTIONARIO GATE — Verifica Finale & Pass Laboratorio -->
+      <div class="slide-container" id="slide6" style="padding:36px 56px;background:#0f172a;flex-direction:column;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin:0 0 16px 0;">
+          <div>
+            <p data-it="Scienza dei Materiali • Slide 5 di 5 • Questionario Gate" data-en="Materials Science • Slide 5 of 5 • Gate Quiz" style="font-size:14px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#38bdf8;margin:0 0 2px 0;">
+              Scienza dei Materiali • Slide 5 di 5 • Questionario Gate
+            </p>
+            <h2 data-it="Gate Finale: Sblocco Colatura e Squadratura" data-en="Final Gate: Unlock Model Pouring &amp; Trimming" style="font-size:28px;font-weight:800;color:#f8fafc;margin:0;">
+              Gate Finale: Sblocco Colatura e Squadratura
+            </h2>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <div class="lang-switch" style="background:#1e293b;border-color:#475569;">
+              <button class="lang-btn active" data-mode="bi" onclick="setLang('bi')" style="color:#f8fafc;">IT/EN</button>
+              <button class="lang-btn" data-mode="it" onclick="setLang('it')" style="color:#f8fafc;">IT</button>
+              <button class="lang-btn" data-mode="en" onclick="setLang('en')" style="color:#f8fafc;">EN</button>
+            </div>
+            <div id="gate1-score-box" class="mono" style="background:#ea580c;color:#ffffff;padding:9px 16px;border-radius:10px;font-size:15px;font-weight:700;">
+              Punteggio / Score: 0 / 4
+            </div>
+            <button onclick="resetGate(1)" style="background:#1e293b;border:1.5px solid #475569;color:#f8fafc;padding:9px 13px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">
+              <span>↻</span> <span data-it="Azzera" data-en="Reset">Azzera</span>
+            </button>
+          </div>
+        </div>
+
+        <div style="flex-grow:1;display:flex;flex-direction:column;gap:12px;justify-content:center;">
+          <div style="display:flex;gap:18px;">
+            <div style="flex:1 1 0;background:#1e293b;border:1px solid #334155;border-radius:12px;padding:12px 16px;">
+              <p data-it="1. Qual è la formula chimica del gesso dentale in polvere prima della miscelazione?" data-en="1. What is the chemical formula of dental gypsum powder before mixing?" style="font-size:16px;font-weight:700;color:#f8fafc;margin:0 0 8px 0;">
+                1. Qual è la formula chimica del gesso dentale in polvere prima della miscelazione?
+              </p>
+              <button class="quiz-opt" data-it="A) Solfato di calcio emiidrato (CaSO₄ · ½H₂O)" data-en="A) Calcium sulfate hemihydrate (CaSO₄ · ½H₂O)" onclick="answerGate(1, 0, true, this)">A) Solfato di calcio emiidrato (CaSO₄ · ½H₂O)</button>
+              <button class="quiz-opt" data-it="B) Solfato di calcio diidrato (CaSO₄ · 2H₂O)" data-en="B) Calcium sulfate dihydrate (CaSO₄ · 2H₂O)" onclick="answerGate(1, 0, false, this)">B) Solfato di calcio diidrato (CaSO₄ · 2H₂O)</button>
+              <button class="quiz-opt" data-it="C) Carbonato di calcio anidro (CaCO₃)" data-en="C) Anhydrous calcium carbonate (CaCO₃)" onclick="answerGate(1, 0, false, this)">C) Carbonato di calcio anidro (CaCO₃)</button>
+            </div>
+
+            <div style="flex:1 1 0;background:#1e293b;border:1px solid #334155;border-radius:12px;padding:12px 16px;">
+              <p data-it="2. Quale classe ISO 6873 si usa per monconi sfilabili di protesi fissa (19–22 ml/100g)?" data-en="2. Which ISO 6873 type is used for fixed prosthodontic dies (19–22 ml/100g)?" style="font-size:16px;font-weight:700;color:#f8fafc;margin:0 0 8px 0;">
+                2. Quale classe ISO 6873 si usa per monconi sfilabili di protesi fissa (19–22 ml/100g)?
+              </p>
+              <button class="quiz-opt" data-it="A) Tipo II — Gesso tenero da zoccolatura" data-en="A) Type II — Model plaster for mounting" onclick="answerGate(1, 1, false, this)">A) Tipo II — Gesso tenero da zoccolatura</button>
+              <button class="quiz-opt" data-it="B) Tipo IV — Gesso extra-duro a bassa espansione" data-en="B) Type IV — High-strength low-expansion die stone" onclick="answerGate(1, 1, true, this)">B) Tipo IV — Gesso extra-duro a bassa espansione</button>
+              <button class="quiz-opt" data-it="C) Tipo I — Gesso da impronta" data-en="C) Type I — Impression plaster" onclick="answerGate(1, 1, false, this)">C) Tipo I — Gesso da impronta</button>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:18px;">
+            <div style="flex:1 1 0;background:#1e293b;border:1px solid #334155;border-radius:12px;padding:12px 16px;">
+              <p data-it="3. Cosa indica la perdita di lucentezza (loss of gloss) durante la presa del gesso?" data-en="3. What does loss of gloss indicate during the setting of dental gypsum?" style="font-size:16px;font-weight:700;color:#f8fafc;margin:0 0 8px 0;">
+                3. Cosa indica la perdita di lucentezza (loss of gloss) durante la presa del gesso?
+              </p>
+              <button class="quiz-opt" data-it="A) Il raggiungimento della resistenza massima finale" data-en="A) Attainment of maximum final dry strength" onclick="answerGate(1, 2, false, this)">A) Il raggiungimento della resistenza massima finale</button>
+              <button class="quiz-opt" data-it="B) La fine del tempo di lavorazione e l'inizio della presa iniziale" data-en="B) End of working time and onset of initial set" onclick="answerGate(1, 2, true, this)">B) La fine del tempo di lavorazione e l'inizio della presa iniziale</button>
+              <button class="quiz-opt" data-it="C) Un eccesso di acqua di miscelazione nella tazza" data-en="C) Excess gauging water in the mixing bowl" onclick="answerGate(1, 2, false, this)">C) Un eccesso di acqua di miscelazione nella tazza</button>
+            </div>
+
+            <div style="flex:1 1 0;background:#1e293b;border:1px solid #334155;border-radius:12px;padding:12px 16px;">
+              <p data-it="4. Quale sostanza agisce come accelerante senza aumentare l'espansione di presa?" data-en="4. Which substance acts as an accelerator without increasing setting expansion?" style="font-size:16px;font-weight:700;color:#f8fafc;margin:0 0 8px 0;">
+                4. Quale sostanza agisce come accelerante senza aumentare l'espansione di presa?
+              </p>
+              <button class="quiz-opt" data-it="A) Borace al 2%" data-en="A) 2% Borax solution" onclick="answerGate(1, 3, false, this)">A) Borace al 2%</button>
+              <button class="quiz-opt" data-it="B) Solfato di potassio (K₂SO₄) al 2%" data-en="B) 2% Potassium sulfate (K₂SO₄)" onclick="answerGate(1, 3, true, this)">B) Solfato di potassio (K₂SO₄) al 2%</button>
+              <button class="quiz-opt" data-it="C) Acqua distillata riscaldata a 50 °C" data-en="C) Distilled water heated to 50 °C" onclick="answerGate(1, 3, false, this)">C) Acqua distillata riscaldata a 50 °C</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="gate1-banner" style="margin-top:12px;background:#1e293b;border:2px solid #475569;border-radius:10px;padding:10px 18px;display:flex;justify-content:space-between;align-items:center;">
+          <p style="font-size:15px;font-weight:700;color:#cbd5e1;margin:0;">
+            <span style="color:#fb923c;margin-right:8px;">🔒</span>
+            STATO GATE / STATUS: Raggiungi almeno 3/4 per il Pass Colatura Modelli • Score 3/4 to unlock Model Pouring Pass.
+          </p>
+          <span class="mono" style="font-size:14px;font-weight:700;color:#38bdf8;">PASS LABORATORIO</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BARRA DI CONTROLLO TOUCH LIM -->
+  <div id="lim-toolbar">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <button id="lim-btn-prev" class="lim-nav-btn" onclick="prevSlide()">
+        <span>◀</span> Indietro / Prev
+      </button>
+      <select id="lim-slide-select" class="lim-select" onchange="showSlide(parseInt(this.value, 10))">
+        <option value="0">01. Copertina — Il Gesso Dentale</option>
+        <option value="1">02. Chimica e Produzione — Emiidrato α vs β</option>
+        <option value="2">03. Classificazione ISO 6873 — Tipi I – V</option>
+        <option value="3">04. Rapporto Acqua/Polvere e Miscelazione</option>
+        <option value="4">05. Cinetica di Presa, Espansione e Controllo</option>
+        <option value="5">06. Gate Finale — Sblocco Colatura Modelli</option>
+      </select>
+      <button id="lim-btn-next" class="lim-nav-btn primary" onclick="nextSlide()">
+        Avanti / Next <span>▶</span>
+      </button>
+    </div>
+
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span id="lim-counter" class="mono" style="font-size:14px;font-weight:700;color:#38bdf8;background:#0f172a;border:1px solid #334155;padding:6px 12px;border-radius:8px;">
+        SLIDE 1 / 6
+      </span>
+      <button class="lim-nav-btn" onclick="toggleFullscreen()">
+        <span>⛶</span> Schermo Intero LIM
+      </button>
+    </div>
+  </div>
+
+  <script>
+    var currentLang = 'bi';
+    var currentIdx = 0;
+    var slides = Array.prototype.slice.call(document.querySelectorAll('.slide-container'));
+    var gateScores = {
+      1: [null, null, null, null]
+    };
+
+    function toArr(nodeList) {
+      return Array.prototype.slice.call(nodeList);
+    }
+
+    function setLang(mode) {
+      currentLang = mode;
+      document.body.classList.remove('lang-bi', 'lang-it', 'lang-en');
+      document.body.classList.add('lang-' + mode);
+
+      var langBtns = toArr(document.querySelectorAll('.lang-btn'));
+      langBtns.forEach(function(b) {
+        if (b.getAttribute('data-mode') === mode) {
+          b.classList.add('active');
+        } else {
+          b.classList.remove('active');
+        }
+      });
+
+      var translatables = toArr(document.querySelectorAll('[data-it][data-en]'));
+      translatables.forEach(function(el) {
+        var itText = el.getAttribute('data-it');
+        var enText = el.getAttribute('data-en');
+        if (mode === 'it') {
+          el.innerHTML = itText;
+        } else if (mode === 'en') {
+          el.innerHTML = enText;
+        } else {
+          if (el.tagName === 'LI') {
+            el.innerHTML = itText + '<br><span style="color:#0f4c81;font-size:15px;font-style:italic;">' + enText + '</span>';
+          } else if (el.classList.contains('quiz-opt')) {
+            el.innerHTML = itText + ' <span style="color:#475569;font-style:italic;">/ ' + enText.replace(/^[A-C]\)\s*/, '') + '</span>';
+          } else if (el.classList.contains('view-btn') || el.tagName === 'SPAN') {
+            el.innerHTML = itText + ' / ' + enText;
+          } else {
+            el.innerHTML = itText + ' <span style="opacity:0.78;font-weight:600;">/ ' + enText + '</span>';
+          }
+        }
+      });
+
+      updateGateUI(1);
+    }
+
+    function switchView(slideId, idx, btn) {
+      var slide = document.getElementById(slideId);
+      if (!slide) return;
+      var btns = toArr(slide.querySelectorAll('.view-btn'));
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      if (btn) btn.classList.add('active');
+
+      var svgViews = toArr(slide.querySelectorAll('.svg-view'));
+      svgViews.forEach(function(v, i) {
+        if (i === idx) v.classList.add('active');
+        else v.classList.remove('active');
+      });
+
+      var textViews = toArr(slide.querySelectorAll('.text-view'));
+      textViews.forEach(function(v, i) {
+        if (i === idx) v.classList.add('active');
+        else v.classList.remove('active');
+      });
+    }
+
+    function answerGate(gateNum, qIdx, isCorrect, btn) {
+      var card = btn.parentElement;
+      var opts = toArr(card.querySelectorAll('.quiz-opt'));
+      opts.forEach(function(o) {
+        o.disabled = true;
+        if (o.getAttribute('onclick').indexOf('true') !== -1) {
+          o.classList.add('correct');
+        }
+      });
+      if (!isCorrect) {
+        btn.classList.add('wrong');
+        gateScores[gateNum][qIdx] = 0;
+      } else {
+        gateScores[gateNum][qIdx] = 1;
+      }
+      updateGateUI(gateNum);
+    }
+
+    function resetGate(gateNum) {
+      gateScores[gateNum] = [null, null, null, null];
+      var slide = document.getElementById('slide6');
+      var opts = toArr(slide.querySelectorAll('.quiz-opt'));
+      opts.forEach(function(o) {
+        o.disabled = false;
+        o.classList.remove('correct', 'wrong');
+      });
+      updateGateUI(gateNum);
+    }
+
+    function updateGateUI(gateNum) {
+      var total = 0;
+      gateScores[gateNum].forEach(function(v) { if (v === 1) total++; });
+      var scoreBox = document.getElementById('gate1-score-box');
+      var banner = document.getElementById('gate1-banner');
+      if (scoreBox) {
+        if (currentLang === 'it') {
+          scoreBox.textContent = 'Punteggio: ' + total + ' / 4 (Soglia: 3)';
+        } else if (currentLang === 'en') {
+          scoreBox.textContent = 'Score: ' + total + ' / 4 (Pass: 3)';
+        } else {
+          scoreBox.textContent = 'Punteggio / Score: ' + total + ' / 4';
+        }
+      }
+      if (banner) {
+        if (total >= 3) {
+          banner.style.background = '#dcfce7';
+          banner.style.borderColor = '#15803d';
+          var msg = currentLang === 'it'
+            ? 'GATE SUPERATO (' + total + '/4)! Pass Esercitazione di Colatura e Squadratura Modelli Sbloccato.'
+            : currentLang === 'en'
+            ? 'GATE PASSED (' + total + '/4)! Practical Model Pouring & Trimming Pass Unlocked.'
+            : 'GATE SUPERATO / PASSED (' + total + '/4)! Pass Colatura Modelli / Model Pouring Pass Unlocked.';
+          banner.innerHTML = '<p style="font-size:15px;font-weight:800;color:#14532d;margin:0;"><span style="margin-right:8px;">🏆</span>' + msg + '</p><span class="mono" style="font-size:14px;font-weight:800;color:#15803d;">SBLOCCATO / UNLOCKED</span>';
+        } else {
+          banner.style.background = '#1e293b';
+          banner.style.borderColor = '#475569';
+          var lockMsg = currentLang === 'it'
+            ? 'STATO GATE: Raggiungi almeno 3/4 risposte corrette per ottenere il Pass Esercitazione di Colatura Modelli.'
+            : currentLang === 'en'
+            ? 'GATE STATUS: Score at least 3/4 correct answers to unlock the Practical Model Pouring Pass.'
+            : 'STATO GATE / STATUS: Raggiungi almeno 3/4 per il Pass Colatura Modelli • Score 3/4 to unlock Model Pouring Pass.';
+          banner.innerHTML = '<p style="font-size:15px;font-weight:700;color:#cbd5e1;margin:0;"><span style="color:#fb923c;margin-right:8px;">🔒</span>' + lockMsg + '</p><span class="mono" style="font-size:14px;font-weight:700;color:#38bdf8;">PASS LABORATORIO</span>';
+        }
+      }
+    }
+
+    function scaleLIM() {
+      var wrapper = document.getElementById('lim-stage-wrapper');
+      var stage = document.getElementById('lim-stage');
+      if (!stage) return;
+      var w = (wrapper && wrapper.clientWidth > 0) ? wrapper.clientWidth : (window.innerWidth || document.documentElement.clientWidth || 1280);
+      var h = (wrapper && wrapper.clientHeight > 0) ? wrapper.clientHeight : ((window.innerHeight || document.documentElement.clientHeight || 776) - 56);
+      var availW = Math.max(w - 16, 280);
+      var availH = Math.max(h - 16, 180);
+      var scale = Math.min(availW / 1280, availH / 720);
+      if (scale <= 0 || isNaN(scale)) scale = 0.5;
+      stage.style.transform = 'scale(' + scale + ')';
+    }
+
+    function showSlide(idx) {
+      if (idx < 0 || idx >= slides.length) return;
+      slides.forEach(function(s, i) {
+        s.style.display = (i === idx) ? 'flex' : 'none';
+      });
+      currentIdx = idx;
+      var select = document.getElementById('lim-slide-select');
+      var counter = document.getElementById('lim-counter');
+      var btnPrev = document.getElementById('lim-btn-prev');
+      var btnNext = document.getElementById('lim-btn-next');
+      if (select) select.value = String(idx);
+      if (counter) counter.textContent = 'SLIDE ' + (idx + 1) + ' / ' + slides.length;
+      if (btnPrev) {
+        btnPrev.disabled = (idx === 0);
+        btnPrev.style.opacity = (idx === 0) ? '0.4' : '1';
+      }
+      if (btnNext) {
+        btnNext.disabled = (idx === slides.length - 1);
+        btnNext.style.opacity = (idx === slides.length - 1) ? '0.4' : '1';
+      }
+    }
+
+    function prevSlide() {
+      showSlide(currentIdx - 1);
+    }
+
+    function nextSlide() {
+      showSlide(currentIdx + 1);
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen().catch(function() {});
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen().catch(function() {});
+        }
+      }
+    }
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') nextSlide();
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+    });
+
+    var touchX = 0;
+    document.addEventListener('touchstart', function(e) {
+      if (e.touches && e.touches.length) touchX = e.touches[0].clientX;
+    }, { passive: true });
+    document.addEventListener('touchend', function(e) {
+      if (e.changedTouches && e.changedTouches.length) {
+        var dx = touchX - e.changedTouches[0].clientX;
+        if (Math.abs(dx) > 65) {
+          if (dx > 0) nextSlide();
+          else prevSlide();
+        }
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', scaleLIM);
+    window.addEventListener('load', scaleLIM);
+    setLang('bi');
+    scaleLIM();
+    showSlide(0);
+    setTimeout(scaleLIM, 150);
+  </script>
+</body>
+</html>
